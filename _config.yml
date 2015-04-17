@@ -6,9 +6,9 @@ pygments:         true
 permalink:        pretty
 
 # Setup
-title:            samstudio8
-tagline:          'Hoot hoot'
-description:      'Hoot hoot hoot hoot hoot hoot hoot hoot hoot hoot hoot hoot hoot hoot hoot'
+title:            Samposium
+tagline:          'The Exciting Adventures of Sam'
+description:      'The Exciting Adventures of Sam'
 url:              http://samstudio8.github.io
 
 author:
