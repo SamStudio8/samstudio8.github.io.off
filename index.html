@@ -18,8 +18,8 @@ title: Home
         {{ post.content }}
       </blockquote>
     {% elsif post.layout == "meme" %}
-       <img src="{{ site.url }}/public/memes/{{ page.filename }}" alt="{{ page.caption }}" />
-       <span class="lead-small">{{ page.caption }}</span>
+       <img src="{{ site.url }}/public/memes/{{ post.filename }}" alt="{{ post.caption }}" />
+       <span class="lead-small">{{ post.caption }}</span>
     {% else %}
       {{ post.content }}
     {% endif %}
