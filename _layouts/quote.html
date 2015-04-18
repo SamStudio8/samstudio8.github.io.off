@@ -12,7 +12,7 @@ layout: default
 <div class="related">
   <h2>Recent Quotes</h2>
   <ul class="related-posts">
-    {% for post in site.posts | where:"layout","quote" limit:5 %}
+    {% for post in site.posts where:"layout","quote" limit:5 %}
       <li>
         <h3>
           <a href="{{ post.url }}">
