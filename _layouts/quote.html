@@ -12,7 +12,7 @@ layout: default
 <div class="related">
   <h2>Recent Quotes</h2>
   <ul class="related-posts">
-    {% assign quotes = site.posts | where: "layout" %}
+    {% assign quotes = site.posts | where:"layout","quote" %}
     {% for node in quotes limit:5 %}
       <li>
         <h3>
