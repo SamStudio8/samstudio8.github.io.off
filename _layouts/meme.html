@@ -13,7 +13,7 @@ layout: default
   <h2>Recent Memes</h2>
   <ul class="related-posts">
     {% assign memes = site.posts | where:"layout","meme" %}
-    {% for node in quotes limit:5 %}
+    {% for node in memes limit:5 %}
       <li>
         <h3>
           {% if node.title != page.title %}
