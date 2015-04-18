@@ -20,7 +20,7 @@ layout: default
             <small>{{ post.date | date_to_string }}</small>
           </a>
         </h3>
-        <small>{{ post.excerpt }}</small>
+        <small>{{ post.excerpt | markdownify }}</small>
       </li>
     {% endfor %}
   </ul>
