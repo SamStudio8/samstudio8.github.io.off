@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+<div class="post">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <span class="post-date">{{ page.date | date_to_string }}</span>
+  <img src="{{ site.url }}/assets/memes/{{ page.filename }}" alt="{{ page.caption }}" />
+  <span class="lead-small">{{ page.caption }}</span>
+</div>
+
+<div class="related">
+  <h2>Recent Memes</h2>
+  <ul class="related-posts">
+    {% assign memes = site.posts | where:"layout","meme" %}
+    {% for node in quotes limit:5 %}
+      <li>
+        <h3>
+          {% if node.title != page.title %}
+            <a href="{{ node.url }}">
+              {{ node.title }}
+              <small>{{ node.date | date_to_string }}</small>
+            </a>
+          {% endif %}
+        </h3>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
