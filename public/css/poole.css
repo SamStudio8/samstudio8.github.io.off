@@ -133,6 +133,11 @@ hr {
   border-bottom: 1px solid #fff;
 }
 
+.hr-dark {
+  border-top: 1px solid #777;
+  border-bottom: 1px solid #999;
+}
+
 abbr {
   font-size: 85%;
   font-weight: bold;
