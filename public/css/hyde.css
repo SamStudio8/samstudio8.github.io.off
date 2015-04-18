@@ -57,7 +57,7 @@ html {
   text-align: center;
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
-  background-color: #202020;
+  background-color: #240A21;
 }
 @media (min-width: 48rem) {
   .sidebar {
@@ -127,7 +127,7 @@ a.sidebar-nav-item:focus {
 
 @media (min-width: 48rem) {
   .content {
-    max-width: 50%;
+    max-width: 40%;
     margin-left: 20rem;
     margin-right: 2rem;
   }
