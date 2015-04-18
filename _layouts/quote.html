@@ -3,6 +3,24 @@ layout: default
 ---
 
 <div class="post">
-<span class="post-date">{{ page.date | date_to_string }}</span>
-<blockquote class="lead">{{ content }}</blockquote>
+  <h1 class="post-title">{{ page.title }}</h1>
+  <span class="post-date">{{ page.date | date_to_string }}</span>
+  
+  <blockquote class="lead">{{ content }}</blockquote>
+</div>
+
+<div class="related">
+  <h2>Recent Quotes</h2>
+  <ul class="related-posts">
+    {% for post in site.posts | where:"layout","quote" limit:5 %}
+      <li>
+        <h3>
+          <a href="{{ post.url }}">
+            {{ post.title }}
+            <small>{{ post.date | date_to_string }}</small>
+          </a>
+        </h3>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
