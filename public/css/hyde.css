@@ -65,7 +65,7 @@ html {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 20rem;
+    width: 15rem;
     text-align: left;
   }
 }
@@ -79,7 +79,7 @@ html {
 .sidebar-about h1 {
   color: #fff;
   margin-top: 0;
-  font-size: 3.25rem;
+  font-size: 3rem;
 }
 
 /* Sidebar nav */
