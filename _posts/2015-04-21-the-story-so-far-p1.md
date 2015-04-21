@@ -106,7 +106,6 @@ Though you'll have to stay tuned for that drama in another part.</p>
 For an input FASTQ file, FASTQC will create a series of graphs and a summary metrics table
 such as the one below:
 
-<table>
 | Measure            | Value                            |
 |--------------------|----------------------------------|
 | Filename           | A3limpetMetaCleaned_1.fastq.trim |
@@ -116,7 +115,6 @@ such as the one below:
 | Filtered Sequences | 0                                |
 | Sequence length    | 4-86                             |
 | %GC                | 37                               |
-</table>
 
 
 ```bash
