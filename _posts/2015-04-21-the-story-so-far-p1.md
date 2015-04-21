@@ -87,14 +87,35 @@ Allowing some arbitrary number of bytes for headers and the `+` characters:
 > 43485000000B == 43.49GB
 ```
 
-It just adds up! To be exact, both input files span 781,860,356 lines each -- meaning around
-781MB of storage is used merely for newlines alone! These files aren't small at all!
+It just adds up. To be exact, both input files span 781,860,356 lines each -- meaning around
+781MB of storage is used merely for newlines alone! It takes `wc` 90 seconds to count lines,
+these files aren't small at all!
 
 
 ### Quality Control and Trimming
 
-Although already done (as described by the paper), it's good to get an idea of how to run
-some basic quality checks on the input data. I used [`FASTQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+Although already done (as described by the paper), it's good to get an idea of how to run and interpret
+basic quality checks on the input data. I used [`FASTQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+which outputs some nice HTML reports that can be archived somewhere if you are nice and organised.
+
+<p class="message"><b>Top Tip</b><br />
+It's good to be nice and organised because in writing this blog post I've been able
+to quickly retreive the FASTQC reports from October and realised I missed a glaring problem.
+Though you'll have to stay tuned for that drama in another part.</p>
+
+For an input FASTQ file, FASTQC will create a series of graphs and a summary metrics table
+such as the one below:
+
+| Measure            | Value                            |
+|--------------------|----------------------------------|
+| Filename           | A3limpetMetaCleaned_1.fastq.trim |
+| File type          | Conventional base calls          |
+| Encoding           | Sanger / Illumina 1.9            |
+| Total Sequences    | 195465089                        |
+| Filtered Sequences | 0                                |
+| Sequence length    | 4-86                             |
+| %GC                | 37                               |
+
 
 ```bash
 # Command: LC_ALL=C grep -c '^@' $FILE
@@ -148,6 +169,7 @@ There's two main issues of size here:
 * Don't try and count the number of sequences in a FASTQ file by counting `@` characters.
 * Prepend `LC_ALL=C` to commands like `grep` and `awk` if you don't need to support non-ASCII character spaces.
 * Processing **massive** files takes time (more than a minute) and there's nothing wrong with that.
+* Try to actually read quality reports, then read them again. Then grab a coffee and read them for a third time before you do anything.
 
 * * *
 
