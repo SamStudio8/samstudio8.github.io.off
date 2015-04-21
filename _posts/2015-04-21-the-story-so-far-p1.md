@@ -101,7 +101,9 @@ which outputs some nice HTML reports that can be archived somewhere if you are n
 <p class="message"><b>Top Tip</b><br />
 It's good to be nice and organised because in writing this blog post I've been able
 to quickly retreive the FASTQC reports from October and realised I missed a glaring problem
-as well as a metric that could have saved me from wasting time.</p>
+as well as a metric that could have saved me from wasting time.<br/>
+<br/>
+<blockquote>Shit happens. Well, it's good you're checking, I'm much less organised.<footer>— Francesco</blockquote></p>
 
 For an input FASTQ file, FASTQC generate a summary metrics table.
 I've joined the two tables generated for my datasets below.
@@ -121,11 +123,29 @@ Here I managed to miss two things:
 * Both files store the same number of sequences (which is expected as the sequences are paired), something that I apparently forget about shortly...
 * Both files do not contain sequences of uniform length, neither do the non-uniform lengths have the same range, meaning that some pairs will not align to correctly as they cannot overlap fully...
 
-FASTQC also generates some nice graphs, of primary interest, per-base sequence quality over the length of a read.
+FASTQC also generates some nice graphs, of primary interest, per-base sequence quality over the length of a read:
 
 A3limpetMetaCleaned\_1.fastq.trim                    | A3limpetMetaCleaned\_2.fastq.trim
 :---------------------------------------------------:|:---------------------------------------------------:
 ![]({{ site.url }}/public/posts/so-far-p1/pbq1.png)  | ![]({{ site.url }}/public/posts/so-far-p1/pbq2.png)
+
+Although made small to fit, both box plots clearly demonstrate that average base quality (blue line) lives well within
+the "green zone" (binning scores of 28+) slowly declining to a low of around Q34. This is a decent result, although
+not surprising considering quality filtering has already been performed on the dataset to remove poor quality reads!
+A nice sanity check nonetheless. I should add that it is both normal and expected for average per-base quality to
+fall over the length of a read (though this can be problematic if the quality falls drastically) by virtue of
+the unstable chemistry involved in sequencing.
+
+FASTQC can plot a distribution of GC content against a hypothetical normal distribution, this is useful
+for genomic sequencing where one would expect such a distribution. However a metagenomic sample will (should)
+contain many species that may have differing distributions of GC content across their invididual genomes.
+FASTQC will often raise a warning about the distribution of GC content for such metagenomic samples given
+a statistically significant deviation from or violation of the theoretical normal. These can be ignored.
+
+Two other tests also typically attract warnings or errors; K-mer content and sequence duplication levels.
+
+FASTQC also plots N count (no call), GC ratio and average quality scores across whole reads as well as per-base sequence content (which should be checked for a roughly linear stability) and distribution of sequence lengths (which should be checked to ensure the majority of sequences are a reasonable size). Together a quick look at all these metrics
+should provide a decent health check before moving forward.
 
 ```bash
 # Command: LC_ALL=C grep -c '^@' $FILE
@@ -207,7 +227,7 @@ There's two main issues of size here:
 
 [^4]: Seriously, can we stop calling it nextgen yet?
 
-[^5]: I'm unsure why, from a recent internal talk I was under the impression we'd normally trim the first "few" bases (3-5bp, maybe 8bp if there's a lot of poor quality nucleotides) to try and improve downstream analysis such as alignments (given the start and end of reads can often be quite poor and not align as well as they should) but 15bp seems excessive. It also appears the ends of the reads were not truncated.
+[^5]: I'm unsure why, from a recent internal talk I was under the impression we'd normally trim the first "few" bases (1-3bp, maybe up to 13bp if there's a lot of poor quality nucleotides) to try and improve downstream analysis such as alignments (given the start and end of reads can often be quite poor and not align as well as they should) but 15bp seems excessive. It also appears the ends of the reads were not truncated.
 
 [^6]: Which actually wouldn't be that much of a surprise.
 
