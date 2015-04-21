@@ -26,15 +26,15 @@ Size aside, **what** are we even looking at and how is there so much of it?
 
 The files represent approximately 195 million read pairs from a nextgen[^4] sequencing run, with each file holding
 each half of the pair in the FASTQ format. The dataset is from a previous IBERS PhD student and
-was introduced in a 2014 paper titled [Metaphylogenomic and potential functionality of the limpet Patella pellucida's gastrointestinal tract microbiome \[Pubmed\]](http://www.ncbi.nlm.nih.gov/pubmed/25334059). According
-to the paper over 100 Blue-rayed Limpets (*Patella pellucida*) were collected from the shore of Aberystwyth, placed
+was introduced in a 2014 paper titled [Metaphylogenomic and potential functionality of the limpet Patella pellucida's gastrointestinal tract microbiome \[PubMed\]](http://www.ncbi.nlm.nih.gov/pubmed/25334059). According
+to the paper over 100 Blue-rayed Limpets (*Patella pellucida*) were collected from the shore of Aberystwyth and placed
 in to tanks to graze on Oarweed (*Laminaria digitata*) for one month. 60 were plated, anesthetized
 and aseptically dissected; vortexing and homogenizing the extracted digestion tracts before repeated
 filtering and final centrifugation to concentrate cells as a pellet. The pellets were then resuspended and
 DNA was extracted with a soil kit to create an Illumina paired-end library.
 
-The paper describes the post-sequencing data handling briefly: the net result of 398 million reads which
-were quality processed using `fastq-mcf`; to remove adaptor sequences, reads with quality lower than 20 and reads shorter than 31bp. The first 15bp of each read were also truncated[^5]. It was noted the remaining 391 million reads were heavily contaminated with host-derived sequences and thus insufficient for functional analysis.
+The paper describes the post-sequencing data handling briefly: the net result of 398 million reads
+were quality processed using `fastq-mcf`; to remove adaptor sequences, reads with quality lower than Q20 and reads shorter than 31bp. The first 15bp of each read were also truncated[^5]. It was noted the remaining 391 million reads were heavily contaminated with host-derived sequences and thus insufficient for functional analysis.
 
 My job was to investigate to what extent the contamination had occurred and to investigate whether
 any non-limpet reads could be salvaged for functional analysis.
@@ -57,7 +57,7 @@ HELLOIAMASEQUENCEMAKEMEINTOAPROTEINPLEASES
 !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJ
 ```
 
-This example uses Illumina 1.8 sequence identifiers and quality scores, the same as those found
+This example uses Illumina 1.8+ sequence identifiers and quality scores, the same as those found
 in the dataset. The quality string represents increasing quality from 0 (worst) to 41 (best) left to right.
 Taking the first read from the first file as an actual example, we get a better look at a "real-world" sequence header:
 
@@ -88,7 +88,7 @@ Allowing some arbitrary number of bytes for headers and the `+` characters:
 ```
 
 It just adds up. To be exact, both input files span 781,860,356 lines each -- meaning around
-781MB of storage is used merely for newlines alone! It takes `wc` 90 seconds to count lines,
+781MB of storage is used merely for newlines alone! It takes `wc` 90 seconds to just count lines,
 these files aren't small at all!
 
 
@@ -161,7 +161,7 @@ a quick sanity check and ensure that the two files had been handled correctly[^8
 about and ignoring the FASTQC reports I had generated and checked over, I queried both files with `grep`:
 
 ```bash
-LC_ALL=C grep -c '^@' $FILE
+grep -c '^@' $FILE
 ```
 ```
 196517718   A3limpetMetaCleaned_1.fastq.trim
@@ -169,8 +169,8 @@ LC_ALL=C grep -c '^@' $FILE
 ```
 
 "Oh dear"[^9], I thought. The number of sequences in both files are not equal. "Somebody bumbled the trimming!".
-I hypothesised that low-quality sequences had been removed but perhaps its corresponding mate in the other file
-had not been removed too.
+I hypothesised that low-quality sequences had been removed but the corresponding mate in the other file
+had not been removed to keep the pairs in sync.
 
 And so, I unnecessarily launched myself head first in to my first large scale computing problem; given two sets
 of ~196 million reads which mostly overlap, how can we efficiently find the intersection (and write it to disk)?
