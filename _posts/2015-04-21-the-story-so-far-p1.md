@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "The Story so Far: Part I, A Toy Dataset"
+pubdir: "so-far-p1"
 ---
 
 In this somewhat **long** and long overdue post; I'll attempt to explain the work done so far and an overview
@@ -72,7 +73,7 @@ So how are these files so large[^7]? Given each read record takes four lines
 (assuming reads short enough to not be spead over multiple lines -- which they are not
 in our case) and each file contains around 195 million reads, we're looking at 780 million lines. Per file.
 
-Each sequence was trimmed to 86bp and each base takes one byte to store, as well as corresponding
+The maximum sequence size was 86bp and each base takes one byte to store, as well as corresponding
 per-base quality information:
 
 ```
@@ -103,7 +104,8 @@ It's good to be nice and organised because in writing this blog post I've been a
 to quickly retreive the FASTQC reports from October and realised I missed a glaring problem
 as well as a metric that could have saved me from wasting time.</p>
 
-For an input FASTQ file, FASTQC generate a summary metrics table. I've joined the two tables generated for my datasets below.
+For an input FASTQ file, FASTQC generate a summary metrics table.
+I've joined the two tables generated for my datasets below.
 
 | Measure            | Value (\_1)                         | Value (\_2)                         |
 |--------------------|-------------------------------------|-------------------------------------|
@@ -119,6 +121,12 @@ Here I managed to miss two things:
 
 * Both files store the same number of sequences (which is expected as the sequences are paired), something that I apparently forget about shortly...
 * Both files do not contain sequences of uniform length, neither do the non-uniform lengths have the same range, meaning that some pairs will not align to correctly as they cannot overlap fully...
+
+FASTQC also generates some nice graphs, of primary interest, per-base sequence quality over the length of a read.
+
+\_1            |  \_2
+:-------------------------:|:-------------------------:
+![]({{ site.url }}/public/posts/{{ post.pubdir }}/pbq1.png)  |  ![]({{ site.url }}/public/posts/{{ post.pubdir }}/pbq2.png)
 
 ```bash
 # Command: LC_ALL=C grep -c '^@' $FILE
