@@ -180,7 +180,7 @@ There's two main issues of size here:
 [^1]: Now realised to be a complete misnomer, both in terms of size and effort.
 
 [^2]: A text based file format where sequences are delimited by `>` and a sequence name [and|or] description,
-followed by any number of lines containing nucleotides or amino acids (or in reality, whatever you fancy):
+    followed by any number of lines containing nucleotides or amino acids (or in reality, whatever you fancy):
 
     ```bash
     >Example Sequence Hoot Factor 9 | 00000001
