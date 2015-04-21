@@ -1,0 +1,181 @@
+---
+#layout: post
+#title: "The Story so Far: Part I, A Toy Dataset"
+---
+
+In this somewhat **long** and long overdue post; I'll attempt to explain the work done so far and an overview
+of the many issues encountered along the way and an insight in to why doing science is much harder than
+it ought to be.
+
+<p class="message">This post got a little longer than anticipated, so I've sharded it like everything else
+around here.</p>
+
+* * *
+
+## In the beginning...
+To address my lack of experience in handling metagenomic data, I was given a small<sup>1</sup> dataset to play with.
+Immediately I had to adjust my interpretation of what constitutes a "small" file. Previously the largest
+single input I've had to work with would probably have been the human reference genome ([GRCh37](http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human/)) which as a FASTA<sup>2</sup> file
+clocks in at around a little over 3GB<sup>3</sup>.
+
+Thus imagine my dismay when I am directed to the directory of my input data and find 2x**42GB** file.  
+Together, the files are 28x the size of the largest file I've ever worked with...
+
+### So, what is it?
+Size aside, **what** are we even looking at and how is there so much of it?
+
+The files represent approximately 195 million read pairs from a nextgen<sup>4</sup> sequencing run, with each file holding
+each half of the pair in the FASTQ format. The dataset is from a previous IBERS PhD student and
+was introduced in a 2014 paper titled [Metaphylogenomic and potential functionality of the limpet Patella pellucida's gastrointestinal tract microbiome \[Pubmed\]](http://www.ncbi.nlm.nih.gov/pubmed/25334059). According
+to the paper over 100 Blue-rayed Limpets (*Patella pellucida*) were collected from the shore of Aberystwyth, placed
+in to tanks to graze on Oarweed (*Laminaria digitata*) for one month. 60 were plated, anesthetized
+and aseptically dissected; vortexing and homogenizing the extracted digestion tracts before repeated
+filtering and final centrifugation to concentrate cells as a pellet. The pellets were then resuspended and
+DNA was extracted with a soil kit to create an Illumina paired-end library.
+
+The paper describes the post-sequencing data handling briefly: the net result of 398 million reads which
+were quality processed using `fastq-mcf`; to remove adaptor sequences, reads with quality lower than 20 and reads shorter than 31bp. The first 15bp of each read were also truncated<sup>5</sup>. It was noted the remaining 391 million reads were heavily contaminated with host-derived sequences and thus insufficient for functional analysis.
+
+My job was to investigate to what extent the contamination had occurred and to investigate whether
+any non-limpet reads could be salvaged for functional analysis.
+
+Let's take a closer look at the format to see what we're dealing with.
+
+#### FASTQ Format
+FASTQ is another text based file format, similar to FASTA but also stores quality scores for
+each nucleotide in a sequence<sup>6</sup>. Headers are demarcated by the `@` character instead of `>`
+and although not required tend to be formatted strings containing information pertaining to the
+sequencing device that produced the read.
+Sequence data is followed by a single `+` on a new line, before a string of quality scores (encoded as
+ASCII characters within a certain range, depending on the quality schema used) follows on
+another new line:
+
+```
+@BEEPBOOP-SEQUENCER:RUN:CELL:LANE:TILE:X:Y 1:FILTERED:CONTROL:INDEX
+HELLOIAMASEQUENCEMAKEMEINTOAPROTEINPLEASES
++
+!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJ
+```
+
+This example uses Illumina 1.8 sequence identifiers and quality scores, the same as those found
+in the dataset. The quality string represents increasing quality from 0 (worst) to 41 (best) left to right.
+Taking the first read from the first file as an actual example, we get a better look at a "real-world" sequence header:
+
+```
+@HWI-D00173:21:D22FBACXX:5:1101:1806:1986 1:N:0:CTCTCT
+TTGTGTCAAAACCGAACAACATGACAATCTTACTTGCCTGGCCCTCCGTCCTGCACTTCTGGCATGGGGAAACCACACTGGGGGC
++
+IIIAEGIIIFIIIEGIFFIIIFIFIIEFIIIIEFIIEFGCDEFFFFABDDCCCCCBBBBBBBBBBBBBB?BBBB@B?BBBBBBB5
+```
+
+So how are these files so large<sup>7</sup>? Given each read record takes four lines 
+(assuming reads short enough to not be spead over multiple lines -- which they are not
+in our case) and each file contains around 195 million reads, we're looking at 780 million lines. Per file.
+
+Each sequence was trimmed to 86bp and each base takes one byte to store, as well as corresponding
+per-base quality information:
+
+```
+86 * 2 * 195000000
+> 33540000000B == 33.54GB
+```
+
+Allowing some arbitrary number of bytes for headers and the `+` characters:
+
+```
+((86 * 2) + 50 + 1) * 195000000
+> 43485000000B == 43.49GB
+```
+
+It just adds up! To be exact, both input files span 781,860,356 lines each -- meaning around
+781MB of storage is used merely for newlines alone! These files aren't small at all!
+
+
+### Quality Control and Trimming
+
+Although already done (as described by the paper), it's good to get an idea of how to run
+some basic quality checks on the input data. I used [`FASTQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+
+```bash
+# Command: LC_ALL=C grep -c '^@' $FILE
+196517718   /ibers/ernie/repository/genomics/mts11/READS/Limpet-Magda/A3limpetMetaCleaned_1.fastq.trim
+196795722   /ibers/ernie/repository/genomics/mts11/READS/Limpet-Magda/A3limpetMetaCleaned_2.fastq.trim
+```
+
+Let's take another look at the valid range of characters for the Illumina 1.8+ quality scores:
+```
+!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJ
+```
+**`@`**
+
+...for some reason someone thought it would be a great idea to allow the `@` character to
+be available for use in quality strings...
+...I'd written a lazy parser that just looked for these instead of checking for the correct
+formatting of sequencing `+` quality, following by a new sequence starting with the `@` symbol...
+
+Unfortunately this led me to believe the files had been incorrectly trimmed (with some reads in Set A
+not appearing in Set B) launching me head first in to my first large scale
+computing problem. Given a set of 195,000,000 reads, and another set of mostly similar 195,000,000 reads
+ Can we distinguish what reads appear in one set and not the other, given that, can we then create an output file
+ that only contains the intersection of the two sets?
+ 
+ At first I tried to use Python dictionaries to store all the read data seen in both of the input files. It look a while to load. A long while... Turns out that Python requires almost quarter of an hour to merely read through the files and count the number of lines.  I was thinking something was a little off about this, then considered that there are XX billion lines in the file.... Even grep takes 2 minutes.
+ 
+ 
+```bash
+# Command: LC_ALL=C grep -c '^@HWI-D' $FILE
+195465089   /ibers/ernie/repository/genomics/mts11/READS/Limpet-Magda/A3limpetMetaCleaned_1.fastq.trim
+195465089   /ibers/ernie/repository/genomics/mts11/READS/Limpet-Magda/A3limpetMetaCleaned_2.fastq.trim
+```
+
+Better! The number of sequence headers match and I'm happy to assume they are all correctly paired
+as that would require something pretty screwy to be going on\*\*\*\*\*\*.
+Although even this check is only *just about* robust, assuming that all reads are from the same suite
+of machines addressed as `HWI-DXXXXX` (which I do know for sure) 
+and secondly that `H`, `I` and `-` are all valid quality score
+characters and so `W` is the only character preventing further accidental matches to quality strings.
+
+
+
+* * *
+
+There's two main issues of size here:
+* Jobs that are large because the inputs are large,
+* Jobs that are large because the inputs are tiny but there are thousands of them...
+
+* * *
+# tl;dr
+* Don't try and count the number of sequences in a FASTQ file by counting `@` characters.
+* Prepend `LC_ALL=C` to commands like `grep` and `awk` if you don't need to support non-ASCII character spaces.
+* Processing **massive** files takes time (more than a minute) and there's nothing wrong with that.
+
+* * *
+
+<sup>1</sup> Now realised to be a complete misnomer, both in terms of size and effort.
+
+<sup>2</sup> A text based file format where sequences are delimited by `>` and a sequence name [and|or] description,
+followed by any number of lines containing nucleotides or amino acids (or in reality, whatever you fancy):
+
+```bash
+>Example Sequence Hoot Factor 9 | 00000001
+HELLOIAMASEQUENCE
+BEEPBOOPTRANSLATE
+MEINTOPROTEINS
+>Example Sequence Hoot Factor 9 | 00000002
+NNNNNNNNNNNNNNNNN
+```
+
+Typically sequence lines are of uniform length (under 80bp), though this is not a requirement of the format.
+The [NCBI](http://www.ncbi.nlm.nih.gov/) suggest formats for the header (single line descriptor,
+following the '>' character) though these are also not required to be syntactically valid.
+
+<sup>3</sup> Stored as text we take a byte for each of the 3 billion nucleotides as well as each newline
+delimiter and an arbitrary number of bytes for each chromosome's single line header.
+
+<sup>4</sup> Seriously, can we stop calling it nextgen yet?
+
+<sup>5</sup> I'm unsure why, from a recent internal talk I was under the impression we'd normally trim the first "few" bases (3-5bp, maybe 8bp if there's a lot of poor quality nucleotides) to try and improve downstream analysis such as alignments (given the start and end of reads can often be quite poor and not align as well as they should) but 15bp seems excessive. It also appears the ends of the reads were not truncated.
+
+<sup>6</sup> Which actually wouldn't be that much of a surprise.
+
+<sup>7</sup> Or small, depending on whether you've adjusted your world view yet.
