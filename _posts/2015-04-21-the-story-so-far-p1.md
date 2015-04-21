@@ -100,22 +100,25 @@ which outputs some nice HTML reports that can be archived somewhere if you are n
 
 <p class="message"><b>Top Tip</b><br />
 It's good to be nice and organised because in writing this blog post I've been able
-to quickly retreive the FASTQC reports from October and realised I missed a glaring problem.
-Though you'll have to stay tuned for that drama in another part.</p>
+to quickly retreive the FASTQC reports from October and realised I missed a glaring problem
+as well as a metric that could have saved me from wasting time.</p>
 
-For an input FASTQ file, FASTQC will create a series of graphs and a summary metrics table
-such as the one below:
+For an input FASTQ file, FASTQC generate a summary metrics table. I've joined the two tables generated for my datasets below.
 
-| Measure            | Value                            |
-|--------------------|----------------------------------|
-| Filename           | A3limpetMetaCleaned_1.fastq.trim |
-| File type          | Conventional base calls          |
-| Encoding           | Sanger / Illumina 1.9            |
-| Total Sequences    | 195465089                        |
-| Filtered Sequences | 0                                |
-| Sequence length    | 4-86                             |
-| %GC                | 37                               |
+| Measure            | Value (\_1)                         | Value (\_2)                         |
+|--------------------|-------------------------------------|-------------------------------------|
+| Filename           | A3limpetMetaCleaned\_1.fastq.trim   | A3limpetMetaCleaned\_2.fastq.trim   |
+| File type          | Conventional base calls             | Conventional base calls             |
+| Encoding           | Sanger / Illumina 1.9               | Sanger / Illumina 1.9               |
+| Total Sequences    | 195465089                           | 195465089                           |
+| Filtered Sequences | 0                                   | 0                                   |
+| Sequence length    | 4-86                                | 16-86                               |
+| %GC                | 37                                  | 37                                  |
 
+Here I managed to miss two things:
+
+* Both files store the same number of sequences (which is expected as the sequences are paired), something that I apparently forget about shortly...
+* Both files do not contain sequences of uniform length, neither do the non-uniform lengths have the same range, meaning that some pairs may not align to a pair correctly, as the two halves of the pair are not the same length...
 
 ```bash
 # Command: LC_ALL=C grep -c '^@' $FILE
