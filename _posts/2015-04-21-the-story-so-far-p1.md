@@ -123,9 +123,9 @@ Here I managed to miss two things:
 
 FASTQC also generates some nice graphs, of primary interest, per-base sequence quality over the length of a read.
 
-\_1            |  \_2
-:-------------------------:|:-------------------------:
-![]({{ site.url }}/public/posts/so-far-p1/pbq1.png)  |  ![]({{ site.url }}/public/posts/so-far-p1/pbq2.png)
+A3limpetMetaCleaned\_1.fastq.trim                    | A3limpetMetaCleaned\_2.fastq.trim
+:---------------------------------------------------:|:---------------------------------------------------:
+![]({{ site.url }}/public/posts/so-far-p1/pbq1.png)  | ![]({{ site.url }}/public/posts/so-far-p1/pbq2.png)
 
 ```bash
 # Command: LC_ALL=C grep -c '^@' $FILE
