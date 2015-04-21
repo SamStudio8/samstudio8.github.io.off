@@ -182,8 +182,6 @@ Stay tuned and find out next time on Samposium.
 * In bioinformatics, "small" really isn't *small*.
 * Try to actually read quality reports, then read them again. Then grab a coffee or go outside and come back and read them for a third time before you do something foolish and have to tell everyone at your lab meeting about how silly you are.
 
-* * *
-
 [^1]: Now realised to be a complete misnomer, both in terms of size and effort.
 
 [^2]: A text based file format where sequences are delimited by `>` and a sequence name [and|or] description,
