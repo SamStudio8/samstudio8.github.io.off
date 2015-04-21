@@ -118,7 +118,7 @@ For an input FASTQ file, FASTQC generate a summary metrics table. I've joined th
 Here I managed to miss two things:
 
 * Both files store the same number of sequences (which is expected as the sequences are paired), something that I apparently forget about shortly...
-* Both files do not contain sequences of uniform length, neither do the non-uniform lengths have the same range, meaning that some pairs may not align to a pair correctly, as the two halves of the pair are not the same length...
+* Both files do not contain sequences of uniform length, neither do the non-uniform lengths have the same range, meaning that some pairs will not align to correctly as they cannot overlap fully...
 
 ```bash
 # Command: LC_ALL=C grep -c '^@' $FILE
@@ -172,6 +172,7 @@ There's two main issues of size here:
 * Don't try and count the number of sequences in a FASTQ file by counting `@` characters.
 * Prepend `LC_ALL=C` to commands like `grep` and `awk` if you don't need to support non-ASCII character spaces.
 * Processing **massive** files takes time (more than a minute) and there's nothing wrong with that.
+* Practice reading
 * Try to actually read quality reports, then read them again. Then grab a coffee and read them for a third time before you do anything.
 
 * * *
@@ -179,8 +180,7 @@ There's two main issues of size here:
 [^1]: Now realised to be a complete misnomer, both in terms of size and effort.
 
 [^2]: A text based file format where sequences are delimited by `>` and a sequence name [and|or] description,
-followed by any number of lines containing nucleotides or amino acids (or in reality, whatever you fancy):
-
+followed by any number of lines containing nucleotides or amino acids (or in reality, whatever you fancy):  
 ```bash
 >Example Sequence Hoot Factor 9 | 00000001
 HELLOIAMASEQUENCE
@@ -188,8 +188,7 @@ BEEPBOOPTRANSLATE
 MEINTOPROTEINS
 >Example Sequence Hoot Factor 9 | 00000002
 NNNNNNNNNNNNNNNNN
-```
-
+```  
 Typically sequence lines are of uniform length (under 80bp), though this is not a requirement of the format.
 The [NCBI](http://www.ncbi.nlm.nih.gov/) suggest formats for the header (single line descriptor,
 following the '>' character) though these are also not required to be syntactically valid.
