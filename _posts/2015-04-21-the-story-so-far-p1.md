@@ -177,6 +177,8 @@ had not been removed too.
 And so, I unnecessarily launched myself head first in to my first large scale computing problem; given two sets
 of ~196 million reads which mostly overlap, how can we efficiently find the intersection (and write it to disk)?
 
+* * *
+
 ## An Unnecessary Tangent
 <p class="message">Whilst a learning exercise, I feel it necessary to re-iterate that this tangent could easily have been avoided had I only paid a little more attention to the `FASTQC` reports...<br /><br />
 Incidentally if you are after a project overview, you can skip this interluding derailment. I'll probably save a super-technical write-up of what happened here for a future post.</p>
