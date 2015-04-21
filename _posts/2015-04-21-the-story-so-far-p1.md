@@ -1,6 +1,6 @@
 ---
-#layout: post
-#title: "The Story so Far: Part I, A Toy Dataset"
+layout: post
+title: "The Story so Far: Part I, A Toy Dataset"
 ---
 
 In this somewhat **long** and long overdue post; I'll attempt to explain the work done so far and an overview
