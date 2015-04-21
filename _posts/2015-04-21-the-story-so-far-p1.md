@@ -196,7 +196,7 @@ There's two main issues of size here:
     following the '>' character) though these are also not required to be syntactically valid.
 
 [^3]: Stored as text we take a byte for each of the 3 billion nucleotides as well as each newline
-delimiter and an arbitrary number of bytes for each chromosome's single line header.
+    delimiter and an arbitrary number of bytes for each chromosome's single line header.
 
 [^4]: Seriously, can we stop calling it nextgen yet?
 
