@@ -107,7 +107,7 @@ For an input FASTQ file, FASTQC will create a series of graphs and a summary met
 such as the one below:
 
 | Measure            | Value                            |
-|--------------------|----------------------------------|
+| ------------------ | -------------------------------- |
 | Filename           | A3limpetMetaCleaned_1.fastq.trim |
 | File type          | Conventional base calls          |
 | Encoding           | Sanger / Illumina 1.9            |
