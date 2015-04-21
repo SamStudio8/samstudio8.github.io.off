@@ -103,9 +103,8 @@ which outputs some nice HTML reports that can be archived somewhere if you are n
 <p class="message"><b>Top Tip</b><br />
 It's good to be nice and organised because in writing this blog post I've been able
 to quickly retreive the FASTQC reports from October and realised I missed a glaring problem
-as well as a metric that could have saved me from wasting time.<br/>
-<br/>
-<blockquote>Shit happens. Well, it's good you're checking, I'm much less organised.<footer>— Francesco</blockquote></p>
+as well as a metric that could have saved me from wasting time.</p>
+<blockquote>Shit happens. Well, it's good you're checking, I'm much less organised.<footer>— Francesco</blockquote>
 
 For an input FASTQ file, FASTQC generate a summary metrics table.
 I've joined the two tables generated for my datasets below.
@@ -178,11 +177,11 @@ had not been removed too.
 And so, I unnecessarily launched myself head first in to my first large scale computing problem; given two sets
 of ~196 million reads which mostly overlap, how can we efficiently find the intersection (and write it to disk)?
 
-#### An Unnecessary Tangent
+## An Unnecessary Tangent
 <p class="message">Whilst a learning exercise, I feel it necessary to re-iterate that this tangent could easily have been avoided had I only paid a little more attention to the `FASTQC` reports...<br /><br />
 Incidentally if you are after a project overview, you can skip this interluding derailment. I'll probably save a super-technical write-up of what happened here for a future post.</p>
 
-##### Hello Python
+### Hello Python
 I jumped to write a Python script that reads in each file by turn, adds each sequence header to a dictionary and stores
 the byte-location of that read in both files (from `file_handle.tell()`) in a two element list. Many hours after
 executing this script I was confused that I was still waiting, progress was happening but becoming increasingly
@@ -210,11 +209,11 @@ lines; that's twelve lines (or rather, three whole FASTQ records) for every pers
 This set the baseline for improvement, we couldn't possibly do what I wanted to do in less than 30 minutes as file
 handling alone took this much time.
 
-##### `grep` and `awk` oddities
+### Oddities with `grep` and `awk`
 
-##### MySQL
+### MySQL
 
-##### Mootness
+### Mootness
 
 Let's take another look at the valid range of characters for the Illumina 1.8+ quality scores:
 ```
