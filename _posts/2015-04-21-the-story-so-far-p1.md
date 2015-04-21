@@ -180,18 +180,20 @@ There's two main issues of size here:
 [^1]: Now realised to be a complete misnomer, both in terms of size and effort.
 
 [^2]: A text based file format where sequences are delimited by `>` and a sequence name [and|or] description,
-followed by any number of lines containing nucleotides or amino acids (or in reality, whatever you fancy):  
-```bash
->Example Sequence Hoot Factor 9 | 00000001
-HELLOIAMASEQUENCE
-BEEPBOOPTRANSLATE
-MEINTOPROTEINS
->Example Sequence Hoot Factor 9 | 00000002
-NNNNNNNNNNNNNNNNN
-```  
-Typically sequence lines are of uniform length (under 80bp), though this is not a requirement of the format.
-The [NCBI](http://www.ncbi.nlm.nih.gov/) suggest formats for the header (single line descriptor,
-following the '>' character) though these are also not required to be syntactically valid.
+followed by any number of lines containing nucleotides or amino acids (or in reality, whatever you fancy):
+
+    ```bash
+    >Example Sequence Hoot Factor 9 | 00000001
+    HELLOIAMASEQUENCE
+    BEEPBOOPTRANSLATE
+    MEINTOPROTEINS
+    >Example Sequence Hoot Factor 9 | 00000002
+    NNNNNNNNNNNNNNNNN
+    ```  
+    
+    Typically sequence lines are of uniform length (under 80bp), though this is not a requirement of the format.
+    The [NCBI](http://www.ncbi.nlm.nih.gov/) suggest formats for the header (single line descriptor,
+    following the '>' character) though these are also not required to be syntactically valid.
 
 [^3]: Stored as text we take a byte for each of the 3 billion nucleotides as well as each newline
 delimiter and an arbitrary number of bytes for each chromosome's single line header.
