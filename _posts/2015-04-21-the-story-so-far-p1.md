@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "The Story so Far: Part I, A Toy Dataset"
-pubdir: "so-far-p1"
 ---
 
 In this somewhat **long** and long overdue post; I'll attempt to explain the work done so far and an overview
@@ -126,7 +125,7 @@ FASTQC also generates some nice graphs, of primary interest, per-base sequence q
 
 \_1            |  \_2
 :-------------------------:|:-------------------------:
-![]({{ site.url }}/public/posts/{{ post.pubdir }}/pbq1.png)  |  ![]({{ site.url }}/public/posts/{{ post.pubdir }}/pbq2.png)
+![]({{ site.url }}/public/posts/so-far-p1/pbq1.png)  |  ![]({{ site.url }}/public/posts/so-far-p1/pbq2.png)
 
 ```bash
 # Command: LC_ALL=C grep -c '^@' $FILE
