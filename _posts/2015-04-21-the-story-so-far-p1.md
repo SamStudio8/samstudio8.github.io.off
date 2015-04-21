@@ -1,7 +1,9 @@
 ---
 layout: post
-title: "The Story so Far: Part I, A Toy Dataset"
+title: "The Story so Far: Part I, A Toy Dataset [WIP]"
 ---
+
+<p class="message"><b>This post isn't finished yet. Consider coming back later?</b></p>
 
 In this somewhat **long** and long overdue post; I'll attempt to explain the work done so far and an overview
 of the many issues encountered along the way and an insight in to why doing science is much harder than
@@ -92,7 +94,7 @@ It just adds up. To be exact, both input files span 781,860,356 lines each -- me
 these files aren't small at all!
 
 
-### Quality Control and Trimming
+### Quality Control
 
 Although already done (as described by the paper), it's good to get an idea of how to run and interpret
 basic quality checks on the input data. I used [`FASTQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
@@ -143,15 +145,76 @@ FASTQC will often raise a warning about the distribution of GC content for such 
 a statistically significant deviation from or violation of the theoretical normal. These can be ignored.
 
 Two other tests also typically attract warnings or errors; K-mer content and sequence duplication levels.
+These tests attempt to quantify the diversity of the reads at hand, which is great when you
+are looking for diversity within reads of one genome; raising a flag if perhaps you've accidentally sequenced
+all your barcodes or done too many rounds of PCR and been left with a lot of similar looking fragments.
+But once again, metagenomics violates expectations and assumptions made by traditional single-species
+genomics. For example, highly represented species ([and|or] fragments that do well under PCR) will dominate 
+samples and trigger apparently high levels of sequence duplication. Especially so if many species share many
+similar sequences which is likely in environments undergoing co-evolution.
 
 FASTQC also plots N count (no call), GC ratio and average quality scores across whole reads as well as per-base sequence content (which should be checked for a roughly linear stability) and distribution of sequence lengths (which should be checked to ensure the majority of sequences are a reasonable size). Together a quick look at all these metrics
-should provide a decent health check before moving forward.
+should provide a decent health check before moving forward, but they too should be taken with a pinch of salt
+as FASTQC tries to help you answer the question "are these probably from one genome?".
+
+
+### Trimming
+Trimming had already been completed by the time I had got hold of the dataset, but I wanted to perform
+a quick sanity check and ensure that the two files had been handled correctly[^8]. Blatantly forgetting
+about and ignoring the FASTQC reports I had generated and checked over, I queried both files with `grep`:
 
 ```bash
-# Command: LC_ALL=C grep -c '^@' $FILE
-196517718   /ibers/ernie/repository/genomics/mts11/READS/Limpet-Magda/A3limpetMetaCleaned_1.fastq.trim
-196795722   /ibers/ernie/repository/genomics/mts11/READS/Limpet-Magda/A3limpetMetaCleaned_2.fastq.trim
+LC_ALL=C grep -c '^@' $FILE
 ```
+```
+196517718   A3limpetMetaCleaned_1.fastq.trim
+196795722   A3limpetMetaCleaned_2.fastq.trim
+```
+
+"Oh dear"[^9], I thought. The number of sequences in both files are not equal. "Somebody bumbled the trimming!".
+I hypothesised that low-quality sequences had been removed but perhaps its corresponding mate in the other file
+had not been removed too.
+
+And so, I unnecessarily launched myself head first in to my first large scale computing problem; given two sets
+of ~196 million reads which mostly overlap, how can we efficiently find the intersection (and write it to disk)?
+
+#### An Unnecessary Tangent
+<p class="message">Whilst a learning exercise, I feel it necessary to re-iterate that this tangent could easily have been avoided had I only paid a little more attention to the `FASTQC` reports...<br /><br />
+Incidentally if you are after a project overview, you can skip this interluding derailment. I'll probably save a super-technical write-up of what happened here for a future post.</p>
+
+##### Hello Python
+I jumped to write a Python script that reads in each file by turn, adds each sequence header to a dictionary and stores
+the byte-location of that read in both files (from `file_handle.tell()`) in a two element list. Many hours after
+executing this script I was confused that I was still waiting, progress was happening but becoming increasingly
+sluggish. I'd saturated the dictionary. ~196 million keys is a lot.
+
+I started to wonder about things I'd not noticed or taken in to account before -- how long does it even take to just
+handle the file? Iterating over one of the files in Python with `readline()` took just shy of quarter of an hour[^10].
+Wat?
+
+```python
+while line:
+    if line[0] == '@':
+        count += 1
+    line = fastq_1_fh.readline()
+print count 
+```
+
+This was unsettling. This is the sort of thing I've not needed to worry about before. Files just get handled and
+then things happen? I've never experienced such a **wait**! I scrabbled for a calculator, to take 15 minutes to
+handle ~781 million lines, we must be doing around 867,777 lines every second, that's not bad.
+Suddenly the scale of what I was trying to do set in: it's not that Python is *slow* (although neither is it the
+fastest method), there really is just a **significant** amount of data here. Over three quarters of a billion
+lines; that's twelve lines (or rather, three whole FASTQ records) for every person in the UK[^11].
+
+This set the baseline for improvement, we couldn't possibly do what I wanted to do in less than 30 minutes as file
+handling alone took this much time.
+
+##### `grep` and `awk` oddities
+
+##### MySQL
+
+##### Mootness
 
 Let's take another look at the valid range of characters for the Illumina 1.8+ quality scores:
 ```
@@ -164,19 +227,12 @@ be available for use in quality strings...
 ...I'd written a lazy parser that just looked for these instead of checking for the correct
 formatting of sequencing `+` quality, following by a new sequence starting with the `@` symbol...
 
-Unfortunately this led me to believe the files had been incorrectly trimmed (with some reads in Set A
-not appearing in Set B) launching me head first in to my first large scale
-computing problem. Given a set of 195,000,000 reads, and another set of mostly similar 195,000,000 reads
- Can we distinguish what reads appear in one set and not the other, given that, can we then create an output file
- that only contains the intersection of the two sets?
- 
- At first I tried to use Python dictionaries to store all the read data seen in both of the input files. It look a while to load. A long while... Turns out that Python requires almost quarter of an hour to merely read through the files and count the number of lines.  I was thinking something was a little off about this, then considered that there are XX billion lines in the file.... Even grep takes 2 minutes.
- 
- 
 ```bash
-# Command: LC_ALL=C grep -c '^@HWI-D' $FILE
-195465089   /ibers/ernie/repository/genomics/mts11/READS/Limpet-Magda/A3limpetMetaCleaned_1.fastq.trim
-195465089   /ibers/ernie/repository/genomics/mts11/READS/Limpet-Magda/A3limpetMetaCleaned_2.fastq.trim
+LC_ALL=C grep -c '^@HWI-D' $FILE
+```
+```
+195465089   A3limpetMetaCleaned_1.fastq.trim
+195465089   A3limpetMetaCleaned_2.fastq.trim
 ```
 
 Better! The number of sequence headers match and I'm happy to assume they are all correctly paired
@@ -185,7 +241,6 @@ Although even this check is only *just about* robust, assuming that all reads ar
 of machines addressed as `HWI-DXXXXX` (which I do know for sure) 
 and secondly that `H`, `I` and `-` are all valid quality score
 characters and so `W` is the only character preventing further accidental matches to quality strings.
-
 
 
 * * *
@@ -198,6 +253,7 @@ There's two main issues of size here:
 # tl;dr
 * Don't try and count the number of sequences in a FASTQ file by counting `@` characters.
 * Prepend `LC_ALL=C` to commands like `grep` and `awk` if you don't need to support non-ASCII character spaces.
+* Python loads file in blocks to speed up file handling so unless you control the iterator yourself (manually calling `readline()`, `tell()` will respond with the location of the end of the current block, which is a bit useless if you are trying to build an index of where things are...
 * Processing **massive** files takes time (more than a minute) and there's nothing wrong with that.
 * Practice reading
 * Try to actually read quality reports, then read them again. Then grab a coffee and read them for a third time before you do anything.
@@ -232,3 +288,13 @@ There's two main issues of size here:
 [^6]: Which actually wouldn't be that much of a surprise.
 
 [^7]: Or small, depending on whether you've adjusted your world view yet.
+
+[^8]: Primarily because I don't trust anyone. Including myself.[^me]
+
+[^9]: I'm sure you can imagine what I really said.
+
+[^10]: In reality I wouldn't go so far as describing this as a "benchmark", my methodology is a little flawed. I was using the login/head node (which experiences varying levels of load) and runs Python 2.6 by default. I also made no real attempt to flush cache lines. Despite this, I demonstrated reproducible behaviour and thought it worth of mention.
+
+[^11]: Or 65 records for each person here in Wales.
+
+[^me]: Especially myself.
