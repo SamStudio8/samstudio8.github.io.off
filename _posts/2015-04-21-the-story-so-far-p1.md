@@ -203,6 +203,7 @@ next time on Samposium.
 # tl;dr
 * In bioinformatics, "small" really isn't *small*.
 * Try to actually read quality reports, then read them again. Then grab a coffee or go outside and come back and read them for a third time before you do something foolish and have to tell everyone at your lab meeting about how silly you are.
+* Don't count the number of sequences in a FASTQ file by counting `@` characters at the start of a line, it's a valid quality score for most quality encoding formats.
 
 [^1]: Now realised to be a complete misnomer, both in terms of size and effort.
 
