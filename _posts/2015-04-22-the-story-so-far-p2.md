@@ -8,11 +8,11 @@ title: "The Story so Far: Part II, An Unnecessary Tangent [WIP]"
 Following from my [previous post]({{ page.previous.url }}), we left off as I embarked upon an ultimately unnecessary
 exercise (though I am yet to discover my error) in attempting to "synchronise" two large FASTQ files...
 
-## An Unnecessary Tangent
+# An Unnecessary Tangent
 <p class="message">Whilst a learning exercise, I feel it necessary to re-iterate that this tangent could easily have been avoided had I only paid a little more attention to the `FASTQC` reports...<br /><br />
 If you are after a project overview, you can skip this interluding derailment and head to the next part.</p>
 
-### Hello Python
+## Hello Python
 I jumped to write a Python script that reads in each file by turn, adds each sequence header to a dictionary and stores
 the byte-location of that read in both files (from `handle.tell()`) in a two element list. Many hours after
 executing this script I was confused that I was still waiting, progress was happening but becoming increasingly
@@ -40,11 +40,11 @@ lines; that's twelve lines (or rather, three whole FASTQ records) for every pers
 This set the baseline for improvement, we couldn't possibly do what I wanted to do in less than 30 minutes as file
 handling alone took this much time.
 
-### Oddities with `grep` and `awk`
+## Oddities with `grep` and `awk`
 
-### MySQL
+## MySQL
 
-### Mootness
+## Mootness
 ...
 ```bash
 LC_ALL=C grep -c '^@HWI-D' $FILE
