@@ -14,7 +14,7 @@ If you are after a project overview, you can skip this interluding derailment an
 
 ### Hello Python
 I jumped to write a Python script that reads in each file by turn, adds each sequence header to a dictionary and stores
-the byte-location of that read in both files (from `file_handle.tell()`) in a two element list. Many hours after
+the byte-location of that read in both files (from `handle.tell()`) in a two element list. Many hours after
 executing this script I was confused that I was still waiting, progress was happening but becoming increasingly
 sluggish. I'd saturated the dictionary. ~196 million keys is a lot.
 
@@ -31,9 +31,9 @@ print count
 ```
 
 This was unsettling. This is the sort of thing I've not needed to worry about before. Files just get handled and
-then things happen? I've never experienced such a **wait**! I scrabbled for a calculator, to take 15 minutes to
-handle ~781 million lines, we must be doing around 867,777 lines every second, that's not bad.
-Suddenly the scale of what I was trying to do set in: it's not that Python is *slow* (although neither is it the
+then things happen? I've never experienced such a wait for mere file I/O. I scrabbled for a calculator; to take 15 minutes to
+handle ~781 million lines, we must be doing around 867,777 lines every second, that's not too bad. So what's taking
+so long? Suddenly the scale of what I was trying to do set in: it's not that Python is *slow* (although neither is it the
 fastest method), there really is just a **significant** amount of data here. Over three quarters of a billion
 lines; that's twelve lines (or rather, three whole FASTQ records) for every person in the UK[^2].
 
@@ -71,12 +71,12 @@ There's two main issues of size here:
 * * *
 
 # tl;dr
-* Prepend `LC_ALL=C` to commands like `grep` and `awk` if you don't need to support non-ASCII character spaces.
-* Python loads file in blocks to speed up file handling so unless you control the iterator yourself (manually calling `readline()`, `tell()` will respond with the location of the end of the current block, which is a bit useless if you are trying to build an index of where things are...
-* Processing **massive** files takes time (more than a minute) and there's nothing wrong with that.
+* If your system `locale` is set to `UTF-8` (or such), prepend `LC_ALL=C` to commands like `grep` and `awk` to override localisation settings and expect characters of an ASCII character set to significantly improve search performance (no
+longer parsing text in unicode).
+* When using Python's implicit file looping (`for line in handle`), files are buffered in blocks to improve performance in fetching adjacent lines from RAM instead of disk. However this causes `handle.tell()` to report the byte-address of the handle's current position as at the end of the current block, rather than the current `line`. If you are say, trying to construct an index of where sequences in a file are, one must control the handle iterator 'manually' using `handle.readline()`.
+* Processing files that are actually **massive** simply takes time (more than a minute) and there's nothing wrong with that.
 
-* * *
 
 [^1]: In reality I wouldn't go so far as describing this as a "benchmark", my methodology is a little flawed. I was using the login/head node (which experiences varying levels of load) and runs Python 2.6 by default. I also made no real attempt to flush cache lines. Despite this, I demonstrated reproducible behaviour and thought it worth of mention.
 
-[^2]: Or 65 records for each person here in Wales.
+[^2]: Or 65 for every person here in rainy Wales.
