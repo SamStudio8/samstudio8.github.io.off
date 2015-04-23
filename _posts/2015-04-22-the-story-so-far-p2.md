@@ -7,7 +7,7 @@ title: "The Story so Far: Part II, An Unnecessary Tangent [WIP]"
 
 ## An Unnecessary Tangent
 <p class="message">Whilst a learning exercise, I feel it necessary to re-iterate that this tangent could easily have been avoided had I only paid a little more attention to the `FASTQC` reports...<br /><br />
-Incidentally if you are after a project overview, you can skip this interluding derailment. I'll probably save a super-technical write-up of what happened here for a future post.</p>
+If you are after a project overview, you can skip this interluding derailment and head to the next part.</p>
 
 ### Hello Python
 I jumped to write a Python script that reads in each file by turn, adds each sequence header to a dictionary and stores
