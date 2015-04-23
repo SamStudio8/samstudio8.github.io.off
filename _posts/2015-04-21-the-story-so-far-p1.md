@@ -12,7 +12,7 @@ around here.</p>
 
 * * *
 
-## In the beginning...
+# In the beginning...
 To address my lack of experience in handling metagenomic data, I was given a small[^1] dataset to play with.
 Immediately I had to adjust my interpretation of what constitutes a "small" file. Previously the largest
 single input I've had to work with would probably have been the human reference genome ([GRCh37](http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human/)) which as a FASTA[^2] file
@@ -21,7 +21,7 @@ clocks in at around a little over 3GB[^3].
 Thus imagine my dismay when I am directed to the directory of my input data and find 2x**42GB** file.  
 Together, the files are 28x the size of the largest file I've ever worked with...
 
-### So, what is it?
+## So, what is it?
 Size aside, **what** are we even looking at and how is there so much of it?
 
 The files represent approximately 195 million read pairs from a nextgen[^4] sequencing run, with each file holding
@@ -41,7 +41,7 @@ any non-limpet reads could be salvaged for functional analysis.
 
 Let's take a closer look at the format to see what we're dealing with.
 
-#### FASTQ Format
+### FASTQ Format
 FASTQ is another text based file format, similar to FASTA but also stores quality scores for
 each nucleotide in a sequence[^6]. Headers are demarcated by the `@` character instead of `>`
 and although not required tend to be formatted strings containing information pertaining to the
@@ -92,7 +92,7 @@ It just adds up. To be exact, both input files span 781,860,356 lines each -- me
 these files aren't small at all!
 
 
-### Quality Control
+## Quality Control
 
 Although already done (as described by the paper), it's good to get an idea of how to run and interpret
 basic quality checks on the input data. I used [`FASTQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
@@ -155,7 +155,7 @@ should provide a decent health check before moving forward, but they too should 
 as FASTQC tries to help you answer the question "are these probably from one genome?".
 
 
-### Trimming
+## Trimming
 Trimming is the process of truncating bases that fall below a particular quality threshold at the start
 and end of reads. Typically this is done to create "better" read overlaps (as potential low-quality base
 calls could otherwise prevent overlaps that should exist) which can help improve performance of downstream
