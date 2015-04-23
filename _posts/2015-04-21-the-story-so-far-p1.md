@@ -195,7 +195,7 @@ as well as any quality line that happened to begin with an encoded score of Q31,
 
 And so, I unnecessarily launched myself head first in to my first large scale computing problem; given two sets
 of ~196 million reads which mostly overlap, how can we efficiently find the intersection (and write it to disk)?
-Stay tuned and find out how long it took me to realise my mistake and the adventures that led me to the discover,
+Stay tuned and find out how long it took me to realise my mistake and the adventures that led me to the discovery,
 next time on Samposium.
 
 * * *
