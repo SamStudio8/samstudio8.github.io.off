@@ -156,7 +156,12 @@ as FASTQC tries to help you answer the question "are these probably from one gen
 
 
 ### Trimming
-Trimming had already been completed by the time I had got hold of the dataset, but I wanted to perform
+Trimming is the process of truncating bases that fall below a particular quality threshold at the start
+and end of reads. Typically this is done to create "better" read overlaps (as potential low-quality base
+calls could otherwise prevent overlaps that should exist) which can help improve performance of downstream
+tools such as assemblers and aligners.
+
+Trimming had already been completed by the time I had got hold of the dataset[^5], but I wanted to perform
 a quick sanity check and ensure that the two files had been handled correctly[^8]. Blatantly forgetting
 about and ignoring the FASTQC reports I had generated and checked over, I queried both files with `grep`:
 
@@ -172,9 +177,26 @@ grep -c '^@' $FILE
 I hypothesised that low-quality sequences had been removed but the corresponding mate in the other file
 had not been removed to keep the pairs in sync.
 
+With hindsight, let's take another look at the valid range of quality score characters for the
+Illumina 1.8+ format:
+
+```
+!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJ
+^                              ^         ^
+0..............................31........41
+```
+
+The record delimiting character; `@` is used to encode Q31. For some reason somebody thought it would
+be a great idea to make this character available for use in quality strings. I'd been counting records
+as well as any quality line that happened to begin with an encoded score of Q31, the `@`.
+
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/samstudio8">@samstudio8</a> One of many sins in FASTQ story. They could have used tilde at top of ASCII range or something… see also <a href="http://t.co/x2Jz2owODp">http://t.co/x2Jz2owODp</a></p>&mdash; Peter Cock (@pjacock) <a href="https://twitter.com/pjacock/status/551598001215385600">January 4, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 And so, I unnecessarily launched myself head first in to my first large scale computing problem; given two sets
 of ~196 million reads which mostly overlap, how can we efficiently find the intersection (and write it to disk)?
-Stay tuned and find out next time on Samposium.
+Stay tuned and find out how long it took me to realise my mistake and the adventures that led me to the discover,
+next time on Samposium.
 
 * * *
 
@@ -205,7 +227,12 @@ Stay tuned and find out next time on Samposium.
 
 [^4]: Seriously, can we stop calling it nextgen yet?
 
-[^5]: I'm unsure why, from a recent internal talk I was under the impression we'd normally trim the first "few" bases (1-3bp, maybe up to 13bp if there's a lot of poor quality nucleotides) to try and improve downstream analysis such as alignments (given the start and end of reads can often be quite poor and not align as well as they should) but 15bp seems excessive. It also appears the ends of the reads were not truncated.
+[^5]: I'm unsure why, from a recent internal talk I was under the impression we'd normally trim the first "few" bases (1-3bp, maybe up to 13bp if there's a lot of poor quality nucleotides) to try and improve downstream analysis such as alignments (given the start and end of reads can often be quite poor and not align as well as they should) but 15bp seems excessive. It also appears the ends of the reads were not truncated.  
+
+    <p class="message"><b>Update</b><br />It's possible an older library prep kit was used to create
+    the sequencing library, thus the barcodes would have needed truncating from the reads along with
+    any poor scoring bases.<br /><br />The ends of the reads were not truncated as the quality falls
+    inside a reasonable threshold.</p>
 
 [^6]: Which actually wouldn't be that much of a surprise.
 
