@@ -10,7 +10,7 @@ exercise (though I am yet to discover my error) in attempting to "synchronise" t
 
 # An Unnecessary Tangent
 <p class="message">Whilst a learning exercise, I feel it necessary to re-iterate that this tangent could easily have been avoided had I only paid a little more attention to the `FASTQC` reports...<br /><br />
-If you are after a project overview, you can skip this interluding derailment and head to the [next part]({{ post.next.url }}).</p>
+If you are after a project overview, you can skip this interluding derailment and head to the [next part]({{ page.next.url }}).</p>
 
 ## Hello Python
 I jumped to write a Python script that reads in each file by turn, adds each sequence header to a dictionary and stores
