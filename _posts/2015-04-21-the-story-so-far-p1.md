@@ -221,7 +221,7 @@ next time on Samposium.
     
     Typically sequence lines are of uniform length (under 80bp), though this is not a requirement of the format.
     The [NCBI](http://www.ncbi.nlm.nih.gov/) suggest formats for the header (single line descriptor,
-    following the '>' character) though these are also not required to be syntactically valid.
+    following the `>` character) though these are also not required to be syntactically valid.
 
 [^3]: Stored as text we take a byte for each of the 3 billion nucleotides as well as each newline
     delimiter and an arbitrary number of bytes for each chromosome's single line header.
