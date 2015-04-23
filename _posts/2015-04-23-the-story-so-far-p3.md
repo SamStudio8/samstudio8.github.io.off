@@ -28,7 +28,8 @@ the jigsaw that is our genome of interest[^2].
 
 If we had little (or no) information about similarity (*e.g.* no images on the pieces, *i.e.* genetically
 dissimilar reads) or overlap (*e.g.* the pieces are merely tiles with no tabs or blanks[^3], *i.e.* reads
-which share no overlap) you can imagine how things become somewhat more difficult.
+which share no overlap) you can imagine how things become somewhat more difficult. Especially so if pieces
+are missing.
 
 ## velvet
 ### BIGASSEMBLY
