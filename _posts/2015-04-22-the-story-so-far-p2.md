@@ -5,6 +5,9 @@ title: "The Story so Far: Part II, An Unnecessary Tangent [WIP]"
 
 <p class="message"><b>This post isn't finished yet. Consider coming back later?</b></p>
 
+Following from my [previous post]({{ post.prev }}), we left off as I embarked upon an ultimately unnecessary
+exercise (though I am yet to discover my error) in attempting to "synchronise" two large FASTQ files...
+
 ## An Unnecessary Tangent
 <p class="message">Whilst a learning exercise, I feel it necessary to re-iterate that this tangent could easily have been avoided had I only paid a little more attention to the `FASTQC` reports...<br /><br />
 If you are after a project overview, you can skip this interluding derailment and head to the next part.</p>
