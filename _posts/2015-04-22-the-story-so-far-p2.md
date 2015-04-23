@@ -9,8 +9,8 @@ Following from my [previous post]({{ page.previous.url }}), we left off as I emb
 exercise (though I am yet to discover my error) in attempting to "synchronise" two large FASTQ files...
 
 # An Unnecessary Tangent
-<p class="message" markdown="1">Whilst a learning exercise, I feel it necessary to re-iterate that this tangent could easily have been avoided had I only paid a little more attention to the `FASTQC` reports...<br /><br />
-If you are after a project overview, you can skip this interluding derailment and head to the [next part]({{ page.next.url }}).</p>
+<p class="message">Whilst a learning exercise, I feel it necessary to re-iterate that this tangent could easily have been avoided had I only paid a little more attention to the {{ `FASTQC` | markdownify }} reports...<br /><br />
+If you are after a project overview, you can skip this interluding derailment and head to the {{ [next part]({{ page.next.url }}) | markdownify }}.</p>
 
 ## Hello Python
 I jumped to write a Python script that reads in each file by turn, adds each sequence header to a dictionary and stores
