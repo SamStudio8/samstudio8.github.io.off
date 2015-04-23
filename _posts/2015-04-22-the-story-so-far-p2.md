@@ -5,7 +5,7 @@ title: "The Story so Far: Part II, An Unnecessary Tangent [WIP]"
 
 <p class="message"><b>This post isn't finished yet. Consider coming back later?</b></p>
 
-Following from my [previous post]({{ post.previous.url }}), we left off as I embarked upon an ultimately unnecessary
+Following from my [previous post]({{ page.previous.url }}), we left off as I embarked upon an ultimately unnecessary
 exercise (though I am yet to discover my error) in attempting to "synchronise" two large FASTQ files...
 
 ## An Unnecessary Tangent
