@@ -42,18 +42,7 @@ handling alone took this much time.
 ### MySQL
 
 ### Mootness
-
-Let's take another look at the valid range of characters for the Illumina 1.8+ quality scores:
-```
-!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJ
-```
-**`@`**
-
-...for some reason someone thought it would be a great idea to allow the `@` character to
-be available for use in quality strings...
-...I'd written a lazy parser that just looked for these instead of checking for the correct
-formatting of sequencing `+` quality, following by a new sequence starting with the `@` symbol...
-
+...
 ```bash
 LC_ALL=C grep -c '^@HWI-D' $FILE
 ```
@@ -79,7 +68,6 @@ There's two main issues of size here:
 * * *
 
 # tl;dr
-* Don't try and count the number of sequences in a FASTQ file by counting `@` characters.
 * Prepend `LC_ALL=C` to commands like `grep` and `awk` if you don't need to support non-ASCII character spaces.
 * Python loads file in blocks to speed up file handling so unless you control the iterator yourself (manually calling `readline()`, `tell()` will respond with the location of the end of the current block, which is a bit useless if you are trying to build an index of where things are...
 * Processing **massive** files takes time (more than a minute) and there's nothing wrong with that.
