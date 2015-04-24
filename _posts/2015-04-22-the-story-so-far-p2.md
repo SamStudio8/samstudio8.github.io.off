@@ -13,8 +13,18 @@ Whilst a learning exercise, I feel it necessary to re-iterate that this tangent 
 If you are after a project overview, you can skip this interluding derailment and head to the [next part]({{ page.next.url }}).
 
 ## Hello Python
-I jumped to write a Python script that reads in each file by turn, adds each sequence header to a dictionary and stores
-the byte-location of that read in both files (from `handle.tell()`) in a two element list. Many hours after
+I followed my natural instict and wrote up a small Python script to iterate over the contents of the first
+FASTQ file, looking for sequence headers (lines beginning with `@`) which were inserted as keys in a `dict`
+whose corresponding value was a two-element list storing the byte-location (`handle.tell()`) of the beginning
+of that sequence record in each input file, respectively.
+
+Once the dictionary has been populated, the script iterates over the second FASTQ file, this time looking up sequence headers in the `dict` and if it exists updating the second element of the list with the byte-position.
+Finally the script would iterate over the dictionary and output entries that only had a value for the second
+element (*i.e.* only sequences found in both files).
+
+...
+
+Many hours after
 executing this script I was confused that I was still waiting, progress was happening but becoming increasingly
 sluggish. I'd saturated the dictionary. ~196 million keys is a lot.
 
@@ -23,10 +33,12 @@ handle the file? Iterating over one of the files in Python with `readline()` too
 Wat?
 
 ```python
+handle = open("A3limpetMetaCleaned_1.fastq.trim")
+line = handle.readline()
 while line:
     if line[0] == '@':
         count += 1
-    line = fastq_1_fh.readline()
+    line = handle.readline()
 print count 
 ```
 
@@ -40,7 +52,9 @@ lines; that's twelve lines (or rather, three whole FASTQ records) for every pers
 This set the baseline for improvement, we couldn't possibly do what I wanted to do in less than 30 minutes as file
 handling alone took this much time.
 
-## Oddities with `grep` and `awk`
+## Oddities with `grep` and `awk`...
+
+## ...and `sed` too
 
 ## MySQL
 
@@ -71,8 +85,7 @@ There's two main issues of size here:
 * * *
 
 # tl;dr
-* If your system `locale` is set to `UTF-8` (or such), prepend `LC_ALL=C` to commands like `grep` and `awk` to override localisation settings and expect characters of an ASCII character set to significantly improve search performance (no
-longer parsing text in unicode).
+* If your system `locale` is set to `UTF-8` (or such), prepend `LC_ALL=C` to commands like `grep` and `awk` to override localisation settings and expect characters of an ASCII character set to significantly improve search performance (no longer parsing text in unicode).
 * When using Python's implicit file looping (`for line in handle`), files are buffered in blocks to improve performance in fetching adjacent lines from RAM instead of disk. However this causes `handle.tell()` to report the byte-address of the handle's current position as at the end of the current block, rather than the current `line`. If you are say, trying to construct an index of where sequences in a file are, one must control the handle iterator 'manually' using `handle.readline()`.
 * Processing files that are actually **massive** simply takes time (more than a minute) and there's nothing wrong with that.
 
