@@ -43,7 +43,7 @@ Let's take a closer look at the format to see what we're dealing with.
 
 ### FASTQ Format
 FASTQ is another text based file format, similar to FASTA but also stores quality scores for
-each nucleotide in a sequence[^6]. Headers are demarcated by the `@` character instead of `>`
+each nucleotide in a sequence. Headers are demarcated by the `@` character instead of `>`
 and although not required tend to be formatted strings containing information pertaining to the
 sequencing device that produced the read.
 Sequence data is followed by a single `+` on a new line, before a string of quality scores (encoded as
@@ -234,8 +234,6 @@ Stay tuned and find out how long it took me to realise my mistake and the advent
     the sequencing library, thus the barcodes would have needed truncating from the reads along with
     any poor scoring bases.<br /><br />The ends of the reads were not truncated as the quality falls
     inside a reasonable threshold.</p>
-
-[^6]: Which actually wouldn't be that much of a surprise.
 
 [^7]: Or small, depending on whether you've adjusted your world view yet.
 
