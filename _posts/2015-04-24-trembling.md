@@ -33,8 +33,8 @@ The UniProt Knowledgebase (UniProtKB) has witnessed an exponential growth in the
 From now on, we will no longer create new UniProtKB/TrEMBL records for proteomes identified as redundant.
 </blockquote>
 
-Personally I would have liked to see this sort of information in the release notes[^4] rather than as an aside
-stored in an HTML file that I don't tend to open in my terminal! Though it is amusing that the removal of 47 million
+Personally I would have liked to see this sort of major announcement (and actually a bit more information on "the *procedure*") in the release notes[^4] rather than as an aside
+stored in an HTML file that I wouldn't open in my terminal. Though it is amusing that the removal of 47 million
 entries still wasn't enough of a story to make it the "Headline" piece of news for the release!
 
 Mystery solved. At least my BLAST jobs have less to hit against now[^5]?
