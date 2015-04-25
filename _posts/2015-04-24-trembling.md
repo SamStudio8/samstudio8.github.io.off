@@ -3,6 +3,8 @@ layout: post
 title: "TrEMBLing"
 ---
 
+Something appears to amiss with **TrEMBL**, millions of sequences are "missing". Where did they go?
+
 At the end of last month, to build a database of bacterial sequences with known hydrolase activity[^1], I extracted
 around 2.9 million sequences from **UniProtKB/TrEMBL**; a popular database which contains sequences that are have
 been automatically annotated and are waiting for manual curation before graduating to the **UniProtKB/SwissProt**
