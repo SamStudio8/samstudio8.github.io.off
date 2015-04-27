@@ -6,8 +6,8 @@ title: "TrEMBLing"
 Something appears amiss with **TrEMBL**, millions of sequences are "missing". Where did they go?
 
 At the end of last month, to build a database of bacterial sequences with known hydrolase activity[^1], I extracted
-around 2.9 million sequences from **UniProtKB/TrEMBL**; a popular database which contains sequences that are have
-been automatically annotated and are waiting for manual curation before graduating to the **UniProtKB/SwissProt**
+around 2.9 million sequences from **UniProtKB/TrEMBL**; a popular database which contains sequences that have
+been automatically annotated and are awaiting manual curation for graduation to the **UniProtKB/SwissProt**
 database. It's important to note that as these annotations have not yet been reviewed they may be less accurate,
 but it is this same lack of review that allows the database to be so large -- making it a useful first port of call
 when trying to classify your own sequences. Typically we handle the potential for less accurate results by using a
@@ -16,14 +16,15 @@ created in confidence) when filtering alignment hits from software such as BLAST
 
 It's good to keep databases up-to-date and so I ran the [same query](http://www.uniprot.org/uniprot/?query=ec%3A3.*+AND+taxonomy%3A%22Bacteria+%5B2%5D%22+AND+reviewed%3Ano)[^2]
 against TrEMBL with a view to re-download the resulting FASTA, only to find just shy of 1 million results had
-been returned -- just over a third of the original query. Wat?
+been returned -- just over a third of the original query a month ago. Wat?
 
-The database was updated at the start of April[^3] and the [current release notes](http://www.ebi.ac.uk/uniprot/TrEMBLstats)
-show the graph below.
+TrEMBL was most recently updated at the start of April[^3] and the [current release notes](http://www.ebi.ac.uk/uniprot/TrEMBLstats)
+include the graph below.
 
 ![]({{ site.url }}/public/posts/trembling/entries.png)
 
-Indeed it appears that half of TrEMBL is missing? I presumed this must have been a database spring clean to
+Indeed it appears that half of TrEMBL is missing? After my initial panic state,
+I presumed this must have been a database spring clean to
 remove similar looking sequences and digging around the FTP repository, my hunch was confirmed in an additional
 [news file](ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/news.html):
 
@@ -40,6 +41,11 @@ stored in an HTML file that I wouldn't open in my terminal. Though it is amusing
 entries still wasn't enough of a story to make it the "Headline" piece of news for the release!
 
 Mystery solved. At least my BLAST jobs have less to hit against now[^5]?
+
+<p class="notice"><b>Update</b><br />
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/samstudio8">@samstudio8</a> Are you referring to reduced redundancy in <a href="https://twitter.com/uniprot">@uniprot</a> ? Here&#39;s some info about it in their Help pages: <a href="http://t.co/s8zhqztWpQ">http://t.co/s8zhqztWpQ</a></p>&mdash; EMBL-EBI (@emblebi) <a href="https://twitter.com/emblebi/status/592603637525979136">April 27, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</p>
 
 * * *
 
@@ -59,7 +65,7 @@ Mystery solved. At least my BLAST jobs have less to hit against now[^5]?
 
 [^2]: The `reviewed:no` search query limits results from the UniProtKB to just entries found in TrEMBL.
 
-[^3]: And I figure this would make for a pretty poor joke.
+[^3]: And I figured this would make a pretty poor April Fool's joke.
 
 [^4]: A large neon sign wouldn't have gone amiss either.
 
