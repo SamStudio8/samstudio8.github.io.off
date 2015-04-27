@@ -75,13 +75,6 @@ of machines addressed as `HWI-DXXXXX` (which I do know for sure)
 and secondly that `H`, `I` and `-` are all valid quality score
 characters and so `W` is the only character preventing further accidental matches to quality strings.
 
-
-* * *
-
-There's two main issues of size here:
-* Jobs that are large because the inputs are large,
-* Jobs that are large because the inputs are tiny but there are thousands of them...
-
 * * *
 
 # tl;dr
