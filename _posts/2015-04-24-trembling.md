@@ -42,7 +42,9 @@ entries still wasn't enough of a story to make it the "Headline" piece of news f
 
 Mystery solved. At least my BLAST jobs have less to hit against now[^5]?
 
-<p class="notice"><b>Update</b><br />
+* * *
+
+<p class="message"><b>Update</b><br />
 <blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/samstudio8">@samstudio8</a> Are you referring to reduced redundancy in <a href="https://twitter.com/uniprot">@uniprot</a> ? Here&#39;s some info about it in their Help pages: <a href="http://t.co/s8zhqztWpQ">http://t.co/s8zhqztWpQ</a></p>&mdash; EMBL-EBI (@emblebi) <a href="https://twitter.com/emblebi/status/592603637525979136">April 27, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 </p>
