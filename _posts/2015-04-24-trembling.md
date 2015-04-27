@@ -71,4 +71,4 @@ Mystery solved. At least my BLAST jobs have less to hit against now[^5]?
 
 [^4]: A large neon sign wouldn't have gone amiss either.
 
-[^5]: I imagine our sys-admin will be pleased to have some scratch space back too.
+[^5]: I imagine our sys-admin will be pleased to have some [scratch space](http://samstudio8.github.io/2015/04/25/scratch/) back too.
