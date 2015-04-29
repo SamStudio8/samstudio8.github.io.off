@@ -6,7 +6,8 @@ title: "What am I doing?"
 A week ago I had a progress meeting with
 [Amanda](http://www.aber.ac.uk/en/cs/staff-list/staff_profiles/?staff_id=afc) and
 [Wayne](http://www.aber.ac.uk/en/cs/staff-list/staff_profiles/?login=waa2); who make up the
-supervisory team for the computational face of my project.
+supervisory team for the computational face of my project, I talked about how computers are
+terrible and where the project is heading.
 
 As Wayne had been away from meetings for a few weeks, I began with a roundup of everything
 that has been going [disasterously wrong](http://samstudio8.github.io/2015/04/17/exits/)[^1].
