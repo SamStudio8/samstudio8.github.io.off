@@ -63,8 +63,8 @@ For the purpose of `BLAST`[^6], we can shard both the contigs and the database o
 Until the number of jobs you have starts [causing trouble](http://samstudio8.github.io/2015/04/17/exits/).
 
 Of course this in turn makes handling data for downstream analysis a little more complex, output files need
-converting, sorting and merging before potentially having to be re-sharded once again to fit them through a
-different tool.
+converting, sorting and merging before potentially having to be re-sharded once again to [fit them through a
+different tool](http://samstudio8.github.io/2015/04/29/pipelines/).
 
 # Conquering Computational Complexity
 So how can we move forward? 
