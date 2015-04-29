@@ -10,8 +10,8 @@ supervisory team for the computational face of my project. I talked about how co
 terrible and where the project is heading.
 
 As Wayne had been away from meetings for a few weeks, I began with a roundup of everything
-that has been going [disasterously wrong](http://samstudio8.github.io/2015/04/17/exits/)[^1].
-Progress on a functional analysis of the [limpet data](http://samstudio8.github.io/2015/04/21/the-story-so-far-p1/)
+that has been going [disasterously wrong]({% post_url 2015-04-17-exits %})[^1].
+Progress on a functional analysis of the [limpet data]({% post_url 2015-04-21-the-story-so-far-p1 %})
 has been repeatedly hindered by a lack of resources on our cluster which is simply strugging with the
 sheer size of the jobs I'm asking of it.
 
@@ -34,7 +34,7 @@ lead to a job being terminated for exceeding its allowance, wasting queue time (
 well as execution time (days or weeks) and leaving you with nothing to show[^4].
 The problem is in asking for too much, you queue for a node longer, but when finally scheduled
 you effectively block others from 
-using resources for a significant time period and [I'll make you feel bad for it](http://samstudio8.github.io/2015/04/26/memblame/).
+using resources for a significant time period and [I'll make you feel bad for it]({% post_url 2015-04-26-memblame %}).
 
 The only way to get around these constraints is to minimise the dataset you have in the first place.
 For example for assemblies you could employ:
@@ -53,18 +53,18 @@ For example for assemblies you could employ:
 
 ## Big-Small Jobs
 The latter category is a problem actually introduced by trying to optimise cluster scheduling in the first place.
-For example, an assembly can produce thousands of **contigs** ([groups of reads believed by an assembler to belong together](http://samstudio8.github.io/2015/04/23/the-story-so-far-p3/)) and often we want to know if
+For example, an assembly can produce thousands of **contigs** ([groups of reads believed by an assembler to belong together]({% post_url 2015-04-23-the-story-so-far-p3 %})) and often we want to know if
 any interesting known sequences can be found on these contigs. Databases of interesting known sequences
-are often [(very) large](http://samstudio8.github.io/2015/04/24/trembling/) and so to avoid submitting an inefficient long-running memory-hogging small-big job to locate thousands of different needles in thousands of different haystacks (*i.e.* `BLAST`'ing many contigs against a large database),
+are often [(very) large]({% post_url 2015-04-24-trembling %}) and so to avoid submitting an inefficient long-running memory-hogging small-big job to locate thousands of different needles in thousands of different haystacks (*i.e.* `BLAST`'ing many contigs against a large database),
 we can instead attempt to minimize the size of the job by amortising the work over many significantly smaller jobs.
 
 For the purpose of `BLAST`[^6], we can shard both the contigs and the database of interesting sequences in to smaller pieces. This reduces the search space (fewer interesting-sequence needles to find in fewer contig haystacks) and thus execution time and resource requirements. Now your monolith job is represented by hundreds
 (or thousands) of smaller, less resource intensive jobs that finish more quickly. Hooray!
 
-Until the number of jobs you have starts [causing trouble](http://samstudio8.github.io/2015/04/17/exits/).
+Until the number of jobs you have starts [causing trouble]({% post_url 2015-04-17-exits %}).
 
 Of course this in turn makes handling data for downstream analysis a little more complex, output files need
-[converting, sorting and merging](http://samstudio8.github.io/2015/04/29/pipelines/) before potentially having to be re-sharded once again to fit them through a different tool.
+[converting, sorting and merging]({% post_url 2015-04-29-pipelines %}) before potentially having to be re-sharded once again to fit them through a different tool.
 
 # Conquering Complications
 So how can we move forward? We could just do what is [fashionable at the moment](https://xkcd.com/927/) and write 
