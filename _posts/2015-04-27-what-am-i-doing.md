@@ -5,8 +5,8 @@ title: "What am I doing?"
 
 A week ago I had a progress meeting with
 [Amanda](http://www.aber.ac.uk/en/cs/staff-list/staff_profiles/?staff_id=afc) and
-[Wayne](http://www.aber.ac.uk/en/cs/staff-list/staff_profiles/?login=waa2); who make up the
-supervisory team for the computational face of my project, I talked about how computers are
+[Wayne](http://www.aber.ac.uk/en/cs/staff-list/staff_profiles/?login=waa2), who make up the
+supervisory team for the computational face of my project. I talked about how computers are
 terrible and where the project is heading.
 
 As Wayne had been away from meetings for a few weeks, I began with a roundup of everything
@@ -22,28 +22,28 @@ I've encountered two main issues with job size here:
 * Jobs that are large because although the inputs are small (< 100MB), there are thousands of them (*e.g.* `BLAST`'ing large numbers of contigs against a sharded database[^2])
 
 ## Small-Big Jobs
-The former is somewhat unavoidable, if `velvet` wants to consume 450GB of RAM for an assembly and we 
+The former is somewhat unavoidable. If `velvet` wants to consume 450GB of RAM for an assembly and we 
 want an assembly specifically from `velvet` then it's a case of having to wait patiently for one of the larger
-nodes to become free enough to schedule the job. Indeed we could look for other assemblers[^3] and evaluate
-their bold claims regarding reduced resource usage over competitors but often when we've found a tool that
+nodes to become free enough to schedule the job. Although we could look for other assemblers[^3] and evaluate
+their bold claims regarding reduced resource usage over competitors often when we've found a tool that
 *just works*, we like to keep things that way -- especially if we want to be able to compare results of other
 assemblies that must be manufactured in the same way.
 
-Cluster jobs require resources to be requested up-front and guesstimating (even generously) can often
-lead to a job being terminated for exceeding its allowance; wasting queue time (days) as
+Cluster jobs require resources to be requested up front and guesstimating (even generously) can often
+lead to a job being terminated for exceeding its allowance, wasting queue time (days) as
 well as execution time (days or weeks) and leaving you with nothing to show[^4].
 The problem is in asking for too much, you queue for a node longer, but when finally scheduled
 you effectively block others from 
 using resources for a significant time period and [I'll make you feel bad for it](http://samstudio8.github.io/2015/04/26/memblame/).
 
-Really the only way to get around these constraints is to try and minimize the dataset you have in the first place.
-For example for assemblies you can employ one or more of:
+The only way to get around these constraints is to minimise the dataset you have in the first place.
+For example for assemblies you could employ:
 
 **Normalization**
 : Count appearances of substrings of length *k* (**k-mers**) present in the raw reads, then discard corresponding reads in a fashion that retains the distribution of k-mers. Discarding data is clearly lossy, but the idea is that as the distribution of k-mers is represented in the same way but with fewer reads.
 
 **Partitioning**
-: Attempt to construct a graph of all k-mers present in the raw reads, then partition it in to a series of subgraphs based on connectivity. Corresponding reads from each partition can then be assembled seperately and potentially merged afterwards. Personally I've found this method a bit hit and miss so far but would like to have time to investigate more.
+: Attempt to construct a graph of all k-mers present in the raw reads, then partition it in to a series of subgraphs based on connectivity. Corresponding reads from each partition can then be assembled separately and potentially merged afterwards. Personally I've found this method a bit hit and miss so far but would like to have time to investigate further.
 
 **Subsampling**
 : Select a more manageable proportion of reads from your dataset at random and construct an assembly. Not only very lossy, this in itself raises some interesting sampling bias issues (to go with your original environment sampling and PCR biases).
@@ -68,21 +68,21 @@ Of course this in turn makes handling data for downstream analysis a little more
 
 # Conquering Complications
 So how can we move forward? We could just do what is [fashionable at the moment](https://xkcd.com/927/) and write 
-a fantastic new [assembler|aligner|<software>] that is better and faster[^7] than the competition, uses next-to-no
+a fantastic new [assembler|aligner|pipeline] that is better and faster[^7] than the competition, uses next-to-no
 memory and can even be run on a Raspberry Pi, but this is more than a PhD in itself[^8], so sadly, I guess
 we have to make do and stick with what we have and attempt to use it more efficiently.
 
 Digressing, I feel a major problem in bioinformatics software right now is a failure to adequately communicate
-the uses and effects of parameters; how can end-users of your software fine tune[^9] controls and options
+the uses and effects of parameters: how can end-users of your software fine tune[^9] controls and options
 without it feeling like piloting a Soyuz? I think if the learning curve is too great, with understanding
 hampered further by a lack of tutorials or extensive documentation with examples, users end up
 driven to roll their own solution. Often in these cases the end result is maintained by a single developer
-or group, missing out on the benefits of input from an open-source community at large.
+or group, missing out on the benefits of input from the open-source community at large.
 
-Small-Big jobs can currently be tackled with novel methods like Tom's iterative subsampling
+*Small-Big* jobs can currently be tackled with novel methods like Tom's iterative subsampling
 as described above, or of course, by adding additional resources (but that costs money).
 
-Some of the risk recently identified with the execution of Big-Small jobs can be reduced by being a little
+Some of the risk recently identified with the execution of *Big-Small* jobs can be reduced by being a little
 more organised. I'm in the process of writing some software to ease interaction with Sun Grid Engine that
 now places logs generated during job execution outside of the working directory -- reducing some of the I/O load
 when repeatedly requesting the contents of output directories.
@@ -103,11 +103,11 @@ After trading some graph theory with Wayne in return for some biological termino
 to a broad view of where the project as whole is heading. We discussed how it is difficult to assemble entire
 genomes from metagenomic datasets due to environmental bias, PCR bias and clearly, computational troubles.
 
-I'd described my project at a talk previously;
+I'd described my project at a talk previously:
 
-<blockquote>...it's like trying to simultaneously assemble thousands of jigsaws but some of the jigsaws are heavily duplicated and some of the jigsaws hardly appear at all, a lot of the pieces are missing and quite a few pieces that really should fit together are broken. Also the jigsaws are pictures of sky.</blockquote>
+<blockquote>[...] it's like trying to simultaneously assemble thousands of jigsaws but some of the jigsaws are heavily duplicated and some of the jigsaws hardly appear at all, a lot of the pieces are missing and quite a few pieces that really should fit together are broken. Also the jigsaws are pictures of sky.</blockquote>
 
-Lately I've started to wonder how this is even possible, how can we state with confidence that we've
+Lately I've started to wonder how this is even possible: how can we state with confidence that we've
 assembled a whole environment? How do we know the initial sample contained all the species? How can
 we determine what is sequencing error and what is real and rare? How on Earth are we supposed to identify
 all affinities in variation for all species across millions of reads that are shorter than my average
@@ -121,14 +121,14 @@ Currently I'm hunting for **hydrolases** (enzymes used to
 break apart chemical bonds in presence of water), so we can turn the problem on its head a little.
 Instead of creating an assembly and assigning taxonomic and functional annotations to every single one
 of the resulting contigs then filtering the results by those that resemble hydrolasic behaviour
--- treating each contig as equally interesting -- we can just look at contigs that contain coding
+- treating each contig as equally interesting - we can just look at contigs that contain coding
 regions for the creation of hydrolases directly! We can use a short-read aligner such as `rapsearch`
 or `BLAST` to search for needles from a hydrolase-specific database of our own construction, instead
 of a larger, more general bacterial database.
 
 We can then query the assembly for the original raw reads that built the contig on which
-strong hits for hydrolases appear. We can then take a closer look at these reads alone, filtering
-out whole swathes of the assembly (and thus millions of reads) that are "not interesting" in terms
+strong hits for hydrolases appear. We can take a closer look at these reads alone, filtering
+out whole swathes of the assembly (and thus millions of reads) that are "uninteresting" in terms
 of our search.
 
 We want to identify and extract interesting enzymes and the sequences that derive them, discovering a
@@ -148,15 +148,13 @@ novel species in the process is a nice bonus but the protein sequence is the key
 
 [^2]: In an attempt to speed up BLAST queries against large databases we have taken to splitting
     the database into 'shards'; submitting a job for each set of contigs against a specific
-    database shard, before `cat`'ing all the results together at the end.
+    database shard, before `cat`'ing all the results together at the end. I call this **re-tailing**.
     
 [^3]: In fact, currently I'm trying to evaluate [`MegaHIT`](https://github.com/voutcn/megahit).
 
 [^4]: This isn't always strictly true. For example, aligners can flush output hits to a file as
    they go along and with a bit of fiddling you can pick up where you left off and `cat` the
    outputs together[^5].
-
-[^5]: I call this **re-tailing**.
 
 [^6]: Other short-read sequencer aligners are available.
 
