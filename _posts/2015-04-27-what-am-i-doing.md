@@ -89,10 +89,10 @@ when repeatedly requesting the contents of output directories.
 Keeping abreast of the work of others who dared to tread and write their own new assembler, aligner or whatever
 is important too. Currently we're testing out [`rapsearch`](http://omics.informatics.indiana.edu/mg/RAPSearch2/)
 as an alternative to `BLAST` simply due to its execution speed (yet another post in itself).
-`BLAST` is pretty old and "better" alternatives are known to exist, but it's still cited and an expected part
-of analysis in journal papers, so switching out parts of our pipeline is potentially not ideal but at the same
+`BLAST` is pretty old and "better" alternatives are known to exist, but it's still oft-cited and an expected part
+of analysis in journal papers, so switching out parts of our pipeline for performance is not ideal. At the same
 time, I actually want to get some work done and right now using `BLAST` on the dataset I have, with the resources
-I have is proving too problematic and I want to get some work done.
+I have is proving too problematic.
 
 At the very least, we can now use `rapsearch` to quickly look for hits to be analysed further with `BLAST`
 if we fear that the community may be put off by our use of "non-standard" software.
