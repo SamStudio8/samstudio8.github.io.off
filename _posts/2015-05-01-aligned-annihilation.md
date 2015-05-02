@@ -4,15 +4,18 @@ title: "Aligned Annihilation"
 ---
 
 This afternoon in a coffee fueled fugue, I nuked every directory containing output for any attempt
-to align the limpet contigs to any form of database so far[^1]. I was too far down the rabbit hole of which outputs
-belonged to what job, which sets of outputs were supposed to be appended to the ends of other truncated
-outputs, whether we were [looking at hydrolases or taxonomy]({% post_url 2015-04-27-what-am-i-doing %})
-and were the hits to TrEMBL or SwissProt (or both, or neither)? Not that the database matters
+to align the limpet contigs to any form of database so far. Here's why, and what I did next.
+
+I awoke in the morning knowing I was too far down the rabbit hole to truly know which outputs
+belonged to what job, which sets of outputs were now supposed to be appended to the ends of other truncated
+outputs, whether I was even supposed to be
+[looking at hydrolases or taxonomy]({% post_url 2015-04-27-what-am-i-doing %})
+and did I try hitting on TrEMBL or SwissProt (or both, or neither)? Not that the database matters
 given my copies of both are now [heavily redundant]({% post_url 2015-04-24-trembling %}) anyway.
 
-As you might imagine, this was a briefly cathartic experience interrupted by an intense realisation
-that I am definitely behind in producing interesting data. But it is refreshing to have
-a grasp on what we have so far, even if it is now very little. It was also easy to work out where to
+As you might imagine, the obliteration was a briefly cathartic experience interrupted too soon by
+an intense realisation that I am definitely behind in producing interesting data. But it is refreshing to have
+a grasp on what we have so far, even if it is now very little[^1]. It was also easy to work out where to
 go from here: generate some damn data.
 
 Recently I [sidelined `BLAST`]({% post_url 2015-04-27-what-am-i-doing %}) in favour of `rapsearch`
@@ -72,8 +75,8 @@ and so I've escalated my confusion and ruined the bank holiday weekend of our tr
 * I deleted everything that hasn't quite worked and it felt good for a short time.
 * The cluster is still not working.
 
-[^1]: Apart from my first and only successful `BLAST` job that completed over Christmas that was against
-    a heavily outdated SwissProt. I'm not even sure if this is of use any more but it is all I have to
+[^1]: I kept my first and only successful `BLAST` job which completed over Christmas, that was against
+    a heavily outdated SwissProt. I doubt at this point it is even of any use but it is all I have to
     show for myself.
 
 [^2]: Is that right?
@@ -85,7 +88,7 @@ and so I've escalated my confusion and ruined the bank holiday weekend of our tr
     
 [^5]: I can't help but name drop my tool here. It just makes my life so much easier. Instead of messing
     around editing job submission scripts to change queues and parameters, I can just resubmit by answering
-    a few prompts from the comfort of my terminal:
+    a few prompts from the comfort of my terminal!
 
     ```bash
     sunblock resub 8-11
