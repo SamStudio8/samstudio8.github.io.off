@@ -63,11 +63,18 @@ recently when client nodes had been upgraded in an attempt to address the "recen
 (or yet to reboot following) such an update. After resubmitting the jobs to other queues with `Sunblock`[^5]
 and found the behaviour repeated on another node, my hunch was proven incorrect. Grr.
 
-Of the two successful jobs, the only link appears to be their small database size (see table). Yet the smallest database
-still met the same fateful error regardless, thus it appears the behaviour is intermittent.
-I can only guess the trouble is related to the particular compute node rather than a bug in `rapsearch` or
+Of the two successful jobs, the only link appears to be their small database size (see table). Yet the smallest database still met the same fateful error regardless, thus it appears the behaviour is unpredictable.
+I can only guess the trouble is related to a particular compute node rather than a bug in `rapsearch` or
 an error in my job submission scripts (which have had at least six PhD candidate grade eyes on them now)
 and so I've escalated my confusion and ruined the bank holiday weekend of our trusty sysadmin.
+
+## Update: The following morning
+I spoke to Tom about the `rapsearch` jobs he's running right now and all is apparently well
+on `node009` and `node010`. So I figured I'd resubmit the previously failed fungi TrEMBL job
+to `node010` and wait for a result: it completed sucessfully in just over 40 minutes.
+
+Unhelpfully, the fungi SwissProt job (which admittedly was previously successful) was able to
+finish on the suspicious `node003`. So the problem is unpredictable and transient? The plot thickens.
 
 * * *
 
