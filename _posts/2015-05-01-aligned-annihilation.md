@@ -90,8 +90,9 @@ I'll have to ask our sysadmin how he managed to build it as a module but this do
 My good friend and resident expert in all things C(++), [Dan](http://bytecove.co.uk/) located some manual pages
 that I should have read regarding [boost serialization exceptions](http://www.boost.org/doc/libs/1_37_0/libs/serialization/doc/exceptions.html).
 The `boost::archive_exception` object holds an `exception_code` that maps to an enum to tell you exactly
-what went wrong, very useful. Annoyingly the error isn't caught by `rapsearch` so my options are re-compiling
-`rapsearch` with my own attempt at error handling or re-enabling core dumps and inspecting the steaming remains
+what went wrong, which is awesomely thought out and very useful. Unfortunately for me, the error isn't caught
+by `rapsearch` which is why I have an upset `stderr`. My options are probably either to re-compile
+`rapsearch` with my own attempt at error handling, or re-enabling core dumps and inspecting the steaming remains
 with `gdb`. I'm opting for the latter because quite frankly, screw spending my weekend 
 messing around [trying to diagnose and fix](https://github.com/samtools/samtools/pull/259) poorly documented
 C-based bioinformatics tools again.
