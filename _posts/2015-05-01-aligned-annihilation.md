@@ -76,6 +76,8 @@ to `node010` and wait for a result: it completed sucessfully in just over 40 min
 Unhelpfully, the fungi SwissProt job (which admittedly was previously successful) was able to
 finish on the suspicious `node003`. So the problem is unpredictable and transient? The plot thickens.
 
+I'll try out the bacterial and failed archaea tasks on `node010`.
+
 * * *
 
 # tl;dr
