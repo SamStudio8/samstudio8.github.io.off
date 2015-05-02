@@ -101,7 +101,8 @@ C-based bioinformatics tools again.
 
 # tl;dr
 * I deleted everything that hasn't quite worked and it felt good for a short time.
-* The cluster is still not working.
+* The cluster continues to fail in an unexpected and unpredictable fashion.
+* If your library gives you nice exception objects, try to catch them and use them for good.
 
 [^1]: I kept my first and only successful `BLAST` job which completed over Christmas, that was against
     a heavily outdated SwissProt. I doubt at this point it is even of any use but it is all I have to
