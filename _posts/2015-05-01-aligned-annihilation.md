@@ -17,10 +17,10 @@ go from here: generate some damn data.
 
 Recently I [sidelined `BLAST`]({% post_url 2015-04-27-what-am-i-doing %}) in favour of `rapsearch`
 for performing searches over contigs for "interesting sequences" as the cluster simply appears
-[unable to cope]({% post_url 2015-02-17-sun-grid-engine %}) with the scale of
-[*Big-Small* jobs]({% post_url 2015-04-27-what-am-i-doing %}): once both the limpet assembly contigs
-had been sharded into 250 bite-size pieces and hit against say, 30 shards of TrEMBL\_v2015_03,
-you're already looking submitting 7,500 jobs -- which is [potentially problematic]({% post_url 2015-04-17-exits %}).
+[unable to cope]({% post_url 2015-02-17-sun-grid-engine %}) with such scale: once both the limpet assembly contigs
+had been sharded into 250 bite-size pieces and hit against say, 30 shards of TrEMBL v2015_03,
+you're already looking at 7,500 jobs -- which as [seen previously]({% post_url 2015-04-17-exits %}) is
+potentially problematic.
 
 Having re-stocked my hydrolase-specific databases after the latest release of Uniprot, with bacterial
 and archaeal[^2] hydrolases, Wayne suggested to grab those from fungi too -- as they are an expected
@@ -28,13 +28,13 @@ taxonomic group in the dataset and we'd like to not miss them out. The table bel
 databases for future reference:
 
 | Taxonomy | Reviewed | #Records  | DB Size (MB) | Failed |
-|----------|----------|-----------|--------------|:------:|
-| Bacteria | N (Tr)   | 1,069,711 | 2,700~       | X |
-| Bacteria | Y (SP)   | 42,027    | 108          | X |
-| Archaea  | N (Tr)   | 20,456    | 59           |  |
-| Archaea  | Y (SP)   | 2,132     | 20           | X |
-| Fungi    | N (Tr)   | 61,521    | 243          | X |
-| Fungi    | Y (SP)   | 5,546     | 37           | |
+|----------|:--------:|-----------|--------------|:------:|
+| Bacteria | N (Tr)   | 1,069,711 | 2,700~       | X      |
+| Bacteria | Y (SP)   | 42,027    | 108          | X      |
+| Archaea  | N (Tr)   | 20,456    | 59           |        |
+| Archaea  | Y (SP)   | 2,132     | 20           | X      |
+| Fungi    | N (Tr)   | 61,521    | 243          | X      |
+| Fungi    | Y (SP)   | 5,546     | 37           |        |
 
 Thanks to the speed of `rapsearch`, one does not need to perform any sharding on the contig queries
 or the database, which is lovely. Additionally, my
@@ -49,7 +49,7 @@ a non-zero exit (as configured) from the `rapsearch` command and dumping the fol
 terminate called after throwing an instance of 'boost::archive::archive_exception'
   what():  invalid signature
 /cm/local/apps/sge/current/spool/node012/job_scripts/1442997: line 40: 31100 Aborted
-  (core dumped) rapsearch -q $QUERY -d /ibers/ernie/groups/rumenISPG/Databases/2015_04-trembl-ec3/rapsearch/2015-04__uniprot__ec_3__tax_2-Bacteria__reviewed_no.rap -u 1 -z 5 -e 0.00001 > $OUTFILE
+  (core dumped) rapsearch -q $QUERY -d /ibers/ernie/groups/rumenISPG/Databases/2015_04-trembl-ec3/rapsearch/2015-04__uniprot__ec_3__tax_2-Bacteria__reviewed_no.rap -u 1 -z 8 -e 0.00001 > $OUTFILE
 ```
 
 A quick search offers no concrete solution. The disk isn't full[^6] and the accounting file indicates that
@@ -61,10 +61,10 @@ recently when client nodes had been upgraded in an attempt to address the "recen
 and found the behaviour repeated on another node, my hunch was proven incorrect. Grr.
 
 Of the two successful jobs, the only link appears to be their small database size (see table). Yet the smallest database
-still met the same fateful error regardless, it appears the behaviour is intermittent.
-I can only assume the trouble is related to the compute node rather than a bug in `rapsearch` or an error in my
-job submission script (which has had at least six PhD candidate grade eyes on it now) and so I've escalated
-my confusion and ruined the bank holiday weekend of our trusty sysadmin.
+still met the same fateful error regardless, thus it appears the behaviour is intermittent.
+I can only guess the trouble is related to the particular compute node rather than a bug in `rapsearch` or
+an error in my job submission scripts (which have had at least six PhD candidate grade eyes on them now)
+and so I've escalated my confusion and ruined the bank holiday weekend of our trusty sysadmin.
 
 * * *
 
