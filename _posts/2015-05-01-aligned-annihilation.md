@@ -78,6 +78,24 @@ finish on the suspicious `node003`. So the problem is unpredictable and transien
 
 I'll try out the bacterial and failed archaea tasks on `node010`.
 
+## Update: Mostly still morning
+The archaeal task was a success on `node007`, taking just shy of 20 minutes. One of the bacterial
+re-resubmissions has already failed with the same error as before. I decided to have a nose around the `rapsearch` [repository](https://github.com/zhaoyanswill/RAPSearch2/tree/95c866e9b818b7b4b9648ef4e0810a33300c3432)
+to try and track down where calls to `boost` archive serialization functionality even reside.
+Instead I'm sat here confused as to why there is a `boost/` directory included in the source that hasn't been
+updated for two years, whilst the project's [Makefile](https://github.com/zhaoyanswill/RAPSearch2/blob/95c866e9b818b7b4b9648ef4e0810a33300c3432/Src/Makefile) still links against a local installation of `boost` with `-lboost_serialization` as a sane person would? Wat?
+I'm not even sure what the consequences of this are, does this old directory get used during building? 
+I'll have to ask our sysadmin how he managed to build it as a module but this does not sit well with me. 
+
+My good friend and resident expert in all things C(++), [Dan](http://bytecove.co.uk/) located some manual pages
+that I should have read regarding [boost serialization exceptions](http://www.boost.org/doc/libs/1_37_0/libs/serialization/doc/exceptions.html).
+The `boost::archive_exception` object holds an `exception_code` that maps to an enum to tell you exactly
+what went wrong, very useful. Annoyingly the error isn't caught by `rapsearch` so my options are re-compiling
+`rapsearch` with my own attempt at error handling or re-enabling core dumps and inspecting the steaming remains
+with `gdb`. I'm opting for the latter because quite frankly, screw spending my weekend 
+messing around [trying to diagnose and fix](https://github.com/samtools/samtools/pull/259) poorly documented
+C-based bioinformatics tools again.
+
 * * *
 
 # tl;dr
