@@ -44,7 +44,7 @@ leaving them unaware of the actual target and thus with no option but to spoof t
 
 A [helpful blogpost](http://www.ohow.co/stop-adult-referral-spam-ga/#How_to_Block_these_Referrals_in_Google_Analytics) details how to set up a simple filter
 in your Google Analytics control panel to remove future[^4] spurious data by ignoring hits which fail to provide
-a valid expected hostname. Hooray.
+a valid expected hostname. The remaining 44.08% of my traffic appears genuine, hooray!
 
 * * *
 
@@ -62,5 +62,4 @@ a valid expected hostname. Hooray.
     
 [^3]: Although by mentioning the domains here perhaps I've done exactly what they wanted...
 
-[^4]: If you are as fussy as me when it comes to data, that same blog has [another helpful post](http://www.ohow.co/remove-referrer-spam-with-segments/#Create_a_segment_with_valid_hostnames)
-which offers a method to clean up historic data too.
+[^4]: If you are as fussy as me when it comes to data, that same blog has [another helpful post](http://www.ohow.co/remove-referrer-spam-with-segments/#Create_a_segment_with_valid_hostnames) which offers a method to clean up historic data too.
