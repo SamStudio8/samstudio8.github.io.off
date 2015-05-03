@@ -24,5 +24,5 @@ However after a few days, I noticed several strange entries:
 | forum.topic62206786.darodar.com | 7        | 2.92%          | 0.00%       | 3.00            | 00:00:00              |
 | www.Get-Free-Traffic-Now.com    | 4        | 1.62%          | 100.00%     | 1.00            | 00:00:00              |
 
-All non-social referrals are **ghost referrals**. It seems that spam bots can cycle through guesses for Google Analytics
+Curses. All my non-social referrals are **ghost referrals**! It seems that spam bots can cycle through guesses for Google Analytics
 tracking IDs and remotely execute the tracking script and so hit without even needing to access the website.
