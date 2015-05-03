@@ -52,7 +52,7 @@ a valid expected hostname. Hooray.
 * Spambots performed a seemingly pointless **data pollution** attack on my Google Analytics records.
 * One should always be as suspicious of data as possible, especially if it was collected by somebody else.
 
-[^0]: I haven't censored the source column as it may be potentially useful to others having the same problem.[^4]
+[^0]: I haven't censored the source column as it may be potentially useful to others having the same problem.
 
 [^1]: Presumably by guessing or spidering Google Analytics tracking IDs.
 
