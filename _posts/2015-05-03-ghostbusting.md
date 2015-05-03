@@ -43,7 +43,7 @@ leaving them unaware of the actual target and thus with no option but to spoof t
 (or leave the field unset) which should in fact match that of the website under attack.
 
 A [helpful blogpost](http://www.ohow.co/stop-adult-referral-spam-ga/#How_to_Block_these_Referrals_in_Google_Analytics) details how to set up a simple filter
-in your Google Analytics control panel to remove future spurious data by ignoring hits which fail to provide
+in your Google Analytics control panel to remove future[^4] spurious data by ignoring hits which fail to provide
 a valid expected hostname. Hooray.
 
 * * *
@@ -51,8 +51,9 @@ a valid expected hostname. Hooray.
 # tl;dr
 * Spambots performed a seemingly pointless **data pollution** attack on my Google Analytics records.
 * One should always be as suspicious of data as possible, especially if it was collected by somebody else.
+* I like numbers. I really don't like people messing with my numbers.
 
-[^0]: I haven't censored the source column as it may be potentially useful to others having the same problem.
+[^0]: I haven't censored the source column as it may be potentially useful to others having the same problem[^3].
 
 [^1]: Presumably by guessing or spidering Google Analytics tracking IDs.
 
@@ -60,3 +61,6 @@ a valid expected hostname. Hooray.
     confusing annoyance.
     
 [^3]: Although by mentioning the domains here perhaps I've done exactly what they wanted...
+
+[^4]: If you are as fussy as me when it comes to data, that same blog has [another helpful post](http://www.ohow.co/remove-referrer-spam-with-segments/#Create_a_segment_with_valid_hostnames)
+which offers a method to clean up historic data too.
