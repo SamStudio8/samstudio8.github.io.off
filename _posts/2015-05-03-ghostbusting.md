@@ -42,7 +42,7 @@ wrong are upsetting. So how can normality be restored? These spambots target ind
 leaving them unaware of the actual target and thus with no option but to spoof the `hostname` of the hit
 (or leave the field unset) which should in fact match that of the website under attack.
 
-A [helpful blogpost](http://www.ohow.co/stop-adult-referral-spam-ga/) details how to set up a simple filter
+A [helpful blogpost](http://www.ohow.co/stop-adult-referral-spam-ga/#How_to_Block_these_Referrals_in_Google_Analytics) details how to set up a simple filter
 in your Google Analytics control panel to remove future spurious data by ignoring hits which fail to provide
 a valid expected hostname. Hooray.
 
