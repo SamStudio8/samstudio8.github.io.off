@@ -74,7 +74,7 @@ A constructor! Expecting a reference to pointer as its first parameter. So what'
 0x463b40 <_ZTIN5boost7archive17archive_exceptionE>:     0x0069ee50
 ```
 
-Seems promising? We're hunting for information on an archive\_exception! `\_ZTIN5boost7archive17archive_exceptionE` unmangles to:
+Seems promising? We're hunting for information on an `archive_exception`! `_ZTIN5boost7archive17archive_exceptionE` unmangles to:
 
 ```
 typeinfo for boost::archive::archive_exception
