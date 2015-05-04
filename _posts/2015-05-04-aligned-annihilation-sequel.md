@@ -63,7 +63,8 @@ Ok, so that's a start. `_ZNSt15__exception_ptr13exception_ptrC1ERKS0_` unmangles
 std::__exception_ptr::exception_ptr::exception_ptr(std::__exception_ptr::exception_ptr const&)
 ```
 
-A constructor! Expecting a reference to pointer as its first parameter. So what's in `%rdi`?
+A constructor! Expecting a reference to pointer as its first parameter. So what's did we leave `%rdi`
+after the subtraction? It looks address-worthy, let's e**x**amine it:
 
 ```
 (gdb) x 0x7ffffffbb3b8
@@ -74,22 +75,20 @@ A constructor! Expecting a reference to pointer as its first parameter. So what'
 0x463b40 <_ZTIN5boost7archive17archive_exceptionE>:     0x0069ee50
 ```
 
-Seems promising? We're hunting for information on an `archive_exception`! `_ZTIN5boost7archive17archive_exceptionE` unmangles to:
+Seems promising? We're hunting for information on an [`archive_exception`](http://www.boost.org/doc/libs/1_37_0/libs/serialization/doc/exceptions.html)! `_ZTIN5boost7archive17archive_exceptionE` unmangles to:
 
 ```
 typeinfo for boost::archive::archive_exception
 ```
 
-What can we do with that? Apparently nothing.
-
-This in itself holds a pointer;
+What about the hex? Is it an address?
 
 ```
 (gdb) x 0x0069ee50
 0x69ee50 <_ZTVN10__cxxabiv121__vmi_class_type_infoE@@CXXABI_1.3+16>:    0x926be010
 ```
 
-The symbol unmangles to:
+Yes, and the symbol unmangles to:
 
 ```
 vtable for __cxxabiv1::__vmi_class_type_info
