@@ -98,17 +98,14 @@ messing around [trying to diagnose and fix](https://github.com/samtools/samtools
 C-based bioinformatics tools again.
 
 ## Update: A few days later
-I've managed to get `rapsearch` to generate two core dumps for inspection with `gdb` but I am struggling to
-extract any useful information beyond what I already know. The backtrace:
-
-{% gist 8c88fdd06cd250872d67 backtrace.gdb %}
+[The drama continues]({% post_url 2015-05-04-aligned-annihilation-sequel.md %}).
 
 * * *
 
 # tl;dr
 * I deleted everything that hasn't quite worked and it felt good for a short time.
 * The cluster continues to fail in an unexpected and unpredictable fashion.
-* If your library gives you nice exception objects, try to catch them and use them for good.
+* If a library you include gives you nice exception objects, please try to catch them and use them for good.
 
 [^1]: I kept my first and only successful `BLAST` job which completed over Christmas, that was against
     a heavily outdated SwissProt. I doubt at this point it is even of any use but it is all I have to
