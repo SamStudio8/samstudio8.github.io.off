@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Aligned Annihilation II: Dumpster Diving"
+title: "Aligned Annihilation II: Dumpster Diving [WIP]"
 excerpt: "I tried to extract a single integer from a core dump and instead fell in to an abyss and learned how to be a computer."
 ---
 
