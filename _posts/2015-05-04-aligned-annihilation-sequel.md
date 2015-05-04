@@ -6,7 +6,6 @@ excerpt: "I tried to extract a single integer from a core dump and instead fell 
 
 <p class="message"><b>Warning</b></br>This is going to get a bit technical and probably quite boring.<p>
 
-
 If you haven't already looked at what led me to this awful situation, check out what happened when
 I [annihilated all my alignment]({% post_url 2015-05-01-aligned-annihilation %}) data.
 
@@ -37,8 +36,8 @@ I tried to disassemble the frame:
 {% gist 8c88fdd06cd250872d67 disassemble_f3.gdb %}
 
 It's [my understanding](http://stackoverflow.com/questions/2535989/what-are-the-calling-conventions-for-unix-linux-system-calls-on-x86-64)
-that the `%rdi` register contains the first parameter given to a function and so here I expect to see
-some form of pointer to exception. I'll dump the values held in the registers at this frame too.
+that the `%rdi` register contains the first parameter given to a function and so here I'd expect to see
+some form of pointer address. I'll dump the values held in the registers at this frame too.
 
 {% gist 8c88fdd06cd250872d67 registers_f3.gdb %}
 
@@ -94,6 +93,9 @@ Yes, and the symbol unmangles to:
 vtable for __cxxabiv1::__vmi_class_type_info
 ```
 
+I'm not particularly interesting in the contents of a `vtable`. The `archive_exception` is a virtual class
+so this should be where it's function pointers live. I'm interested in the specific instance of the class
+that is raised.
 
 
 * * *
