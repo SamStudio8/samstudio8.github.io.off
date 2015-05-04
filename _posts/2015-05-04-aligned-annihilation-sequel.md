@@ -19,8 +19,15 @@ was not compiled with debugging symbols, leaving us with those `??` frames.
 
 Desperately attempting to avoid having to edit and recompile `rapsearch`, I began nosing around the core
 in a similar fashion as one would poke a stick around in a dirty pond. At first I naively tried to explore
-frame 3, treating `0x31926bcbd6` as "the exception" before realising the address was for a function responsible
-for handling assignment of an exception[^7]. I'd have to try harder.
+frame 3, treating `0x31926bcbd6` as "the exception" before realising the address was for a function.
+If we translate ("unmangle"[^8]) the symbol we can guess it is responsible
+for handling assignment of an exception[^7]:
+
+```
+std::__exception_ptr::exception_ptr::operator=(std::__exception_ptr::exception_ptr const&)
+```
+
+I'd have to try harder.
 
 I started looking at the registers for the same frame, as the function accepts an exception pointer as a parameter
 it should be stored in a register here. It was when I started reading about [x86 Calling Conventions](http://en.wikipedia.org/wiki/X86_calling_conventions#System_V_AMD64_ABI) that I realised I was
@@ -42,19 +49,59 @@ the instructions[^9], I could become my own arch-nemesis, a computer:
 
 ```
 [...]
-sub    $0x28,%rsp   # Substract 28 from the stack pointer
+sub    $0x28,%rsp   # Substract 28 from the %rsp in-place
                     # 0x7ffffffbb3e0 − 0x28 = 0x7ffffffbb3b8
-                    #
+                    # %rsp = 0x7ffffffbb3b8
 [...]
+mov    %rsp,%rdi    # Move %rsp to %rdi
+                    # %rdi = 0x7ffffffbb3b8
+callq  0x31926559d8 <_ZNSt15__exception_ptr13exception_ptrC1ERKS0_@plt>
 ```
+Ok, so that's a start. `_ZNSt15__exception_ptr13exception_ptrC1ERKS0_` unmangles[^8] to:
+
+```
+std::__exception_ptr::exception_ptr::exception_ptr(std::__exception_ptr::exception_ptr const&)
+```
+
+A constructor! Expecting a reference to pointer as its first parameter. So what's in `%rdi`?
+
+```
+(gdb) x 0x7ffffffbb3b8
+0x7ffffffbb3b8: 0x23b8db80
+(gdb) x 0x23b8db80
+0x23b8db80:     0x00463b40
+(gdb) x 0x00463b40
+0x463b40 <_ZTIN5boost7archive17archive_exceptionE>:     0x0069ee50
+```
+
+Seems promising? We're hunting for information on an archive\_exception! `\_ZTIN5boost7archive17archive_exceptionE` unmangles to:
+
+```
+typeinfo for boost::archive::archive_exception
+```
+
+What can we do with that? Apparently nothing.
+
+This in itself holds a pointer;
+
+```
+(gdb) x 0x0069ee50
+0x69ee50 <_ZTVN10__cxxabiv121__vmi_class_type_infoE@@CXXABI_1.3+16>:    0x926be010
+```
+
+The symbol unmangles to:
+
+```
+vtable for __cxxabiv1::__vmi_class_type_info
+```
+
+
 
 * * *
 
 # tl;dr
 * Life feels different now, I am on the other side. I have seen too much. I would very much like to never do this again.
 
-
-[^7]: Unmangling[^8] to `std::__exception_ptr::exception_ptr::operator=(std::__exception_ptr::exception_ptr const&)`
 
 [^8]: Thanks to [Dan](http://bytecove.co.uk/) for showing me [this symbol demangling tool](http://demangler.com/).
 
