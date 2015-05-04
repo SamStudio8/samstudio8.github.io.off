@@ -98,7 +98,7 @@ messing around [trying to diagnose and fix](https://github.com/samtools/samtools
 C-based bioinformatics tools again.
 
 ## Update: A few days later
-[The drama continues]({% post_url 2015-05-04-aligned-annihilation-sequel.md %}).
+[The drama continues]({% post_url 2015-05-04-aligned-annihilation-sequel %}).
 
 * * *
 
