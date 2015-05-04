@@ -21,7 +21,7 @@ Desperately attempting to avoid having to edit and recompile `rapsearch`, I bega
 in a similar fashion as one would poke a stick around in a dirty pond. At first I naively tried to explore
 frame 3, treating `0x31926bcbd6` as "the exception" before realising the address was for a function.
 If we translate ("unmangle"[^8]) the symbol we can guess it is responsible
-for handling assignment of an exception[^7]:
+for handling assignment of an exception:
 
 ```
 std::__exception_ptr::exception_ptr::operator=(std::__exception_ptr::exception_ptr const&)
