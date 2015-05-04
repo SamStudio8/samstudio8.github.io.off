@@ -97,6 +97,12 @@ with `gdb`. I'm opting for the latter because quite frankly, screw spending my w
 messing around [trying to diagnose and fix](https://github.com/samtools/samtools/pull/259) poorly documented
 C-based bioinformatics tools again.
 
+## Update: A few days later
+I've managed to get `rapsearch` to generate two core dumps for inspection with `gdb` but I am struggling to
+extract any useful information beyond what I already know. The backtrace:
+
+{% gist 8c88fdd06cd250872d67 backtrace.gdb %}
+
 * * *
 
 # tl;dr
