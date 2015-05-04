@@ -57,13 +57,13 @@ mov    %rsp,%rdi    # Move %rsp to %rdi
                     # %rdi = 0x7ffffffbb3b8
 callq  0x31926559d8 <_ZNSt15__exception_ptr13exception_ptrC1ERKS0_@plt>
 ```
-Ok, so that's a start. `_ZNSt15__exception_ptr13exception_ptrC1ERKS0_` unmangles[^8] to:
+Beep boop. Ok, so that's a start. `_ZNSt15__exception_ptr13exception_ptrC1ERKS0_` unmangles[^8] to:
 
 ```
 std::__exception_ptr::exception_ptr::exception_ptr(std::__exception_ptr::exception_ptr const&)
 ```
 
-A constructor! Expecting a reference to pointer as its first parameter. So what's did we leave `%rdi`
+A constructor! Expecting a reference to pointer as its first parameter. So what's left in `%rdi`
 after the subtraction? It looks address-worthy, let's e**x**amine it:
 
 ```
