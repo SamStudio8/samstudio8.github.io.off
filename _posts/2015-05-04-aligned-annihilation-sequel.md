@@ -99,7 +99,7 @@ vtable for __cxxabiv1::__vmi_class_type_info
 * * *
 
 # tl;dr
-* Life feels different now, I am on the other side. I have seen too much. I would very much like to never do this again.
+* Life feels different now, I took it too far. I learned more about registers, calling conventions and assembly and feel I am on the other side. I have seen too much. I would very much like to never do this again.
 
 
 [^8]: Thanks to [Dan](http://bytecove.co.uk/) for showing me [this symbol demangling tool](http://demangler.com/).
