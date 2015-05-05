@@ -233,10 +233,10 @@ Hooray for open sorcery!
 * * *
 
 # tl;dr
-* [^11]~~Life feels different now, I took it too far. I learned more about registers, calling conventions and assembly and have seen too much. I would very much like to never do this again.~~
+* <strike>Life feels different now, I took it too far. I learned more about registers, calling conventions and assembly and have seen too much. I would very much like to never do this again.</strike>[^11]
 * `rapsearch` probably corrupts temporary files causing job failure for searches writing to the same output directory if you don't use the `-o` option.
 * I am not a very good computer.
-* Read. **Everything**.
+* Read errors. **Believe** errors.
 
 
 [^8]: Thanks to [Dan](http://bytecove.co.uk/) for showing me [this symbol demangling tool](http://demangler.com/), as well as for putting up with hours of remote interrogation. You may increment your drinks counter.
