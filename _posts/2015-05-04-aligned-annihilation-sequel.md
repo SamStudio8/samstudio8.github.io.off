@@ -226,13 +226,13 @@ Note those all important unique temporary file names!
 * * *
 
 # tl;dr
-* ~~<strikethrough>Life feels different now, I took it too far. I learned more about registers, calling conventions and assembly and have seen too much. I would very much like to never do this again.</strikethrough>~~[^11]
+* ~~Life feels different now, I took it too far. I learned more about registers, calling conventions and assembly and have seen too much. I would very much like to never do this again.~~ [^11]
 * `rapsearch` probably corrupts temporary files causing job failure for searches writing to the same output directory if you don't use the `-o` option.
 * I am not a very good computer.
 * Read. **Everything**.
 
 
-[^8]: Thanks to [Dan](http://bytecove.co.uk/) for showing me [this symbol demangling tool](http://demangler.com/).
+[^8]: Thanks to [Dan](http://bytecove.co.uk/) for showing me [this symbol demangling tool](http://demangler.com/), as well as for putting up with hours of remote interrogation. You may increment your drinks counter.
 
 [^9]: Made more difficult as combinations of `assembly` `instruction` and `which way around` yielded many
     search results for construction of IKEA flatpack furniture.
