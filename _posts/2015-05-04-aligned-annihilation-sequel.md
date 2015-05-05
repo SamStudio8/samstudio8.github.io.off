@@ -223,6 +223,12 @@ All six jobs, running in harmony:
 
 Note those all important unique temporary file names!
 
+## Update: Bedtime
+In case this ever affects anybody else, I've notified the developers by opening
+[an issue](https://github.com/zhaoyanswill/RAPSearch2/issues/17) on the `rapsearch` Github.
+Hooray for open sorcery!
+
+
 * * *
 
 # tl;dr
