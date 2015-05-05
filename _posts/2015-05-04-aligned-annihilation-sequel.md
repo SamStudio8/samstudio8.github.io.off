@@ -171,7 +171,8 @@ terminate called after throwing an instance of 'boost::archive::archive_exceptio
   what():  invalid signature
 ```
 
-Oh dear[^10]. I had the answer all along:
+Oh dear[^10]. I'd disregarded the `what()` error as it sounded confusing and mysterious and not related
+to file handling. Yet it was trying to tell us the answer all along:
 
 <blockquote>
 <b>invalid_signature</b></br>
