@@ -190,7 +190,7 @@ to keep my data organised by storing the alignment hits for bacterial, archaeal 
 hydrolases on my limpet contigs in the same place.
 
 However, `rapsearch` creates a `.m8` storing hits along with a somewhat esoteric `.aln` alignment file.
-But one cannot prevent the latter file from being generated. I thought I'd try and be clever and find
+But one cannot prevent the latter file from being generated (*Update*: Or so I thought at the time, [see below](#suppress_aln)). I thought I'd try and be clever and find
 a way around having to just delete any `.aln` files once the job had completed and found `rapsearch`
 accepts a `-u` option:
 
@@ -229,6 +229,20 @@ In case this ever affects anybody else, I've notified the developers by opening
 [an issue](https://github.com/zhaoyanswill/RAPSearch2/issues/17) on the `rapsearch` Github.
 Hooray for open sorcery!
 
+<a name="suppress_aln"></a>
+## Update: A few days and another manpage later
+Turns out, one can suppress the `.aln` file after all. As demonstrated in the `rapsearch`
+[usage examples](https://github.com/zhaoyanswill/RAPSearch2/blob/95c866e9b818b7b4b9648ef4e0810a33300c3432/readme#L80),
+the `-b` option (help entry below) can be set to 0.
+
+```
+-b int    : number of database sequence to show alignments [default: 100]. If it's -1, all results will be shown.
+```
+
+This seems somewhat counter-intuitive to me and is simply not something I had thought
+of trying. If anything I'd have expected `-b 0` to just create an empty `.aln` file!
+Nevertheless, this is a blog about metagenomics, not user interface design, so let's
+[get on with some science]({{ page.next.url }}).
 
 * * *
 
