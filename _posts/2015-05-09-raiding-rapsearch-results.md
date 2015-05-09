@@ -59,13 +59,22 @@ does the top-ranking hit represent a hydrolase? How is "top-ranking" defined? Le
 
 Hmm, it sounds as though database quality is considered paramount by the default ranking device, ensuring
 that SwissProt results take precedence over those from TrEMBL. However what if the SwissProt hit actually has
-a lower bitscore? To check, I'll modify [the source](https://bitbucket.org/setsuna80/mgkit/src/f3b5aa7e65d1cc8870743a9c7492ccb2528b8417/mgkit/filter/gff.py?#cl-45)[^4] and construct a trivial example below[^5].
+a lower bitscore? What happens? To check, I'll modify [the source](https://bitbucket.org/setsuna80/mgkit/src/f3b5aa7e65d1cc8870743a9c7492ccb2528b8417/mgkit/filter/gff.py?#cl-45)[^4] slightly to construct a trivial example below[^5].
 
 ```python
+# Default discarding function:
 # lambda a1, a2: min(a1, a2, key=lambda el: (el.dbq, el.bitscore, len(el)))
+
+# I'll treat a 3-element list as the `el` object, with format:
+#    hit = [dbq, bitscore, length]
+# Let's re-define the default discarding function to anticipate this list:
 discard = lambda a1, a2: min(a1, a2, key=lambda el: (el[0], el[1], el[2]))
+
+# Construct some hits
 crap_sp_hit = [10, 39, 100]
 good_tr_hit = [8, 60, 100]
+
+# Determine which hit to discard
 discard(crap_sp_hit, good_tr_hit)
 > [8, 60, 100]
 ```
