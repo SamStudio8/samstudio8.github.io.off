@@ -120,7 +120,7 @@ metric isn't more commonly used, are we doing something special?
 
 # tl;dr
 * We have data. Already it raises more questions than answers.
-* MGKit's `filter-gff` annotation overlap discarder liberally discards annotations from a "weaker" database by default.
+* MGKit's `filter-gff` annotation overlap discarder has a superiority complex causing it to liberally discard annotations from a "weaker" database by default.
 * You never quite get what you need from a program's output.
 
 [^1]: This seems to be a fairly commonly used "cut-off" threshold when looking at hit quality.
