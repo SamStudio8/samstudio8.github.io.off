@@ -6,7 +6,7 @@ title: "Raiding `rapsearch` Results"
 Finally. After all the trouble I've had [trying to scale `BLAST`]({% post_url 2015-04-27-what-am-i-doing %}),
 running [out of disk space]({% post_url 2015-04-25-scratch %}),
 [database accounting irregularities]({% post_url 2015-04-24-trembling %})
-and [investigating `boost::archive::archive_exception`]({% post_url 2015-05-04-aligned-annihilation-sequel %}) when using `rapsearch`, **we have data**.
+and [investigating an `archive_exception`]({% post_url 2015-05-04-aligned-annihilation-sequel %}), **we have data**.
 
 Thanks to the incredible speed of `rapsearch`, what I've been trying to accomplish over the past few months
 with `BLAST` has been done in mere hours without the hassle of database or contig sharding. Quantifying the
@@ -33,17 +33,17 @@ after selecting for the "best" hit for cases where hits overlap by 100bp[^2] or 
 |Bacteria [2]  | 683,307 | 392,791         | 6,810          |
 |Archaea [2157]| 79,738  | 34,950          | 1,486          |
 |Fungi [4751]  | 345,160 | 190,936         | 7,379          |
-|**Total**     | 1,108,205 | 618,677 (55.83%)| 15,675 (2.53%, Raw:1.41%)|
+|**Total**     | 1,108,205 | 618,677 (55.83%)| 15,675 (2.53%, *Raw*:1.41%)|
 
 
 ## Merged
 
 | Taxa         | Raw All  | Bitscore Filter | Overlap Filter |
 |--------------|----------|-----------------|----------------|
-|**All**       | 1,330,832| 713,898 (53.64%)| 12,194 (1.71%, Raw: 0.92%)|
+|**All**       | 1,330,832| 713,898 (53.64%)| 12,194 (1.71%, *Raw*:0.92%)|
 
 Initially, I had merged all the hits from both databases and all three taxa together to create
-a super-hit list; yielding just over 12k reasonable quality (`>=BQ40`) hits to
+a super-hit list; yielding just over 12k reasonable quality (`>=40`) hits to
 play with after both filtering steps. However, I became concerned with what I coin
 **overlap loss**: a significant number of hits were discarded in overlapping regions.
 94.53% and 97.47% of our bitscore filtered hits were lost by overlap for
