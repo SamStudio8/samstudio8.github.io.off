@@ -55,7 +55,7 @@ raw reads aligning to an assembly consisting of just 433 million base pairs, an 
 does the top-ranking hit represent a hydrolase? How is "top-ranking" defined? Let's read the manual[^3]:
 
 <blockquote>[...] preference is given to the db quality first, than the bit score and finally the lenght of annotation, the one with the highest values is kept
-<footer>&emdash;<a href="http://pythonhosted.org/mgkit/scripts/filter-gff.html#overlap-filtering">http://pythonhosted.org/mgkit/scripts/filter-gff.html#overlap-filtering</a></footer></blockquote>
+<footer><a href="http://pythonhosted.org/mgkit/scripts/filter-gff.html#overlap-filtering">http://pythonhosted.org/mgkit/scripts/filter-gff.html#overlap-filtering</a></footer></blockquote>
 
 Hmm, it sounds as though database quality is considered paramount by the default ranking device, ensuring
 that SwissProt results take precedence over those from TrEMBL. However what if the SwissProt hit actually has
