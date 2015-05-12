@@ -6,7 +6,7 @@ title: "Playing Phylogenetic Hide and Seek with Protozoa [WIP]"
 Amanda suggested that alongside archaeal, bacterial and fungal associated hydrolases,
 we should also look at [**protozoans**](http://en.wikipedia.org/wiki/Protozoa). 
 No problem, I'll just get the taxonomy ID for protozoa and extract another database
-from UniProtKB as before. Simple! Or so I thought...
+from UniProtKB [as before]({% post_url 2015-04-24-trembling %}). Simple! Or so I thought...
 
 Classification of protozoa appears to be less clear than I had realised. UniProtKB
 [lists three taxonomy entries](http://www.uniprot.org/taxonomy/?query=protozoa&sort=score)
