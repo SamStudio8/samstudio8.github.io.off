@@ -1,9 +1,7 @@
 ---
 layout: page
-title: About
+title: "Hello! I'm Sam Nicholls."
 ---
-
-# Hello! I'm Sam Nicholls.
 
 A twenty-four year old Computational Biology PhD student at Aberystwyth University. Previously a first class Computer Science and Statistics graduate, during the study for which I spent a year out with the Numerical Algorithms Group and Wellcome Trust Sanger Institute.
 
