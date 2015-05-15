@@ -18,7 +18,7 @@ each possess some interesting property that we hoped would lead to interesting i
 ## Sample Preperation
 Samples of a few millimetres in length were stuck to the sticky and conductive surface of specimen bolts.
 Non-conductive samples must be coated in a thin layer of some conductive material so as to be interactable
-and thus detectable by the scope. The bolts were loaded in to a vacuum sputter coater and coated in a layer
+and thus detectable by the scope. The bolts were loaded in to an argon vacuum sputter coater and coated in a layer
 of platinum-palladium alloy.
 
 ![]({{ site.url }}/public/posts/microscopy/bolts.jpg)
@@ -40,26 +40,27 @@ exterior protects a sponge-like fibrous interior.
 
 I wasn't exactly sure what to expect but had initially envisaged being able to see a more wood-like
 structure. Of course the product is designed to be both flexible and safely extruded without
-blocking or damaging the printer head and thus it is likely the wood content is milled and uniformly
+blocking or damaging the printer head and thus it is possible the wood content is milled and uniformly
 mixed with the ABS.
 
 ## Pseudo-Brick
 Lulzbot also offer [Laybrick](https://www.lulzbot.com/products/laybrick-filament-3mm), embedding "minerals"
 to offer a stone-like appearance. On the surface, the resulting images are similar to that of the wood-based
-counterpart, though the interior appears more compact and rigid.
+counterpart, featuring a textured exterior. Appearing almost smooth at 45x, the coating reveals a more
+fine texture at 180x. The interior appears more compact and rigid.
 
 <a href="https://www.flickr.com/photos/89981359@N08/17687208152" title="3d_printer_brick_filament_1 by Vic Harkness, on Flickr"><img src="https://c2.staticflickr.com/6/5452/17687208152_b9cb2e4ba4.jpg" alt="3d_printer_brick_filament_1"></a>
 <a href="https://www.flickr.com/photos/130574919@N07/17066945254" title="3d_printer_brick_filament_8 by Sam Nicholls, on Flickr"><img src="https://c1.staticflickr.com/9/8765/17066945254_3196b078ec_z.jpg" alt="3d_printer_brick_filament_8"></a>
 <a href="https://www.flickr.com/photos/130574919@N07/17069124483" title="3d_printer_brick_filament_11 by Sam Nicholls, on Flickr"><img src="https://c1.staticflickr.com/9/8813/17069124483_a703236296_z.jpg" alt="3d_printer_brick_filament_11"></a>
 
-I had expected to see more of a crystalline structure but again, imagine this would cause trouble
-during extruding. It should be noted the products are designed to look like wood and brick and achieve
-well enough with their exteriors. There isn't a pressing need to emulate the materials under the surface!
+I had expected to see more of a crystalline structure due to the minerals. But again, I imagine this would
+cause trouble during extruding. It should be noted the products are designed to look like wood and brick and achieve
+this job well enough with their exteriors. There isn't a pressing need to emulate the materials under the surface!
 
 ## Glow in the Dark ABS
 We also took a look at Lulzbot [Glow in the Dark ABS](https://www.lulzbot.com/products/abs-3mm-filament-1kg-reel),
 curious to see whether the glowing property altered the structure in an interesting fashion. From what we could see,
-it does not. However, this offers a useful comparions to our previous samples: note in particular the smooth exterior
+it does not. However, this offers a useful comparison to our previous samples: note in particular the smooth exterior
 and the "cliff-face" at the cutting point where the blade slid across the surface. The interior appears rather solid,
 densely compacted and neither fibrous or porous.
 
@@ -67,14 +68,14 @@ densely compacted and neither fibrous or porous.
 <a href="https://www.flickr.com/photos/130574919@N07/17689661881" title="3d_printer_glow_filament_2 by Sam Nicholls, on Flickr"><img src="https://c1.staticflickr.com/9/8740/17689661881_9d3364aeaf_z.jpg" alt="3d_printer_glow_filament_2"></a>
 
 ## Flex
-Leaving the best and by far the most interesting (to me at least), the Lulzbot
+Leaving the best and by far the most interesting (to me at least) until last, the Lulzbot
 [Ninja Flex](https://www.lulzbot.com/ninjaflex). The material is fascinatingly flexible with strong and durable elasticity.
 Unsurprisingly you could probably predict these properties from the microscopy images:
 
 <a href="https://www.flickr.com/photos/130574919@N07/17686975952" title="3d_printer_flex_filament_1 by Sam Nicholls, on Flickr"><img src="https://c2.staticflickr.com/6/5324/17686975952_f120693508_z.jpg" alt="3d_printer_flex_filament_1"></a>
 
-Above, the surface coated with obvious fibres. Below Vic captures a ~10-15µm thick stray strand of flex fibre, followed
-by an cross-section image of the sample at one of the cut sites. Note the "landslide"-like result of the blade
+Above: the surface coated with obvious fibres. Below, Vic captures a ~10-15µm thick stray strand of flex fibre, followed
+by a cross-section of the cut sites. Note the "landslide"-like result of the blade
 passing through the sample, dragging external fibres inward and bringing some of the surface with it.
 
 <a href="https://www.flickr.com/photos/89981359@N08/17687423712" title="3d_printer_flex_filament_7 by Vic Harkness, on Flickr"><img src="https://c2.staticflickr.com/8/7729/17687423712_16504595b2.jpg" alt="3d_printer_flex_filament_7"></a>
