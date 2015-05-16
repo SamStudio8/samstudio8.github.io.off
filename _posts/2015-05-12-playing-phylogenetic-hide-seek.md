@@ -61,13 +61,16 @@ as "a grab-bag for all eukaryotes that are not animals, plants or fungi"[^4], th
 early classifications appeared to focus on removing contradicting taxa
 that were clouding "pure" definitions of what was truly plant and animal and
 choosing to conviniently classify difficult organisms on what they are not, as
-opposed to what they are[^5].
+opposed to what they are[^5]. The term became a dumping ground for
+unicellular protozoa that were not quite animals, protophytic algae that were
+not quite plans and fungal organisms such as slime molds (it wouldn't be
+until 1969 that Fungi would get a kingdom of their own).
 
 After the invention of the first electron microscope in the early 20th century, confusion
 was further compounded by both the appearance of a distinct cellular nucleus in some
 unicellular organisms.
 
-### The Rise and Fall of the Kingdom of Monera <br/>and the Protozoa Identity Crisis
+### The Protozoa Identity Crisis
 Although Haeckel later added the now familiar term protozoa as a "sub-kingdom"
 to his Protista kingdom to represent unicellular animals, another kingdom schema
 emerged in 1938, proposed by Herbert Copeland in *The Kingdoms of Organisms*[^3].
@@ -85,13 +88,24 @@ agreeance with a point made in Hogg's 1860 manuscript
  that the term "can alone include those that are admitted by all to be animals
  or 'zoa'"[^3]. *i.e.* The term is inappropriate if it is to be applied to non-animals.
 
+### The Rise of Superkingdoms
+In the 1960s, microbiologist Roger Stanier propagated the "fundamental division of life" observed
+between the "prokaryotes" and "eukaryotes", originally noted decades prior by Edouard Chatton in 1925[^3].
 
+In 1969, Robert Whittaker published his own five kingdom model (a revision of his earlier work
+where he had in fact returned the bacteria to the protista kingdom, it would take a few more years of
+research before concluding "this evolutionary divergence in cellular
+structure [in bacteria] had to be accounted [for]"), but placing the kingdom Monera
+beneath a new **Superkingdom of Bacteria** (placing the other kingdoms under
+the new **Eukaryotic Superkingdom**) and introducing the kingdom of Fungi; a
+wholly distinct kingdom from Plantae. Whittaker mainted that unicellularity was the most
+important characteristic for membership of the kingdom of protista[^3].
 
+Around the same time biologist Lynn Margulis began working on her own schema for organising life.
+Margulis however allowed the Protista (later re-named to Protoctista) to contain eukaryotic
+organisms that were "either unicellular **or multicellular** that are not plants, animals or fungi"[Emphasis mine][^3].
 
-
-
-
-
+### Sequencing
 With the development of chain-termination DNA sequencing in 1977 by Frederick Sanger, the field
 of molecular genetics was born. Taxonomy could now be based on differences expressed in the genetic
 sequences of organisms (particularly in highly conserved subsequences, such as those responsible
@@ -137,6 +151,7 @@ explains the phylogenetic taxonomy
 * * *
 
 # tl;dr
+* Protozoa don't really exist and I need to be more specific about what I'm looking for.
 * Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy.
 
 
