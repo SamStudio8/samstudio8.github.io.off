@@ -123,4 +123,6 @@ explains the phylogenetic taxonomy
 
 [^4]: AG Simpson and AJ Roger, *The real 'kingdoms' of eukaryotes*, 2004.
 
-[^5]: <blockquote>"No mouth. No respiration. No entry."<br/><footer>— Kingdom <i>Animalia</i> Clubhouse Rules, 1860.</footer><blockquote>
+[^5]: <blockquote>"No mouth. No respiration. No entry."<br/><footer>— Kingdom <i>Animalia</i> Clubhouse Rules, 1860[^6].</footer></blockquote>
+
+[^6]: Based on paleontologist Richard Owen's 1858 description of plants and animals.
