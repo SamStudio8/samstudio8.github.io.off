@@ -68,11 +68,27 @@ was further compounded by both the appearance of a distinct cellular nucleus in 
 unicellular organisms.
 
 ### The Rise and Fall of the Kingdom of Monera
+### and the Protozoa Identity Crisis
 Although Haeckel later added the now familiar term protozoa as a "sub-kingdom"
 to his Protista kingdom to represent unicellular animals, another kingdom schema
 emerged in 1938, proposed by Herbert Copeland in *The Kingdoms of Organisms*[^3].
 Copeland moved the bacteria and algae out of Haeckel's Protista kingdom to create
-the new kingdom, Monera.
+a new kingdom: Monera.
+
+Copeland would later re-name his kingdom of Protista to **Protoctista**
+("first established beings") -- a term originally coined by John Hogg.
+As Haeckel's models still persisted and the Protista kingdom still contained bacteria
+it seemed "unfit" to continue using the same name in both models.
+Selecting a new name, Copeland purposefully avoided the term Protozoa due
+to both its confusing prior use as a kingdom, class and phylum, but also in
+agreeance with a point made in Hogg's 1860 manuscript
+*On the Distinctions of a Plant and an Animal and on a Fourth Kingdom of Nature*: 
+ that the term "can alone include those that are admitted by all to be animals
+ or 'zoa'"[^3]. *i.e.* The term is inappropriate if it is to be applied to non-animals.
+
+
+
+
 
 
 
