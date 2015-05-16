@@ -58,14 +58,20 @@ which included the "Monera" (bacteria) as members of this kingdom too.
 
 It's clear how such kingdoms are later described in 21st century literature
 as "a grab-bag for all eukaryotes that are not animals, plants or fungi"[^4], these
-early classifications appeared to focus on removing confusing taxa
+early classifications appeared to focus on removing contradicting taxa
 that were clouding "pure" definitions of what was truly plant and animal and
 choosing to conviniently classify difficult organisms on what they are not, as
 opposed to what they are[^5].
 
+After the invention of the first electron microscope in the early 20th century, confusion
+was further compounded by both the appearance of a distinct cellular nucleus in some
+unicellular organisms.
 
-Throughout this period in the late 19th and early 20th century, various interpretations on how
-species should be organised were proposed. Most schemes used the term "kingdom"
+### 
+Although Haeckel later added protozoa as a "sub-kingdom" to his Protista kingdom
+to represent unicellular animals, another kingdom emerged[^3]
+
+
 
 
 With the development of chain-termination DNA sequencing in 1977 by Frederick Sanger, the field
@@ -111,10 +117,7 @@ explains the phylogenetic taxonomy
 
 
 * * *
-
-# tl;dr
-* Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy.
-
+# References
 [^1]: Mark A. Ragan, *Trees and networks before and after Darwin*, 2009.
 
 [^2]: Arshan Nasir, Kyung Mo Kim, and Gustavo Caetano-Anolles, *Giant viruses coexisted with the cellular ancestors and represent a distinct supergroup along with superkingdoms Archaea, Bacteria and Eukarya*, 2012.
@@ -122,6 +125,9 @@ explains the phylogenetic taxonomy
 [^3]: JM Scamardella, *Not plants or animals: a brief history of the origin of Kingdoms Protozoa, Protista and Protoctista*, 1999.
 
 [^4]: AG Simpson and AJ Roger, *The real 'kingdoms' of eukaryotes*, 2004.
+
+# tl;dr
+* Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy.
 
 [^5]: <blockquote>"No mouth. No respiration. No entry."<br/><footer>— Kingdom <i>Animalia</i> Clubhouse Rules, 1860.</footer></blockquote>[^6]
 
