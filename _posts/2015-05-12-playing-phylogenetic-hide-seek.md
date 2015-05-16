@@ -70,7 +70,7 @@ After the invention of the first electron microscope in the early 20th century, 
 was further compounded by both the appearance of a distinct cellular nucleus in some
 unicellular organisms.
 
-### The Protozoa Identity Crisis
+### The Protozoan Identity Crisis
 Although Haeckel later added the now familiar term protozoa as a "sub-kingdom"
 to his Protista kingdom to represent unicellular animals, another kingdom schema
 emerged in 1938, proposed by Herbert Copeland in *The Kingdoms of Organisms*[^3].
@@ -102,8 +102,13 @@ wholly distinct kingdom from Plantae. Whittaker mainted that unicellularity was 
 important characteristic for membership of the kingdom of protista[^3].
 
 Around the same time biologist Lynn Margulis began working on her own schema for organising life.
-Margulis however allowed the Protista (later re-named to Protoctista) to contain eukaryotic
-organisms that were "either unicellular **or multicellular** that are not plants, animals or fungi"[Emphasis mine][^3].
+After several iterations, Margulis relied more on morphologic and structural observations over
+Whittaker's unicellular criteria and allowed her Protista (later re-named to Protoctista in a nod
+to Copeland) to contain eukaryotic
+organisms that were "either unicellular **or multicellular** that are not plants, animals
+or fungi"[Emphasis mine][^3].
+
+
 
 ### Sequencing
 With the development of chain-termination DNA sequencing in 1977 by Frederick Sanger, the field
@@ -124,11 +129,7 @@ and Protista, comprising eukaryoute groups formerly classified as algae, protozo
 <footer>— Michael Sleigh, <i>Protozoa and other Protists</i> (2nd ed.), 1989.</footer>
 </blockquote>
 
-Indeed, in the first edition of this book, *The Biology of Protozoa*, published in 1973 -
-whose preface describes the "flourishing"
-state of research in to Protozoa; "these organisms provide excellent subjects for studies on general
-biological phenomena at the cellular level", primarily due to the ease of which large populations
-of similar cells at the same age can be obtained, uncontaminated. 
+
 
 ## Domains and Kingdoms
 
