@@ -29,7 +29,6 @@ environments [...]</blockquote>
 Yet it seems the answer to "What are protozoa?" boils down to who you ask, or rather,
 whose interpretation of the taxonomic system you ask.
 
-
 ## A Very Brief History of Modern Taxonomy
 In the 18th century, Carl Linnaeus published works on the biological classification of organisms based
 on their structural appearances, establishing the three kingdoms of *Animale* (Animal), *Vegetabile* (Vegetable)
@@ -76,7 +75,6 @@ are classed at non-cellular... though ...there is support for adding a fourth do
 
 # tl;dr
 * Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy.
-* 
 
 [^1]: Mark A. Ragan, *Trees and networks before and after Darwin*, 2009.
 [^2]: Arshan Nasir, Kyung Mo Kim, and Gustavo Caetano-Anolles, *Giant viruses coexisted with the cellular ancestors and represent a distinct supergroup along with superkingdoms Archaea, Bacteria and Eukarya*, 2012.
