@@ -28,6 +28,8 @@ Yet it seems the answer to "What are protozoa?" boils down to who you ask, or ra
 whose interpretation of the taxonomic system you ask.
 
 ## A Very Brief History of Modern Taxonomy
+<p class="message">This section is mostly an attempt to condense J.M. Scamardella's 1999 paper: <i>Not plants or animals: a brief history of the origin of Kingdoms Protozoa, Protista and Protoctista</i>. For a full, interesting review I suggest you check it out.</p>
+
 In the 18th century, Carl Linnaeus published works on the biological classification of organisms based
 on their structural appearances, establishing the three kingdoms of *Animale* (Animal), *Vegetabile* (Vegetable)
 and *Lapideum* (Mineral) which lend themselves to a guessing game of the same name.
@@ -103,18 +105,36 @@ important characteristic for membership of the kingdom of protista[^3].
 
 Around the same time biologist Lynn Margulis began working on her own schema for organising life.
 After several iterations, Margulis relied more on morphologic and structural observations over
-Whittaker's unicellular criteria and allowed her Protista (later re-named to Protoctista in a nod
-to Copeland) to contain eukaryotic
-organisms that were "either unicellular **or multicellular** that are not plants, animals
-or fungi"[Emphasis mine][^3].
+Whittaker's strict unicellular criteria and allowed her Protista (later re-named to Protoctista as per
+Copeland's model) to contain eukaryotic organisms that were "either unicellular
+**or multicellular** that are not plants, animals or fungi"[Emphasis mine][^3], once again
+falling back to classification by exclusion.
 
+In the early 1980s, John Corliss reviewed the work of Margulis and Whittaker and tried to solve
+the question of cellular complexity by instead counting the number of “differentiated, functional tissues"
+rather than just the boolean question of whether or not they are uni- or multicellular.
+Corliss describes plants and animals of having more than one type of tissue, whereas
+"protists, while showing multicellularity to varying
+degrees in certain groups [...] fail to demonstrate the
+organization of cells into two or more clearly differentiated tissues". A criticism of this
+model is it "overlooks the fact that multicellular, differentiated organisms are known
+in all four eukaryotic kingdoms" such as cyanobacteria[^3].
 
+There is a difference of opinion between Corliss and Copeland. Corliss believes that a 
+Protista kingdom should exist only if "major uniqueness" can be determined, rather
+than classfication based on the absence of functions common in other kingdoms.
+Confusingly, Corliss "advocates usage of the term protist to denote all forms of Protista, both
+unicellular and multicellular. However, the term protist, as coined by Dobell, was
+defined by Dobell in reference to the Protista possessing the 'unicellular type
+of organization'"[^3]. These sort of disagreements only further cloud my understanding
+of what the protozoa actually are.
 
-### Sequencing
+### The Sequencing Revolution
 With the development of chain-termination DNA sequencing in 1977 by Frederick Sanger, the field
 of molecular genetics was born. Taxonomy could now be based on differences expressed in the genetic
 sequences of organisms (particularly in highly conserved subsequences, such as those responsible
-for constructing ribosomal RNA molecules), rather than by subjective observations of morphology and function.
+for constructing ribosomal RNA molecules), rather than by subjective observations of morphology
+and function.
 
 Different sequence database began to create their own taxonomic classification structure
 
@@ -148,11 +168,10 @@ So how does this all relate to UniProt? The help documentation offloads the resp
 Chapter 4 of the [*NCBI Handbook*](http://www.ncbi.nlm.nih.gov/books/NBK21100/), *The Taxonomy Project*
 explains the phylogenetic taxonomy
 
-
 * * *
 
 # tl;dr
-* Protozoa don't really exist and I need to be more specific about what I'm looking for.
+* Protozoa has become a somewhat ambiguous and confusing term and doesn't really mean anything.
 * Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy.
 
 
