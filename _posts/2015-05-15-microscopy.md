@@ -112,6 +112,8 @@ image turned out to be "just off" when loaded in to the seperate viewing softwar
 Towards the end I feel like we got the hang of things and am looking forward to returning once
 we think of some other interesting samples.
 
+You can check out all the images [via my Flickr album](https://flic.kr/s/aHskbCjxti). [Vic's Flickr album](https://flic.kr/s/aHskbBnAmt) has additional images (that also featured in this post) too.
+
 * * *
 # tl;dr
 * Microscopy is very cool.
