@@ -67,8 +67,7 @@ After the invention of the first electron microscope in the early 20th century, 
 was further compounded by both the appearance of a distinct cellular nucleus in some
 unicellular organisms.
 
-### The Rise and Fall of the Kingdom of Monera
-### and the Protozoa Identity Crisis
+### The Rise and Fall of the Kingdom of Monera <br/>and the Protozoa Identity Crisis
 Although Haeckel later added the now familiar term protozoa as a "sub-kingdom"
 to his Protista kingdom to represent unicellular animals, another kingdom schema
 emerged in 1938, proposed by Herbert Copeland in *The Kingdoms of Organisms*[^3].
