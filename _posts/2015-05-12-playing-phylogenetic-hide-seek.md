@@ -22,9 +22,7 @@ but I want a high level [taxonomic rank](http://en.wikipedia.org/wiki/Taxonomic_
 that encompasses all of the organisms of interest. So what are the organisms of interest?
 In an early introduction to my project, I described the protozoa as:
 
-<blockquote>[...] single celled micro-organisms that feed from their direct surroundings
-and have the capacity for controlled movement with a tendency to thrive in moist
-environments [...]</blockquote>
+<blockquote>[...] single celled micro-organisms that feed from their direct surroundings and have the capacity for controlled movement with a tendency to thrive in moist environments [...]</blockquote>
 
 Yet it seems the answer to "What are protozoa?" boils down to who you ask, or rather,
 whose interpretation of the taxonomic system you ask.
@@ -32,8 +30,8 @@ whose interpretation of the taxonomic system you ask.
 ## A Very Brief History of Modern Taxonomy
 In the 18th century, Carl Linnaeus published works on the biological classification of organisms based
 on their structural appearances, establishing the three kingdoms of *Animale* (Animal), *Vegetabile* (Vegetable)
-and *Lapideum* (Mineral) which lend their names to a guessing game of the same name.
-Linnaeus' work, particularly on naming strategies for organisms served as a foundation to modern taxonomy.
+and *Lapideum* (Mineral) which lend themselves to a guessing game of the same name.
+Linnaeus' work, particularly on [naming strategies for organisms](http://en.wikipedia.org/wiki/Binomial_nomenclature) served as a foundation to modern taxonomy.
 
 However, the class system set out by Linnaeus was designed for the identification of already catalogued species.
 Following Charles Darwin's revolutionary *On the Origin of Species* a century later, tree representations of
@@ -41,9 +39,6 @@ species sharing common descent because increasingly common (although not the fir
 19th and early 20th century scientists attempted to group available fossil records by structual affinity
 to link ancestry of common species through the ages. It was here we drew the comparison between
 contemporary bird species and the dinosaurs.
-
-
-Thomas Cavalier-Smith proposed in 1998 an oft-used "six kingdom"
 
 With the development of chain-termination DNA sequencing in 1977 by Frederick Sanger, the field
 of molecular genetics was born. Taxonomy could now be based on differences expressed in the genetic
@@ -57,7 +52,8 @@ In 1989, Michael Sleigh, in the second edition of *Protozoa and other Protists* 
 The position is now clearer, and there is much support for the view that eukaryotes are best divided
 into four kingdoms: Animalia or multicellular animals [...], Plantae or green land plants [...], Fungi
 and Protista, comprising eukaryoute groups formerly classified as algae, protozoa and flagellate fungi.
-<footer>— Michael Sleigh, *Protozoa and other Protists* (2nd ed.), 1989.</footer>
+<br/>
+<footer>— Michael Sleigh, <i>Protozoa and other Protists</i> (2nd ed.), 1989.</footer>
 </blockquote>
 
 Indeed, in the first edition of this book, *The Biology of Protozoa*, published in 1973 -
@@ -66,10 +62,23 @@ state of research in to Protozoa; "these organisms provide excellent subjects fo
 biological phenomena at the cellular level", primarily due to the ease of which large populations
 of similar cells at the same age can be obtained, uncontaminated. 
 
+## Domains and Kingdoms
+
+Thomas Cavalier-Smith proposed in 1998 an oft-used "six kingdom"
 *Evolution: Revisiting the Root of the Eukaryote Tree*
 
 ...currently the domain model holds no virii (but they have to go somewhere...) as they
-are classed at non-cellular... though ...there is support for adding a fourth domain of life for virii[^2]
+are classed at non-cellular... though ...there is support for adding a fourth domain of life for virii[^2]...
+
+
+## UniProtKB
+So how does this all relate to UniProt? The help documentation offloads the responsibility to the NCBI:
+
+<blockquote>The taxonomy database that is maintained by the UniProt group is based on the <a href="http://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy database</a>, which is supplemented with data specific to the UniProt Knowledgebase (UniProtKB). While the NCBI taxonomy is updated daily to be in sync with GenBank/EMBL-Bank/DDBJ [...]</br><footer>— <a href="http://www.uniprot.org/help/taxonomy">UniProt Help: Taxonomy</a></footer></blockquote>
+
+Chapter 4 of the [*NCBI Handbook*](http://www.ncbi.nlm.nih.gov/books/NBK21100/), *The Taxonomy Project*
+explains the phylogenetic taxonomy
+
 
 * * *
 
@@ -77,4 +86,5 @@ are classed at non-cellular... though ...there is support for adding a fourth do
 * Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy.
 
 [^1]: Mark A. Ragan, *Trees and networks before and after Darwin*, 2009.
+
 [^2]: Arshan Nasir, Kyung Mo Kim, and Gustavo Caetano-Anolles, *Giant viruses coexisted with the cellular ancestors and represent a distinct supergroup along with superkingdoms Archaea, Bacteria and Eukarya*, 2012.
