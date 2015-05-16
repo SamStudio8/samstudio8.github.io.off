@@ -67,9 +67,12 @@ After the invention of the first electron microscope in the early 20th century, 
 was further compounded by both the appearance of a distinct cellular nucleus in some
 unicellular organisms.
 
-### 
-Although Haeckel later added protozoa as a "sub-kingdom" to his Protista kingdom
-to represent unicellular animals, another kingdom emerged[^3]
+### The Rise and Fall of the Kingdom of Monera
+Although Haeckel later added the now familiar term protozoa as a "sub-kingdom"
+to his Protista kingdom to represent unicellular animals, another kingdom schema
+emerged in 1938, proposed by Herbert Copeland in *The Kingdoms of Organisms*[^3].
+Copeland moved the bacteria and algae out of Haeckel's Protista kingdom to create
+the new kingdom, Monera.
 
 
 
@@ -117,7 +120,11 @@ explains the phylogenetic taxonomy
 
 
 * * *
-# References
+
+# tl;dr
+* Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy.
+
+
 [^1]: Mark A. Ragan, *Trees and networks before and after Darwin*, 2009.
 
 [^2]: Arshan Nasir, Kyung Mo Kim, and Gustavo Caetano-Anolles, *Giant viruses coexisted with the cellular ancestors and represent a distinct supergroup along with superkingdoms Archaea, Bacteria and Eukarya*, 2012.
@@ -125,9 +132,6 @@ explains the phylogenetic taxonomy
 [^3]: JM Scamardella, *Not plants or animals: a brief history of the origin of Kingdoms Protozoa, Protista and Protoctista*, 1999.
 
 [^4]: AG Simpson and AJ Roger, *The real 'kingdoms' of eukaryotes*, 2004.
-
-# tl;dr
-* Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy.
 
 [^5]: <blockquote>"No mouth. No respiration. No entry."<br/><footer>— Kingdom <i>Animalia</i> Clubhouse Rules, 1860.</footer></blockquote>[^6]
 
