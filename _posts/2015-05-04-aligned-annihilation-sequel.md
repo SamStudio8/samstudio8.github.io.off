@@ -136,7 +136,7 @@ Shortly after, the work day drew to a close[^d] and sick of feeling like I'd bee
 searching through a cow's core dump, I gave up.
 
 <blockquote>it's ok at least we had fun right
-<footer><a href="http://bytecove.co.uk/">Daniel Evans</a></footer>
+<footer>— <a href="http://bytecove.co.uk/">Daniel Evans</a></footer>
 </blockquote>
 
 # The Easy Way
