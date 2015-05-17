@@ -254,6 +254,33 @@ Chapter 4 of the [*NCBI Handbook*](http://www.ncbi.nlm.nih.gov/books/NBK21100/),
 explains the phylogenetic taxonomy
 ...Different sequence database began to create their own taxonomic classification structure
 
+### NCBI and the Eukaryotes
+NCBI lists the following as entries beneath the Eukaryota domain\superkingdom:
+
+* Alveolata (alveolates)
+* Amoebozoa
+* Apusozoa
+* Breviatea
+* Centroheliozoa (centrohelids)
+* Cryptophyta (cryptomonads)
+* Euglenozoa
+* Fornicata
+* Glaucocystophyceae (glaucocystophytes)
+* Haptophyceae (coccolithophorids)
+* Heterolobosea
+* Jakobida
+* Katablepharidophyta
+* Malawimonadidae
+* Opisthokonta
+* Oxymonadida (oxymonads)
+* Parabasalia (parabasalids)
+* Rhizaria
+* Rhodophyta (red algae)
+* Stramenopiles (heterokonts)
+* Viridiplantae (green plants)
+* environmental samples
+* unclassified eukaryotes
+
 * * *
 
 # tl;dr
