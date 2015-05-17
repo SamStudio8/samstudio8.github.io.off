@@ -8,6 +8,10 @@ we should also look at [**protozoans**](http://en.wikipedia.org/wiki/Protozoa).
 No problem, I'll just get the taxonomy ID for protozoa and extract another database
 from UniProtKB [as before]({% post_url 2015-04-24-trembling %}). Simple! Or so I thought...
 
+<p class="message">
+The rabbit hole is pretty deep on this one. Feel free to skip my multi-day exploration in to the history of protozoans and their taxonomy and meet me  <a href="#uniprot-taxa">on the other side</a>.
+</p>
+
 Classification of protozoa appears to be less clear than I had realised. UniProtKB
 [lists only three taxonomy entries](http://www.uniprot.org/taxonomy/?query=protozoa&sort=score)
 for the term:
@@ -164,6 +168,7 @@ in 1911 to specifically refer to Protista demonstrating a "unicellular type
 of organization'"[^3]. These sort of disagreements only further cloud my understanding
 of what the protozoa actually are.
 
+## A Very-Very Brief Introduction to Current Taxonomy
 ### Domains and the Sequencing Revolution
 With the development of chain-termination DNA sequencing in 1977 by Frederick Sanger, the field
 of molecular genetics was born. Taxonomy could now be based on differences expressed in the genetic
@@ -199,7 +204,10 @@ Woese doesn't make suggestions for what kingdoms should exist beneath these doma
 will preserve the kingdoms Plantae, Animalia, and Fungi [...] and will replace Protista
 with a series of kingdoms corresponding to the various ancient protistan lineages".
 
-## Getting the Band Back Together: 21st Century Supergroups
+### The Sixth Kingdom
+...Thomas Cavalier-Smith proposed in 1998 an oft-used "six kingdom"
+
+### Getting the Band Back Together: 21st Century Supergroups
 With continuing innovation fueling rapidly moving research, especially in the fields of
 molecular biology and genetics, more sequences could be analysed than ever before.
 Scientists had been won over by Woese's domain model and tried to maintain an underlying
@@ -221,21 +229,21 @@ pretty colour-coordinated diagrams, refer to the figure below the table instead.
 | "            | Chromalveolata| Organisms created by secondary endosymbiosis (a eukaryote engulfs and enslaves another eukaryote containing a primary plastid) from a red algae origin | dinoflagellates (flagellate protists, mostly marine plankton), cryptophytes (freshwater algae with plastids), haptophytes and stramenopiles (*a.k.a.* Stramenopiles: algae, giant kelp, diatoms, plankton), alveolates (major grouping of **protozoa**) and apicomplexa (specialist parasites including plasmodia (causing malaria), toxoplasma, and cryptosporidium) |
 | "            | Archaeplastida (Plantae) | Organisms featuring "plastids (chloroplasts) that originated by primary endosymbiosis" (enslavement and genomic reduction of a prokaryotic cell) | Land plants, red and green algae and rare microscopic algae called glaucophytes |
 
-![]({{ site.url }}/public/posts/hide-and-seek/simpson-rogers-cb-r964.png)[^10]
+![]({{ site.url }}/public/posts/hide-and-seek/simpson-rogers-cb-r964.png)
+
+Yet, even now. There is no consensus on what supergroups definitely exist, how exactly they are related and what species belong where.
+
+..It is now widely believed that Rhizaria belong with the Stramenopiles and the Alveolata
 
 ### Where are the virii?
 
-
-
-## Domains and Kingdoms
-
-Thomas Cavalier-Smith proposed in 1998 an oft-used "six kingdom"
 *Evolution: Revisiting the Root of the Eukaryote Tree*
 
 ...currently the domain model holds no virii (but they have to go somewhere...) as they
 are classed at non-cellular... though ...there is support for adding a fourth domain of life for virii[^2]...
 
 
+<a name="uniprot-taxa"/>
 ## UniProtKB
 So how does this all relate to UniProt? The help documentation offloads the responsibility to the NCBI:
 
