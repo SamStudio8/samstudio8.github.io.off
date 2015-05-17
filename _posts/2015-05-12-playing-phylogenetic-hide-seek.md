@@ -191,30 +191,32 @@ Whilst Whittaker had previously introduced the concept of a **Superkingdom** to 
 between the Monera and the rest of the kingdoms, this distinction was rather naive.
 And so, Woese introduced the three domains of life [^3] [^7]:
 
-![]({{ site.url }}/public/posts/hide-and-seek/woese-4578-tree.png)[^7]
-
+![]({{ site.url }}/public/posts/hide-and-seek/woese-4578-tree.png)
 
 ## A Very Brief and Biased Introduction to Current Taxonomy
+
+### Supergroups
 With rapidly moving continuous research in to molecular biology and genetics...
 ...moving to maintain the integrity of a "tree" model by ensuring branches are monophyletic (*i.e.* that
 each branch contains only descendants of that species)
 
-| Domain       | Kingdom  | Description | Examples[^4] |
+If, like me, you prefer pretty colour-coordinated diagrams, refer to the figure below the table instead.
+
+| Domain       | Kingdom  | Description[^4] | Examples[^4] |
 |--------------|----------|-------------|--------------|
-| Bacteria     | Bacteria | ||
-| Archaea      | Archaea  | ||
-| Eukaryota    | Excavata | ||
-| "            | Amoebozoa| ||
-| "            | Opisthokonta| ||
-| "            | Rhizaria | ||
-| "            | Chromalveolata| ||
-| "            | Archaeplastida| ||
+| Bacteria     | Bacteria | Prokaryotic cells lacking a membrane-bound organelles and nucleus | - |
+| Archaea      | Archaea  | Like bacteria but demonstrating more complex RNA polymerases than bacteria (similar to eukaryotes), peptidoglycan does not appear in the cell wall and often appear in extreme environments (*e.g.* acidophiles, halophiles, hyperthermophiles), methanogens are classified as archaea | - |
+| Eukaryota    | Opisthokonta| Primarily predatory multicellular organisms | "animals and tree fungi as well as several unicellular groups, including the free-living choanoflagellates" |
+| "            | Amoebozoa| "Most of the cells that move and feed using broad or finger-like pseudopodia" ("false feet": temporary microtubule and filament structures), typically "heterotrophs that engulf other cells using their pseudopodia"| Classical amoebae and slime moulds | 
+| "            | Excavata | "unicellular eukaryotes, most of which are heterotrophic flagellates", "[m]any excavates have greatly modified mitochondria that are not used for oxidative phosphorylation" | Various groups of parasitic flagellate **protozoa** |
+| "            | Rhizaria | "unites a wide diversity of free-living unicellular organisms, many of which feed using fine ‘filose’ pseudopodia, together with some fungi-like plant parasites" | **Protist** groups including foraminifera (mostly marine-based shell-building amoeboid protists), radiolaria (ocean based protozoa with mineral-based skeletal structures) and includes "heterotrophic flagellates or amoebae that consume other microbes associated with surfaces" |
+| "            | Chromalveolata| Organisms created by secondary endosymbiosis (a eukaryote engulfs and enslaves another eukaryote containing a primary plastid) from a red algae origin | dinoflagellates (flagellate protists, mostly marine plankton), cryptophytes (freshwater algae with plastids), haptophytes and stramenopiles (*a.k.a.* Stramenopiles: algae, giant kelp, diatoms, plankton), alveolates (major grouping of **protozoa**) and apicomplexa (specialist parasites including plasmodia (causing malaria), toxoplasma, and cryptosporidium) |
+| "            | Archaeplastida (Plantae) | Organisms featuring "plastids (chloroplasts) that originated by primary endosymbiosis" (enslavement and genomic reduction of a prokaryotic cell) | Land plants, red and green algae and rare microscopic algae called glaucophytes |
 
 ![]({{ site.url }}/public/posts/hide-and-seek/simpson-rogers-cb-r964.png)[^10]
 
+### Simpson and Roger, 2004
 
-
-Different sequence database began to create their own taxonomic classification structure
 
 
 ### Where are the virii?
@@ -233,10 +235,12 @@ are classed at non-cellular... though ...there is support for adding a fourth do
 ## UniProtKB
 So how does this all relate to UniProt? The help documentation offloads the responsibility to the NCBI:
 
+
 <blockquote>The taxonomy database that is maintained by the UniProt group is based on the <a href="http://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy database</a>, which is supplemented with data specific to the UniProt Knowledgebase (UniProtKB). While the NCBI taxonomy is updated daily to be in sync with GenBank/EMBL-Bank/DDBJ [...]</br><footer>— <a href="http://www.uniprot.org/help/taxonomy">UniProt Help: Taxonomy</a></footer></blockquote>
 
 Chapter 4 of the [*NCBI Handbook*](http://www.ncbi.nlm.nih.gov/books/NBK21100/), *The Taxonomy Project*
 explains the phylogenetic taxonomy
+...Different sequence database began to create their own taxonomic classification structure
 
 * * *
 
