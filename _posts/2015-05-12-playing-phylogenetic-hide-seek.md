@@ -187,20 +187,28 @@ represent an accurate view of the evolutionary relationship between the kingdoms
 It was here that Woese proposed a radical change to taxonomy and added
 the taxonomic rank of **Domain**, superior to Kingdom.
 
-Whilst Whittaker had previously introduced the concept of a **Superkingdom** to differentiate
-between the Monera and the rest of the kingdoms, this distinction was rather naive.
-And so, Woese introduced the three domains of life [^3] [^7]:
+Whilst Whittaker had previously introduced the concept of a Superkingdom to differentiate
+between the Monera and the rest of the kingdoms, this distinction merely noted a difference
+between "bacteria" and "everything else" and didn't describe the relationship between the
+kingdoms within. And so, in his 1990 paper: *Towards a natural system of organisms: Proposal for the domains Archaea, Bacteria, and Eucarya*, Woese introduced the three domains of life[^7]:
 
 ![]({{ site.url }}/public/posts/hide-and-seek/woese-4578-tree.png)
 
-## A Very Brief and Biased Introduction to Current Taxonomy
+Woese doesn't make suggestions for what kingdoms should exist beneath these domains
+(other than archaea, which I will ignore here) anticipating that "analysis of the Eucarya
+will preserve the kingdoms Plantae, Animalia, and Fungi [...] and will replace Protista
+with a series of kingdoms corresponding to the various ancient protistan lineages".
 
-### Supergroups
-With rapidly moving continuous research in to molecular biology and genetics...
-...moving to maintain the integrity of a "tree" model by ensuring branches are monophyletic (*i.e.* that
-each branch contains only descendants of that species)
+## Getting the Band Back Together: 21st Century Supergroups
+With continuing innovation fueling rapidly moving research, especially in the fields of
+molecular biology and genetics, more sequences could be analysed than ever before.
+Scientists had been won over by Woese's domain model and tried to maintain an underlying
+kingdom structure that maintained the intregrity of the "tree" model, ensuring branches are
+monophyletic (*i.e.* branches contain only descendants of that species).
 
-If, like me, you prefer pretty colour-coordinated diagrams, refer to the figure below the table instead.
+In 2004, Simpson and Roger published a review article, outlining six **Supergroups** which
+I have attempted to condense in to the table below[^4]. If, like me, however, you prefer
+pretty colour-coordinated diagrams, refer to the figure below the table instead.
 
 | Domain       | Kingdom  | Description[^4] | Examples[^4] |
 |--------------|----------|-------------|--------------|
@@ -214,10 +222,6 @@ If, like me, you prefer pretty colour-coordinated diagrams, refer to the figure 
 | "            | Archaeplastida (Plantae) | Organisms featuring "plastids (chloroplasts) that originated by primary endosymbiosis" (enslavement and genomic reduction of a prokaryotic cell) | Land plants, red and green algae and rare microscopic algae called glaucophytes |
 
 ![]({{ site.url }}/public/posts/hide-and-seek/simpson-rogers-cb-r964.png)[^10]
-
-### Simpson and Roger, 2004
-
-
 
 ### Where are the virii?
 
