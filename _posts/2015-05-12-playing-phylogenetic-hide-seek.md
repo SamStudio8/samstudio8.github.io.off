@@ -38,7 +38,7 @@ Linnaeus' work, particularly on [naming strategies for organisms](http://en.wiki
 However, the class system set out by Linnaeus was designed for identification rather than heritage.
 Following Charles Darwin's revolutionary *On the Origin of Species* a century later in 1859, tree
 representations of species sharing common descent became increasingly common
-(although his tree diagrams were by no means the first) and as evolutionary theory
+(although his tree diagrams were by no means the first[^1]) and as evolutionary theory
 developed and took hold, scientists attempted to group available fossil
 records by structual affinity to link ancestry of common species through the ages.
 It was here we drew the comparison between contemporary bird species and the dinosaurs.
@@ -116,8 +116,18 @@ Whittaker's strict unicellular criteria and allowed her Protista (later re-named
 Copeland's model) to contain eukaryotic organisms that were "either unicellular
 **or multicellular** that are not plants, animals or fungi"[Emphasis mine][^3].
 
+For those still playing along at home, Whittaker's five-kingdom re-organisation in 1969 left us with this:
+
+| Superkingdom | Kingdom | Description | Examples[^10] |
+|--------------|---------|-------------|----------|
+| Prokaryota   | Monera  | "Procaryotic cells, lacking nuclear membranes, plastids, mitochondria, and advanced [...] flagella"[^10] | blue-green algae (Cyanophyta), gliding bacteria (Myxobacteriae), "true" bacteria (Eubacteriae)|
+| Eukaryota    | Fungi   | Whittaker's kingdom established as a rejection of "the superficial resemblance of fungi to plants"[^3] and the observation that nutrition is derived from environmental absorption[^10] | Slime molds, species demonstrating sporing |
+| "            | Protista | "Primarily unicellular or colonial-unicellular organisms [...] with eucaryotic cells"[^10] | Ciliophora, Sarcodina, Sporozoa, Euglenophyta |
+| "            | Plantae | "Multicellular organisms with walled and frequently vacuolate eucaryotic cells and with photosynthetic pigments in plastids"[^10] | Algaes (including red and brown, but in different subkingdoms) |
+| "            | Animalia | "Multicellular organisms with wall-less eucaryotic cells lacking plastids and photosynthetic pigments. Nutrition primarily ingestive with digestion in an internal cavity"[^10] | Everything else...|
+
 In the early 1980s, John Corliss reviewed the work of both Margulis and Whittaker and tried to solve
-the question of cellular complexity by instead counting the number of “differentiated, functional tissues"
+the question of cellular complexity by instead counting the number of "differentiated, functional tissues"
 an organism exhibits, rather than just the boolean question of whether or not they are unicellular.
 Corliss describes plants and animals as having more than one type of tissue, whereas
 "protists, while showing multicellularity to varying
@@ -179,14 +189,35 @@ the taxonomic rank of **Domain**, superior to Kingdom.
 
 Whilst Whittaker had previously introduced the concept of a **Superkingdom** to differentiate
 between the Monera and the rest of the kingdoms, this distinction was rather naive.
-And so, Woese introduced the three domains of life [^7] [^3]:
+And so, Woese introduced the three domains of life [^3] [^7]:
 
-![]({{ site.url }}/public/posts/hide-and-seek/woese-4578-tree.png)
+![]({{ site.url }}/public/posts/hide-and-seek/woese-4578-tree.png)[^7]
+
+
+## A Very Brief and Biased Introduction to Current Taxonomy
+With rapidly moving continuous research in to molecular biology and genetics...
+...moving to maintain the integrity of a "tree" model by ensuring branches are monophyletic (*i.e.* that
+each branch contains only descendants of that species)
+
+| Domain       | Kingdom  | Description | Examples[^4] |
+|--------------|----------|-------------|--------------|
+| Bacteria     | Bacteria | ||
+| Archaea      | Archaea  | ||
+| Eukaryota    | Excavata | ||
+| "            | Amoebozoa| ||
+| "            | Opisthokonta| ||
+| "            | Rhizaria | ||
+| "            | Chromalveolata| ||
+| "            | Archaeplastida| ||
+
+![]({{ site.url }}/public/posts/hide-and-seek/simpson-rogers-cb-r964.png)[^10]
+
+
 
 Different sequence database began to create their own taxonomic classification structure
 
 
-
+### Where are the virii?
 
 
 
@@ -231,3 +262,5 @@ explains the phylogenetic taxonomy
 [^8]: M Ragan, *A third kingdom of eukaryotic life: history of an idea*, 1997.
 
 [^9]: Haeckel did not recognise Linnaeus' "mineral" kingdom as a kingdom of life.
+
+[^10]: RH Whittaker, *New concepts of kingdoms of organisms*, 1969.
