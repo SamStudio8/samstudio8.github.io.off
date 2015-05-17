@@ -243,7 +243,7 @@ Yet, even now. There is no consensus on what supergroups definitely exist, how e
 are classed at non-cellular... though ...there is support for adding a fourth domain of life for virii[^2]...
 
 
-<a name="uniprot-taxa"/>
+<a name="uniprot-taxa"></a>
 ## UniProtKB
 So how does this all relate to UniProt? The help documentation offloads the responsibility to the NCBI:
 
