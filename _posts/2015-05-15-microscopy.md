@@ -4,7 +4,7 @@ title: "Microscopy"
 ---
 
 The basement of the "old" biology building on campus is lined with beautiful microscopy images which
-I'd always been curious about. A few weeks ago I contacted the team responsible who were
+I'd always been curious about. A few weeks ago I contacted the [team responsible](https://www.aber.ac.uk/en/ibers/about-us/facilities/bioimaging/) who were
 kind enough to offer some of their time to show their laboratory and demonstrate some of the processes
 involved. The team also extended an offer (or rather, issued a challenge) to come back with something
 to image.
@@ -28,6 +28,7 @@ Below, samples tripping the light fantastique.
 
 ![]({{ site.url }}/public/posts/microscopy/fantastique.jpg)
 
+After coating, samples were immediately ready for loading in to the Hitachi S-4700 field emission scanning electron microscope.
 
 ## Pseudo-Wood
 First up; Lulzbot [Laywoo-D3](https://www.lulzbot.com/products/laywoo-d3-cherry-laywood-3mm-250g-coil-cc-products),
