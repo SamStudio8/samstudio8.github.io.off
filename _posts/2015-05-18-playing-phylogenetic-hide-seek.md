@@ -257,33 +257,33 @@ explains the phylogenetic taxonomy
 ### NCBI and the Eukaryotes
 NCBI lists the following as entries beneath the Eukaryota domain\superkingdom:
 
-| Name            | UniProtKB Rank† | Unauthoritative Supergroup‡ |
+| Name            | Rank† | Unauthoritative Supergroup‡ |
 |-----------------|----------------|------------|
-| Alveolata (alveolates) |  | Chromalveolata |
-| Amoebozoa |  | =Amoebozoa |
-| Apusozoa |  | ?[^4] |
-| Breviatea |  | Amoebozoa |
-| Centroheliozoa (centrohelids) |  | ?[^4] |
+| Alveolata (alveolates) | (Superphylum) | Chromalveolata |
+| Amoebozoa | (Phylum) | =Amoebozoa |
+| Apusozoa | (Phylum) | ?[^4] |
+| Breviatea | (Class) | Amoebozoa |
+| Centroheliozoa (centrohelids) | (Class) | ?[^4] |
 | Cryptophyta (cryptomonads) | CLASS | Chromalveolata |
-| Euglenozoa |  | Excavata |
-| Fornicata |  | Excavata |
+| Euglenozoa | (Phylum) | Excavata |
+| Fornicata | (Clade) | Excavata |
 | Glaucocystophyceae (glaucocystophytes) | CLASS | Archaeplastida |
-| Haptophyceae (coccolithophorids) |  | Chromalveolata |
+| Haptophyceae (coccolithophorids) | (Phylum/Division) | Chromalveolata |
 | Heterolobosea | CLASS | Excavata |
-| Jakobida |  | Excavata |
+| Jakobida | (Order) | Excavata |
 | Katablepharidophyta | CLASS | Chromalveolata |
 | Malawimonadidae | FAMILY | Excavata |
-| Opisthokonta |  | =Opisthokonta |
+| Opisthokonta | (Clade) | =Opisthokonta |
 | Oxymonadida (oxymonads) | ORDER | Excavata |
-| Parabasalia (parabasalids) |  | Excavata |
-| Rhizaria |  | =Rhizaria |
-| Rhodophyta (red algae) |  | Archaeplastida |
-| Stramenopiles (heterokonts) |  | Chromalveolata |
+| Parabasalia (parabasalids) | (Superclass) | Excavata |
+| Rhizaria | (Supergroup) | =Rhizaria |
+| Rhodophyta (red algae) | (Phylum) | Archaeplastida |
+| Stramenopiles (heterokonts) | (Phylum) | Chromalveolata |
 | Viridiplantae (green plants) | KINGDOM | Archaeplastida |
 | environmental samples | N/A | N/A |
 | unclassified eukaryotes | N/A | N/A |
 
-**†** A blank entry means *unranked*  
+**†** Parentheses indicate the entry was *unranked* by UniProtKB and a rank was interpreted from another source  
 **‡** There are no references for these classifications, I've just tried to make sense of where the most likely supergroup for each taxonomic entry lies
 
 * * *
