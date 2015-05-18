@@ -257,31 +257,33 @@ explains the phylogenetic taxonomy
 ### NCBI and the Eukaryotes
 NCBI lists the following as entries beneath the Eukaryota domain\superkingdom:
 
-| Name            | Rank     |
-|-----------------|----------|
-| Alveolata (alveolates) | unranked |
-| Amoebozoa | unranked |
-| Apusozoa | unranked |
-| Breviatea | unranked |
-| Centroheliozoa (centrohelids) | unranked |
-| Cryptophyta (cryptomonads) | CLASS |
-| Euglenozoa | unranked |
-| Fornicata | unranked |
-| Glaucocystophyceae (glaucocystophytes) | CLASS |
-| Haptophyceae (coccolithophorids) | unranked |
-| Heterolobosea | CLASS |
-| Jakobida | unranked |
-| Katablepharidophyta | CLASS |
-| Malawimonadidae | FAMILY |
-| Opisthokonta | unranked |
-| Oxymonadida (oxymonads) | ORDER |
-| Parabasalia (parabasalids) | unranked |
-| Rhizaria | unranked |
-| Rhodophyta (red algae) | unranked |
-| Stramenopiles (heterokonts) | unranked |
-| Viridiplantae (green plants) | KINGDOM |
-| environmental samples | - |
-| unclassified eukaryotes | - |
+| Name            | UniProtKB Rank | Unauthoritative Supergroup† |
+|-----------------|----------------|------------|
+| Alveolata (alveolates) | unranked | Chromalveolata |
+| Amoebozoa | unranked | =Amoebozoa |
+| Apusozoa | unranked | |
+| Breviatea | unranked | Amoebozoa |
+| Centroheliozoa (centrohelids) | unranked | |
+| Cryptophyta (cryptomonads) | CLASS | Chromalveolata |
+| Euglenozoa | unranked | Excavata |
+| Fornicata | unranked | Excavata |
+| Glaucocystophyceae (glaucocystophytes) | CLASS | Archaeplastida |
+| Haptophyceae (coccolithophorids) | unranked | Chromalveolata |
+| Heterolobosea | CLASS | Excavata |
+| Jakobida | unranked | Excavata |
+| Katablepharidophyta | CLASS | Chromalveolata |
+| Malawimonadidae | FAMILY | Excavata |
+| Opisthokonta | unranked | =Opisthokonta |
+| Oxymonadida (oxymonads) | ORDER | Excavata |
+| Parabasalia (parabasalids) | unranked | Excavata |
+| Rhizaria | unranked | =Rhizaria |
+| Rhodophyta (red algae) | unranked | Archaeplastida |
+| Stramenopiles (heterokonts) | unranked | Chromalveolata |
+| Viridiplantae (green plants) | KINGDOM | Archaeplastida |
+| environmental samples | - | - |
+| unclassified eukaryotes | - | - |
+
+**†** There are no references for these classifications, I've just tried to make sense of where the most likely supergroup for each taxonomic entry lies.
 
 * * *
 
