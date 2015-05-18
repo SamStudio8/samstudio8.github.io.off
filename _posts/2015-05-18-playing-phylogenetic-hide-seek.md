@@ -257,33 +257,34 @@ explains the phylogenetic taxonomy
 ### NCBI and the Eukaryotes
 NCBI lists the following as entries beneath the Eukaryota domain\superkingdom:
 
-| Name            | UniProtKB Rank | Unauthoritative Supergroup† |
+| Name            | UniProtKB Rank† | Unauthoritative Supergroup‡ |
 |-----------------|----------------|------------|
-| Alveolata (alveolates) | unranked | Chromalveolata |
-| Amoebozoa | unranked | =Amoebozoa |
-| Apusozoa | unranked | |
-| Breviatea | unranked | Amoebozoa |
-| Centroheliozoa (centrohelids) | unranked | |
+| Alveolata (alveolates) |  | Chromalveolata |
+| Amoebozoa |  | =Amoebozoa |
+| Apusozoa |  | ?[^4] |
+| Breviatea |  | Amoebozoa |
+| Centroheliozoa (centrohelids) |  | ?[^4] |
 | Cryptophyta (cryptomonads) | CLASS | Chromalveolata |
-| Euglenozoa | unranked | Excavata |
-| Fornicata | unranked | Excavata |
+| Euglenozoa |  | Excavata |
+| Fornicata |  | Excavata |
 | Glaucocystophyceae (glaucocystophytes) | CLASS | Archaeplastida |
-| Haptophyceae (coccolithophorids) | unranked | Chromalveolata |
+| Haptophyceae (coccolithophorids) |  | Chromalveolata |
 | Heterolobosea | CLASS | Excavata |
-| Jakobida | unranked | Excavata |
+| Jakobida |  | Excavata |
 | Katablepharidophyta | CLASS | Chromalveolata |
 | Malawimonadidae | FAMILY | Excavata |
-| Opisthokonta | unranked | =Opisthokonta |
+| Opisthokonta |  | =Opisthokonta |
 | Oxymonadida (oxymonads) | ORDER | Excavata |
-| Parabasalia (parabasalids) | unranked | Excavata |
-| Rhizaria | unranked | =Rhizaria |
-| Rhodophyta (red algae) | unranked | Archaeplastida |
-| Stramenopiles (heterokonts) | unranked | Chromalveolata |
+| Parabasalia (parabasalids) |  | Excavata |
+| Rhizaria |  | =Rhizaria |
+| Rhodophyta (red algae) |  | Archaeplastida |
+| Stramenopiles (heterokonts) |  | Chromalveolata |
 | Viridiplantae (green plants) | KINGDOM | Archaeplastida |
-| environmental samples | - | - |
-| unclassified eukaryotes | - | - |
+| environmental samples | N/A | N/A |
+| unclassified eukaryotes | N/A | N/A |
 
-**†** There are no references for these classifications, I've just tried to make sense of where the most likely supergroup for each taxonomic entry lies.
+**†** A blank entry means *unranked*  
+**‡** There are no references for these classifications, I've just tried to make sense of where the most likely supergroup for each taxonomic entry lies
 
 * * *
 
