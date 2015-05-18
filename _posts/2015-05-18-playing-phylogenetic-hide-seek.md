@@ -286,6 +286,27 @@ NCBI lists the following as entries beneath the Eukaryota domain\superkingdom:
 **†** Parentheses indicate the entry was *unranked* by UniProtKB and a rank was interpreted from another source  
 **‡** There are no references for these classifications, I've just tried to make sense of where the most likely supergroup for each taxonomic entry lies
 
+The reasoning for such a wide range of entries is lost on me but I suspect it boils down to needing to
+interface between multiple pre-existing databases that held their own taxonomy as well as attempting to
+keep up with multiple recent re-organisations of higher taxonomic structures. Thus several entries of
+"lower" rank such as Class, Order and even Family insulate changes of where such Classes, Orders and Families
+sit in the greater scheme of Phylas and Kingdom.
+
+## So, what are protozoa?
+I think it may be safe to conclude that the **protozoa** (or **protozoans**) consist of an incredibly
+diverse group of various micro-organisms and thus use of either term is potentially ambiguous.
+There appears to be wide ranging evidence existing to support phylogenetic separation of protozoans
+in to groups (with whatever taxonomic rank one wishes to use) exhibiting different evolutionary variation
+in their genomes.
+
+I guess my error was wanting to extract the idea of protozoa by their phenotype in a world where
+we now tend to organise life by genotype.
+
+I need to narrow down my own defintion of what we're looking for by researching
+what organisms are likely to actually appear in the dataset I am currently investigating.
+
+For example **Ciliates** (**Ciliophora**) and **Flagellates**, unicellular 
+
 * * *
 
 # tl;dr
