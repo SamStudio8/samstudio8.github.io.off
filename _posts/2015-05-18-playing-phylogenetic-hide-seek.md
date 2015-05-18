@@ -257,29 +257,31 @@ explains the phylogenetic taxonomy
 ### NCBI and the Eukaryotes
 NCBI lists the following as entries beneath the Eukaryota domain\superkingdom:
 
-* Alveolata (alveolates)
-* Amoebozoa
-* Apusozoa
-* Breviatea
-* Centroheliozoa (centrohelids)
-* Cryptophyta (cryptomonads)
-* Euglenozoa
-* Fornicata
-* Glaucocystophyceae (glaucocystophytes)
-* Haptophyceae (coccolithophorids)
-* Heterolobosea
-* Jakobida
-* Katablepharidophyta
-* Malawimonadidae
-* Opisthokonta
-* Oxymonadida (oxymonads)
-* Parabasalia (parabasalids)
-* Rhizaria
-* Rhodophyta (red algae)
-* Stramenopiles (heterokonts)
-* Viridiplantae (green plants)
-* environmental samples
-* unclassified eukaryotes
+| Name            | Rank     |
+|-----------------|----------|
+| Alveolata (alveolates) | unranked |
+| Amoebozoa | unranked |
+| Apusozoa | unranked |
+| Breviatea | unranked |
+| Centroheliozoa (centrohelids) | unranked |
+| Cryptophyta (cryptomonads) | CLASS |
+| Euglenozoa | unranked |
+| Fornicata | unranked |
+| Glaucocystophyceae (glaucocystophytes) | CLASS |
+| Haptophyceae (coccolithophorids) | unranked |
+| Heterolobosea | CLASS |
+| Jakobida | unranked |
+| Katablepharidophyta | CLASS |
+| Malawimonadidae | FAMILY |
+| Opisthokonta | unranked |
+| Oxymonadida (oxymonads) | ORDER |
+| Parabasalia (parabasalids) | unranked |
+| Rhizaria | unranked |
+| Rhodophyta (red algae) | unranked |
+| Stramenopiles (heterokonts) | unranked |
+| Viridiplantae (green plants) | KINGDOM |
+| environmental samples | - |
+| unclassified eukaryotes | - |
 
 * * *
 
