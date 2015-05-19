@@ -199,13 +199,31 @@ kingdoms within. And so, in his 1990 paper: *Towards a natural system of organis
 
 ![]({{ site.url }}/public/posts/hide-and-seek/woese-4578-tree.png)
 
-Woese doesn't make suggestions for what kingdoms should exist beneath these domains
-(other than archaea, which I will ignore here) anticipating that "analysis of the Eucarya
-will preserve the kingdoms Plantae, Animalia, and Fungi [...] and will replace Protista
-with a series of kingdoms corresponding to the various ancient protistan lineages".
+Woese didn't make suggestions for what kingdoms should exist beneath these domains
+(other than an outline for the archaea, which I will ignore here) anticipating that
+"analysis of the Eucarya will preserve the kingdoms Plantae, Animalia, and Fungi
+[...] and will replace Protista with a series of kingdoms corresponding to
+the various ancient protistan lineages".
 
-### The Sixth Kingdom
-...Thomas Cavalier-Smith proposed in 1998 an oft-used "six kingdom"
+### The Rise and Fall of the Nine Kingdoms of Eukaryota
+> Nine Kingdoms for the eukaryotes,  
+> Eighteen Phyla for the protists,  
+> But we were all deceived, for a definition of the protozoa, still could not be agreed.
+
+In 1981, a decade before the **Domain**, Thomas Cavalier-Smith published his own kingdom model.
+Initially sub-dividing the eukaryotes in to nine different groups and breaking Whittaker's
+Protista kingdom into three: the **Archezoa** (without mitochondria),
+**Chromista** (featuring chloroplasts with particular chlorophyll in the lumen)
+and the **Protozoa**, defined in this model primary by their phagotrophism[^12] but
+still somewhat seeming as a bin for whatever couldn't fit elsewhere.
+Just two years later, Cavalier-Smith had culled his eukaryotic kingdoms to just
+the *Animalia*, *Plantae*, *Fungi*, *Chromista* and *Protozoa*[^13].
+
+Cavalier-Smith revised the system multiple times throughout the 1990s and 2000s.
+
+In 1998, the kingdom
+
+
 
 ### Getting the Band Back Together: 21st Century Supergroups
 With continuing innovation fueling rapidly moving research, especially in the fields of
@@ -296,8 +314,10 @@ sit in the greater scheme of Phylas and Kingdom.
 I think it may be safe to conclude that the **protozoa** (or **protozoans**) consist of an incredibly
 diverse group of various micro-organisms and thus use of either term is potentially ambiguous.
 There appears to be wide ranging evidence existing to support phylogenetic separation of protozoans
-in to groups (with whatever taxonomic rank one wishes to use) exhibiting different evolutionary variation
-in their genomes.
+in to distinct groups (with whatever taxonomic rank one wishes to use) exhibiting different evolutionary
+variation in their genomes.
+
+Thus 
 
 I guess my error was wanting to extract the idea of protozoa by their phenotype in a world where
 we now tend to organise life by genotype.
@@ -333,3 +353,9 @@ For example **Ciliates** (**Ciliophora**) and **Flagellates**, unicellular
 [^9]: Haeckel did not recognise Linnaeus' "mineral" kingdom as a kingdom of life.
 
 [^10]: RH Whittaker, *New concepts of kingdoms of organisms*, 1969.
+
+[^11]: T Cavalier-Smith, *Kingdom Protozoa and Its 18 Phyla*, 1993.
+
+[^12]: T Cavalier-Smith, *Eukaryote kingdoms: Seven or nine?*, 1981. [Abstract only].
+
+[^13]: T Cavalier-Smith, *A revised six-kingdom system of life*, 1998.
