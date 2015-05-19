@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Playing Phylogenetic Hide and Seek with Protozoa [WIP]"
+title: "Playing Phylogenetic Hide and Seek with Protozoa"
 ---
 
 Amanda suggested that alongside archaeal, bacterial and fungal associated hydrolases,
@@ -9,7 +9,7 @@ No problem, I'll just get the taxonomy ID for protozoa and extract another datab
 from UniProtKB [as before]({% post_url 2015-04-24-trembling %}). Simple! Or so I thought...
 
 <p class="message">
-The rabbit hole is pretty deep on this one. Feel free to skip my multi-day exploration in to the history of protozoans and their taxonomy and meet me  <a href="#uniprot-taxa">on the other side</a>.
+The rabbit hole is pretty deep on this one. Feel free to skip my multi-day exploration in to the history of protozoans and their taxonomy and meet me <a href="#uniprot-taxa">on the other side</a>.
 </p>
 
 Classification of protozoa appears to be less clear than I had realised. UniProtKB
@@ -214,16 +214,19 @@ In 1981, a decade before the **Domain**, Thomas Cavalier-Smith published his own
 Initially sub-dividing the eukaryotes in to nine different groups and breaking Whittaker's
 Protista kingdom into three: the **Archezoa** (without mitochondria),
 **Chromista** (featuring chloroplasts with particular chlorophyll in the lumen)
-and the **Protozoa**, defined in this model primary by their phagotrophism[^12] but
+and the **Protozoa**, defined by their phagotrophism[^12] but
 still somewhat seeming as a bin for whatever couldn't fit elsewhere.
-Just two years later, Cavalier-Smith had culled his eukaryotic kingdoms to just
-the *Animalia*, *Plantae*, *Fungi*, *Chromista* and *Protozoa*[^13].
+Just two years later, Cavalier-Smith culled his eukaryotic kingdoms to
+the *Animalia*, *Plantae*, *Fungi*, *Chromista* and *Protozoa* (which now contained
+the relegated subkingdom *Archezoa*). Bacteria still had their own kingdom but now
+also contained the archaebacteria[^13].
 
-Cavalier-Smith revised the system multiple times throughout the 1990s and 2000s.
-
-In 1998, the kingdom
-
-
+In the following decades, Cavalier-Smith would revise his system multiple times as more
+genetic sequencing data became available for analysis.
+By 1993, Kingdom Protozoa had 18 phyla[^11] and as recently as 2010, Cavalier-Smith
+significantly revised the ordering of subkingdoms between the Protozoa and Chromista.
+As you'll see below, Cavalier-Smith's work serves as a significant foundation of the
+organisation of taxonomy today.
 
 ### Getting the Band Back Together: 21st Century Supergroups
 With continuing innovation fueling rapidly moving research, especially in the fields of
@@ -236,102 +239,140 @@ In 2004, Simpson and Roger published a review article, outlining six **Supergrou
 I have attempted to condense in to the table below[^4]. If, like me, however, you prefer
 pretty colour-coordinated diagrams, refer to the figure below the table instead.
 
-| Domain       | Kingdom  | Description[^4] | Examples[^4] |
+| Domain       | Group  | Description[^4] | Examples[^4] |
 |--------------|----------|-------------|--------------|
 | Bacteria     | Bacteria | Prokaryotic cells lacking a membrane-bound organelles and nucleus | - |
 | Archaea      | Archaea  | Like bacteria but demonstrating more complex RNA polymerases than bacteria (similar to eukaryotes), peptidoglycan does not appear in the cell wall and often appear in extreme environments (*e.g.* acidophiles, halophiles, hyperthermophiles), methanogens are classified as archaea | - |
-| Eukaryota    | Opisthokonta| Primarily predatory multicellular organisms | "animals and tree fungi as well as several unicellular groups, including the free-living choanoflagellates" |
-| "            | Amoebozoa| "Most of the cells that move and feed using broad or finger-like pseudopodia" ("false feet": temporary microtubule and filament structures), typically "heterotrophs that engulf other cells using their pseudopodia"| Classical amoebae and slime moulds | 
-| "            | Excavata | "unicellular eukaryotes, most of which are heterotrophic flagellates", "[m]any excavates have greatly modified mitochondria that are not used for oxidative phosphorylation" | Various groups of parasitic flagellate **protozoa** |
-| "            | Rhizaria | "unites a wide diversity of free-living unicellular organisms, many of which feed using fine ‘filose’ pseudopodia, together with some fungi-like plant parasites" | **Protist** groups including foraminifera (mostly marine-based shell-building amoeboid protists), radiolaria (ocean based protozoa with mineral-based skeletal structures) and includes "heterotrophic flagellates or amoebae that consume other microbes associated with surfaces" |
-| "            | Chromalveolata| Organisms created by secondary endosymbiosis (a eukaryote engulfs and enslaves another eukaryote containing a primary plastid) from a red algae origin | dinoflagellates (flagellate protists, mostly marine plankton), cryptophytes (freshwater algae with plastids), haptophytes and stramenopiles (*a.k.a.* Stramenopiles: algae, giant kelp, diatoms, plankton), alveolates (major grouping of **protozoa**) and apicomplexa (specialist parasites including plasmodia (causing malaria), toxoplasma, and cryptosporidium) |
+| Eukaryota    | Opisthokonta (Cavalier-Smith, 1987) | Primarily predatory multicellular organisms | "animals and tree fungi as well as several unicellular groups, including the free-living choanoflagellates" |
+| "            | Amoebozoa (Cavalier-Smith, 1998)| "Most of the cells that move and feed using broad or finger-like pseudopodia" ("false feet": temporary microtubule and filament structures), typically "heterotrophs that engulf other cells using their pseudopodia"| Classical amoebae and slime moulds | 
+| "            | Excavata (Cavalier-Smith, 2002) | "unicellular eukaryotes, most of which are heterotrophic flagellates", "[m]any excavates have greatly modified mitochondria that are not used for oxidative phosphorylation" | Various groups of parasitic flagellate **protozoa** |
+| "            | Rhizaria (Cavalier-Smith, 2002) | "unites a wide diversity of free-living unicellular organisms, many of which feed using fine ‘filose’ pseudopodia, together with some fungi-like plant parasites" | **Protist** groups including foraminifera (mostly marine-based shell-building amoeboid protists), radiolaria (ocean based protozoa with mineral-based skeletal structures) and includes "heterotrophic flagellates or amoebae that consume other microbes associated with surfaces" |
+| "            | Chromalveolata | Organisms created by secondary endosymbiosis (a eukaryote engulfs and enslaves another eukaryote containing a primary plastid) from a red algae origin | dinoflagellates (flagellate protists, mostly marine plankton), cryptophytes (freshwater algae with plastids), haptophytes and stramenopiles (*a.k.a.* Stramenopiles: algae, giant kelp, diatoms, plankton), alveolates (major grouping of **protozoa**) and apicomplexa (specialist parasites including plasmodia (causing malaria), toxoplasma, and cryptosporidium) |
 | "            | Archaeplastida (Plantae) | Organisms featuring "plastids (chloroplasts) that originated by primary endosymbiosis" (enslavement and genomic reduction of a prokaryotic cell) | Land plants, red and green algae and rare microscopic algae called glaucophytes |
 
 ![]({{ site.url }}/public/posts/hide-and-seek/simpson-rogers-cb-r964.png)
 
-Yet, even now. There is no consensus on what supergroups definitely exist, how exactly they are related and what species belong where.
+Yet, even now there is no consensus on what supergroups definitely exist,
+how exactly they are related and what species belong where. As recently as 2007,
+Burki et al. proposed the **SAR Supergroup** (which as of this year is now
+**Subkingdom Harosa**[^18]), suggesting the Stramenopiles, Alveolata and Rhizaria
+should be organised beneath one branch together.
 
-..It is now widely believed that Rhizaria belong with the Stramenopiles and the Alveolata
-
-### Where are the virii?
-
-*Evolution: Revisiting the Root of the Eukaryote Tree*
-
-...currently the domain model holds no virii (but they have to go somewhere...) as they
-are classed at non-cellular... though ...there is support for adding a fourth domain of life for virii[^2]...
-
+### [Woop Woop. I'm done.](http://www.adultswim.com/videos/fishcenter/)
+A later paper by Burki introduces the term **Megagroup**[^15]. At this point, I realised
+I've spent the best part of a week digging for an answer to my classification conundrum
+that likely does not exist. This is yet another side-quest or interesting avenue that
+I must turn back on to get back to the research that I should be doing...
 
 <a name="uniprot-taxa"></a>
-## UniProtKB
-So how does this all relate to UniProt? The help documentation offloads the responsibility to the NCBI:
-
+## Ready or not, here I come!
+### UniProtKB
+That was a lovely, confusing and borderline frustrating insight to the state of taxonomy Sam,
+but how does this help us get the
+protozoan-associated hydrolases? Who sets the taxonomic standard for TrEMBL and SwissProt?
+UniProt's help documentation quickly offloads the responsibility to the NCBI:
 
 <blockquote>The taxonomy database that is maintained by the UniProt group is based on the <a href="http://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy database</a>, which is supplemented with data specific to the UniProt Knowledgebase (UniProtKB). While the NCBI taxonomy is updated daily to be in sync with GenBank/EMBL-Bank/DDBJ [...]</br><footer>— <a href="http://www.uniprot.org/help/taxonomy">UniProt Help: Taxonomy</a></footer></blockquote>
 
-Chapter 4 of the [*NCBI Handbook*](http://www.ncbi.nlm.nih.gov/books/NBK21100/), *The Taxonomy Project*
-explains the phylogenetic taxonomy
-...Different sequence database began to create their own taxonomic classification structure
+Accoding to Chapter 4 of the [*NCBI Handbook*](http://www.ncbi.nlm.nih.gov/books/NBK21100/),
+**The NCBI Taxonomy Project** began in 1991 "to combine the many taxonomies that existed at the
+time into a single classification
+that would span all of the organisms represented in any of the GenBank sources databases". The idea
+was to solve the problem of duplicated, conflicting and uncomparable taxonomies maintained by the three
+big sequencing databases: GenBank, EMBL and DDBJ, who were each keeping their own modified
+classification system originally derived from Los Alamos National Lab by unifying the terminology used.
 
-### NCBI and the Eukaryotes
-NCBI lists the following as entries beneath the Eukaryota domain\superkingdom:
+Six years of curation later, both EMBL and DDBJ switched to adopt the NCBI taxonomic standard;
+SwissProt followed suit in 2001.
 
-| Name            | Rank† | Unauthoritative Supergroup‡ |
+### NCBI's 21 Structures of the Eukaryotes
+So, let's take a look at NCBI's taxonomy tree. As of May 2015 the following appear as
+entries beneath the Eukaryota <strike>domain</strike> <strike>superkingdom</strike>[^14] top-level group[^16]:
+
+| Name            | Rank† ([^15]) | Unauthoritative Supergroup‡ |
 |-----------------|----------------|------------|
 | Alveolata (alveolates) | (Superphylum) | Chromalveolata |
 | Amoebozoa | (Phylum) | =Amoebozoa |
-| Apusozoa | (Phylum) | ?[^4] |
+| Apusozoa | (Subphylum) | ?[^4] |
 | Breviatea | (Class) | Amoebozoa |
-| Centroheliozoa (centrohelids) | (Class) | ?[^4] |
-| Cryptophyta (cryptomonads) | CLASS | Chromalveolata |
-| Euglenozoa | (Phylum) | Excavata |
-| Fornicata | (Clade) | Excavata |
-| Glaucocystophyceae (glaucocystophytes) | CLASS | Archaeplastida |
-| Haptophyceae (coccolithophorids) | (Phylum/Division) | Chromalveolata |
+| Centroheliozoa (centrohelids) | (Class Centrohelea) | ?[^4] |
+| Cryptophyta (cryptomonads) | CLASS (Class Cryptophyceae) | Chromalveolata |
+| Euglenozoa | (Infrakingdom) | Excavata |
+| Fornicata | (?) | Excavata |
+| Glaucocystophyceae (glaucocystophytes) | CLASS (Class Glaucophyceae) | Archaeplastida |
+| Haptophyceae (coccolithophorids) | (Phylum Haptophyta,<br/>== Class Coccolithophyceae/Prymnesiophyceae) | Chromalveolata |
 | Heterolobosea | CLASS | Excavata |
 | Jakobida | (Order) | Excavata |
-| Katablepharidophyta | CLASS | Chromalveolata |
+| Katablepharidophyta | CLASS (Order Katablepharida) | Chromalveolata |
 | Malawimonadidae | FAMILY | Excavata |
-| Opisthokonta | (Clade) | =Opisthokonta |
+| Opisthokonta | (Supergroup) | =Opisthokonta |
 | Oxymonadida (oxymonads) | ORDER | Excavata |
-| Parabasalia (parabasalids) | (Superclass) | Excavata |
-| Rhizaria | (Supergroup) | =Rhizaria |
+| Parabasalia (parabasalids) | (?) | Excavata |
+| Rhizaria | (Infrakingdom) | =Rhizaria |
 | Rhodophyta (red algae) | (Phylum) | Archaeplastida |
-| Stramenopiles (heterokonts) | (Phylum) | Chromalveolata |
-| Viridiplantae (green plants) | KINGDOM | Archaeplastida |
+| Stramenopiles (heterokonts) | (Superphylum Heterokonta == Supergroup Stramenopiles) | Chromalveolata |
+| Viridiplantae (green plants) | KINGDOM (Subkingdom) | Archaeplastida |
 | environmental samples | N/A | N/A |
 | unclassified eukaryotes | N/A | N/A |
 
-**†** Parentheses indicate the entry was *unranked* by UniProtKB and a rank was interpreted from another source  
-**‡** There are no references for these classifications, I've just tried to make sense of where the most likely supergroup for each taxonomic entry lies
+**†** Parentheses indicate the entry was *unranked* by UniProtKB and a rank was interpreted from another source[^15]  
+**‡** There are no references for these classifications, I've just tried to make sense of where the most likely supergroup for each taxonomic entry lies, `?` indicates Simpson and Roger were unable to fit this entry in their 2004 model.
 
-The reasoning for such a wide range of entries is lost on me but I suspect it boils down to needing to
-interface between multiple pre-existing databases that held their own taxonomy as well as attempting to
-keep up with multiple recent re-organisations of higher taxonomic structures. Thus several entries of
-"lower" rank such as Class, Order and even Family insulate changes of where such Classes, Orders and Families
-sit in the greater scheme of Phylas and Kingdom.
+Confusingly, most of the 21 entries are not even of the same taxonomic rank. The reasoning for so
+many "unorganised" entries is lost on me and I can't seem to locate more
+information on the methods used to organise taxonomy from NCBI. For most of the entries,
+UniProt's corresponding metadata does not even contain a taxonomic rank. I've thus
+<strike>lazily</strike> inferred missing ranks (in parentheses) from <strike>WikiSpecies</strike>[^17]
+Ruggiero et al.[^18]. Regardless, the footer of every page of the NCBI taxonomy database is adorned with:
 
-## So, what are protozoa?
-I think it may be safe to conclude that the **protozoa** (or **protozoans**) consist of an incredibly
-diverse group of various micro-organisms and thus use of either term is potentially ambiguous.
-There appears to be wide ranging evidence existing to support phylogenetic separation of protozoans
-in to distinct groups (with whatever taxonomic rank one wishes to use) exhibiting different evolutionary
-variation in their genomes.
+<blockquote>
+<b>Disclaimer</b>: The NCBI taxonomy database is not an authoritative source for nomenclature or classification - please consult the relevant scientific literature for the most reliable information.
+</blockquote>
 
-Thus 
+So perhaps any suggestion that the entries provide anything beyond an agreed set of boxes in
+which to place organisms in a database is invalid. Though the help pages confirm the schema
+attempts to maintain a phylogenetic taxonomy, my impression is that the list purposefully
+contains "lower" ranks such as *Class*, *Order* and even *Family* both to potentially avoid
+having to keep up with
+frequent re-shuffles and re-naming of the (Infra-, Sub-, Super-) Groups, Kingdoms and Phyla but
+also are left broken as a result of some of the changes that have already happened.
+For example, I can't find a mention of either the *Fornicata* or *Parabasalia* in
+Ruggiero et al., but one cannot simply expunge records from a widely used taxonomy database
+without trouble[^19]!
 
-I guess my error was wanting to extract the idea of protozoa by their phenotype in a world where
-we now tend to organise life by genotype.
+## So... What are protozoa?
+I... I don't know.
 
-I need to narrow down my own defintion of what we're looking for by researching
-what organisms are likely to actually appear in the dataset I am currently investigating.
+I think it is safe to conclude that the **protozoa** (or **protozoans**) consist of an incredibly
+diverse group of various micro-organisms. There appears to be wide ranging evidence to
+support phylogenetic separation of protozoans in to distinct groups (with whatever taxonomic
+rank one wishes to use), each exhibiting different evolutionary variation in their genomes. Whilst it
+appears that the term is a valid and widely accepted term for unicellular eukaryotes, given the
+current state of their broken-up taxonomy (and the ambiguous meaning of the terms in the past),
+I would discourage use of the terms when it is possible to substitute a more specialised
+term for organisms of interest.
 
-For example **Ciliates** (**Ciliophora**) and **Flagellates**, unicellular 
+For example **Ciliates** have their own phylum **Phylum Ciliophora**[^15]) and a
+[quick search for Ciliophora-associated hydrolases](http://www.uniprot.org/uniprot/?query=taxonomy%3A%22Ciliophora+%5B5878%5D%22+AND+ec%3A3.*&sort=score) returns 1,691 records.
+
+## Conclusion
+The protozoa have had a long and muddled history and my bet is they will continue to do so
+as further comparative phylogenomics studies are completed. It's worth noting that phylogenomics
+is still a field of scientific endeavour in itself, evolving and adapting to new evidence as other
+fields (including my own) move alongside it. For the purpose of getting on with the study of our own
+fields it may have been necessary to find a compromise between having the most up-to-date database
+and having a database that stays constant enough to know where things actually are.
+
+In the end, I guess expecting the NCBI (or anyone else) to hold a concrete consensus on the
+organisation of life was naive and possibly reflects the fact that I'm still more of a Computer Scientist
+than Microbiologist. Here was me thinking we'd pretty much classified all of life already!
 
 * * *
 
 # tl;dr
-* Protozoa appears to have become a somewhat ambiguous and confusing term over the past few centuries and doesn't seem to really mean anything anymore.
-* Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy.
+* Protozoa appears to have become a somewhat ambiguous and confusing term over the past few centuries and is applied to a vast number of different species which have now been split across the tree of life.
+* I need to go back to original sample and find out what "protozoa" it might contain to try and conduct more specific searches.
+* Even today, we still can't agree on what to call things and where they belong in a taxonomy, or even how best to present that taxonomy. But that's just how science works.
 
 
 [^1]: Mark A. Ragan, *Trees and networks before and after Darwin*, 2009.
@@ -359,3 +400,15 @@ For example **Ciliates** (**Ciliophora**) and **Flagellates**, unicellular
 [^12]: T Cavalier-Smith, *Eukaryote kingdoms: Seven or nine?*, 1981. [Abstract only].
 
 [^13]: T Cavalier-Smith, *A revised six-kingdom system of life*, 1998.
+
+[^14]: I'm unclear on whether the NCBI have even officially adopted either of these two terms.
+
+[^15]: Fabien Burki et al., *Phylogenomics Reshuffles the Eukaryotic Supergroups*, 2007.
+
+[^16]: With "supergroups" and now "megagroups" being used in modern literature, I should have tread carefully even with the word "group". But it's too late for that now.
+
+[^17]: I'm sorry.
+
+[^18]: Michael Ruggiero et al., *A Higher Level Classification of All Living Organisms*, 2015.
+
+[^19]: Let's not forget the confusion that happened [last time]({% post_url 2015-04-24-trembling %}) a database removed a significant number of records without obvious warning.
