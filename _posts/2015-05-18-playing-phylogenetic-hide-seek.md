@@ -300,7 +300,7 @@ entries beneath the Eukaryota <strike>domain</strike> <strike>superkingdom</stri
 | Euglenozoa | (Infrakingdom) | Excavata |
 | Fornicata | (?) | Excavata |
 | Glaucocystophyceae (glaucocystophytes) | CLASS (Class Glaucophyceae) | Archaeplastida |
-| Haptophyceae (coccolithophorids) | (Phylum Haptophyta,<br/>== Class Coccolithophyceae/Prymnesiophyceae) | Chromalveolata |
+| Haptophyceae (coccolithophorids) | (Phylum Haptophyta,<br/>== Class Coccolithophyceae<br/>== Class Prymnesiophyceae) | Chromalveolata |
 | Heterolobosea | CLASS | Excavata |
 | Jakobida | (Order) | Excavata |
 | Katablepharidophyta | CLASS (Order Katablepharida) | Chromalveolata |
@@ -310,7 +310,7 @@ entries beneath the Eukaryota <strike>domain</strike> <strike>superkingdom</stri
 | Parabasalia (parabasalids) | (?) | Excavata |
 | Rhizaria | (Infrakingdom) | =Rhizaria |
 | Rhodophyta (red algae) | (Phylum) | Archaeplastida |
-| Stramenopiles (heterokonts) | (Superphylum Heterokonta == Supergroup Stramenopiles) | Chromalveolata |
+| Stramenopiles (heterokonts) | (Superphylum Heterokonta<br/>== Supergroup Stramenopiles) | Chromalveolata |
 | Viridiplantae (green plants) | KINGDOM (Subkingdom) | Archaeplastida |
 | environmental samples | N/A | N/A |
 | unclassified eukaryotes | N/A | N/A |
