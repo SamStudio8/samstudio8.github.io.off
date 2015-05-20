@@ -355,6 +355,24 @@ term for organisms of interest.
 For example **Ciliates** have their own phylum **Phylum Ciliophora**[^15]) and a
 [quick search for Ciliophora-associated hydrolases](http://www.uniprot.org/uniprot/?query=taxonomy%3A%22Ciliophora+%5B5878%5D%22+AND+ec%3A3.*&sort=score) returns 1,691 records.
 
+## ...and where the hell are the virii?
+Already far outside the scope of what I wanted to read up on, I'll save you and myself the history of viral
+classification schemes and the varying opinions still around today. Suffice to say this is unsurprisingly
+another topic that the community at large has not reached an agreement on. Virii are typically
+excluded from the "tree of life" and to many are "non-cellular life" (often explained
+due to their inability to replicate on their own -- they must hijack a cell's machinery to do it for
+them) and thus have no place in the tree. Some argue that as evidence points to Viruses co-existing
+with organisms throughout evolutionary history they deserve representation as a supergroup or domain of
+their own[^2], indeed viruses are a significant
+contributor to genetic diversity via their role in horizontal gene transfer (transferring genes from
+one organism to another (regardless of species) without 'traditional' reproduction).
+
+Ultimately whether a virus is truly alive or not is somebody else's problem, they still possess sequence
+data and that has to be organised somewhere. The NCBI database has chosen  around this by adding a
+top-level taxonomic entry for "Viruses" with a structure beneath that appears to follow or emulate the
+**Baltimore Classification** system; where virii are organised in to one of seven classes based on
+how they store their genome and their mode of transcription.
+
 ## Conclusion
 The protozoa have had a long and muddled history and my bet is they will continue to do so
 as further comparative phylogenomics studies are completed. It's worth noting that phylogenomics
@@ -362,6 +380,11 @@ is still a field of scientific endeavour in itself, evolving and adapting to new
 fields (including my own) move alongside it. For the purpose of getting on with the study of our own
 fields it may have been necessary to find a compromise between having the most up-to-date database
 and having a database that stays constant enough to know where things actually are.
+
+Indeed, on the subject of compromise, Ruggiero et al. describe their work as a "**consensus classification**";
+a "neither phylogenetic nor evolutionary" system that makes "practical compromises" to accomodate many
+wide ranging opinions and available evidence, primarily with the goal of providing a "backbone" for
+databases and collections[^15].
 
 In the end, I guess expecting the NCBI (or anyone else) to hold a concrete consensus on the
 organisation of life was naive and possibly reflects the fact that I'm still more of a Computer Scientist
