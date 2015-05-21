@@ -3,11 +3,13 @@ layout: default
 title: Home
 ---
 
+{% include disqus-count.html %}
+
 <div class="posts">
   {% for post in paginator.posts %}
   <div class="post">
     <h1 class="post-title">
-      <a href="{{ post.url }}">
+      <a href="{{ post.url }}#disqus-thread">
         {{ post.title }}
       </a>
     </h1>
