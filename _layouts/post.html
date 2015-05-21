@@ -9,7 +9,8 @@ layout: default
 </div>
 
 <div class="comments">
-<a href="http://samstudio8.github.io{{ page.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}"></a>
+  {% include disqus.html %}
+  <a href="http://samstudio8.github.io{{ page.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}"></a>
 </div>
 
 <div class="related">
