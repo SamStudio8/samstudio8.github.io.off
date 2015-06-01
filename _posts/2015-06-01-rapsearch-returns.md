@@ -18,7 +18,7 @@ almost 80% of all the hydrolases in UniProt already!
 [I mentioned previously]({% post_url 2015-04-27-what-am-i-doing %}) that we had started using `rapsearch` as an
 alternative to `BLAST` due to its execution speed. In fact `rapsearch` was capable of searching through all ~700K
 limpet contig sequences (totalling ~433 megabases) against the largest of the hydrolase databases I had created
-(~1.1M sequences, 408 megabases) without the need to shard either the contigs, or the database --
+(~1.1M sequences, ~408 megabases) without the need to shard either the contigs, or the database --
 in a matter of **hours** as opposed to *weeks* (or as it has felt, forever).
 
 Given the primary reason for taking particular taxa-associated records was to reduce cluster time, but
