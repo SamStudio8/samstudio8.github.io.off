@@ -113,7 +113,7 @@ else:
 * One should be careful to remember the difference between testing identity (`is`) and equality (`==`) in Python.
 * One should probably be more careful to avoid problems like this in the first place by using the language constructs properly...
 
-[^1] Although:
+[^1]: Although:
     
     ```python
     True is not np.bool(True)
