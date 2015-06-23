@@ -114,7 +114,7 @@ else:
 * One should probably be more careful to avoid problems like this in the first place by using the language constructs properly...
 
 [^1] Although:
-```python
-True is not np.bool(True)
->>> False
-```
+    ```python
+    True is not np.bool(True)
+    >>> False
+    ```
