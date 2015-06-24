@@ -81,9 +81,11 @@ No pressure.
 * * *
 
 #tl;dr
-* I live in Cambridge until the end of July, please don't try and find me in my office.
+* I live in Cambridge until the end of July, please don't try and find me in my office.[^3]
 
 
 [^1]: As soon as I had my foot in the door I refused to take it away.
 
 [^2]: The sequencing was conducted at different depths between the two standalone studies and it was suspected this may introduce some bias I didn't want to deal with.
+
+[^3]: Not that I'm ever in there, anyway.
