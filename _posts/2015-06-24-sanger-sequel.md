@@ -4,7 +4,7 @@ title: "Sanger Sequel"
 ---
 
 In a change to scheduled programming, days after touching down from my holiday (which needs a post of its own)
-I moved to spend the next few weeks back at the
+I moved[^4] to spend the next few weeks back at the
 [Wellcome Trust Sanger Institute](https://www.sanger.ac.uk/) in Cambridgeshire. I interned here
 previously in 2012 and it's still like working at a science-orientated Google thanks to the
 overwhelming amount of work being done and the crippling inferiority complex that comes
@@ -89,3 +89,5 @@ No pressure.
 [^2]: The sequencing was conducted at different depths between the two standalone studies and it was suspected this may introduce some bias I didn't want to deal with.
 
 [^3]: Not that I'm ever in there, anyway.
+
+[^4]: For what is *at least* the 10th major house move I've made since heading out to university.
