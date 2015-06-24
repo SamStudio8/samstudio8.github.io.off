@@ -54,7 +54,7 @@ I also recall having some major trouble with needing to re-align the failed samp
 samples having failed, were not subjected to all the processing of their QC approved counterparts, which we'll need
 to apply ourselves manually, presumably painstakingly.
 
-**Prepare data for the pipeline**
+**Prepare data for the pipeline**  
 The nail in the coffin for the first stab at this project was the data preparation: `samtools merge` was just
 woefully slow in handling the scale of data that I had, in particular struggling to merge many thousands of files
 at once. A significant amount of project time was spent tracking and patching memory leaks and contributing other
