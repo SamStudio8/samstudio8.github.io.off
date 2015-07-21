@@ -17,7 +17,7 @@ But after triple checking the configuration stanza, everything seemed to be corr
 What's more is the site was definitely receiving traffic and I could access it outside of work without error.
 
 I dismissed the problem as a quirk of Sanger's network which has been known to do funny
-things with web cache in the past[^1], until a bug report from Germany rolled in. The same
+things with web cache in the past, until a bug report from Germany rolled in. The same
 website was not accessible from their home ISP on the continent.
 
 "It works for me", I thought, and clearly for the majority of other users too. I could access
@@ -65,5 +65,4 @@ NameVirtualHost [<IPv6 Address>]:80
 #tl;dr
 * I forgot to configure `apache` to serve content over IPv6 for SSL traffic, things went wrong.
 
-[^1]: Those square brackets aren't to be interpreted as "optional", they are how `apache`
-expects an IPv6 address to be formatted.
+[^1]: Those square brackets aren't to be interpreted as "optional", they are how `apache` expects an IPv6 address to be formatted.
