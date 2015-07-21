@@ -38,7 +38,7 @@ Bollocks. I'd dun goofed the IPv6 configuration, pretty badly. Whilst the server
 "IPv6 ready": it can be pinged and the world's DNS servers know how to reach it over
 the protocol, I'd never told `apache` it is expected to be able to serve content over SSL over IPv6.
 
-After all the investigatory effort, to fix I just needed to update the `apache` ports configuration
+After all the investigatory effort, the fix just consisted of a minor update the `apache` ports configuration
 to add a new `NameVirtualHost` directive for the server's IPv6 address on both ports 80 and 443:
 
 ```
@@ -52,7 +52,7 @@ NameVirtualHost [<IPv6 Address>]:80
 </IfModule>
 ```
 
-...and also add the IPv6 address[^1] alongside the IPv4 to each of my `VirtualHost`:
+...and also to add the IPv6 address[^1] alongside the IPv4 to each of the `VirtualHost`:
 
 ```
 <VirtualHost <IPv4 Address>:443 [<IPv6 Address>]:443>
