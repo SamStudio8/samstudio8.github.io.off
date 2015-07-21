@@ -68,6 +68,18 @@ the previous region returned and both Josh and I could breathe a sigh of relief.
 I plotted a lovely [`Circos`](http://circos.ca/) graph too:
 ![]({{ site.url }}/public/posts/bridgebuilding/circos.png)
 
+You're looking at a circular representation of chromosome 3 of the human genome. Moving from outside to inside you see: cytogenetic banding, a scatter plot of counts of variants at 1Mbp regions over the whole-genome study,
+a heatmap encoding the scatter plot, "Goldiblocks" where those variant counts fall within the desired
+±10 percentiles of the median, followed by a second ring of "Goldiblocks" where variant counts fall
+in the top 5 percentiles of the seperate chip study, a heatmap
+and scatter plot of variants seen at the corresponding 1Mbp regions in the chip study.
+
+Finally, the sparse yellow triangles along the
+outer circle pinpoint the "Goldilocks" candidate regions: where the inner "Goldiblocks" overlap,
+representing a region's match to both criteria. Ultimately we used the candidate between 46-47Mbp on this
+chromosome. Note in particular the very high number of variants on the chip study at that region, allowing
+a very high number of sites at which to compare the results of our repeated analysis pipeline.
+
 **Confirm data integrity**  
 > The data has been sat around in the way of actual in-progress science for the best part of a year and has possibly been moved or "tidied away".
 
