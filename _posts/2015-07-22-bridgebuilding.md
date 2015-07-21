@@ -65,6 +65,9 @@ would make the original region come back and make my terrible mistake go away bu
 I'd convinced myself it made statistical sense. Whatever the reason, under a census with the new criteria
 the previous region returned and both Josh and I could breathe a sigh of relief.
 
+I plotted a lovely [`Circos`](http://circos.ca/) graph too:
+![]({{ site.url }}/public/posts/bridgebuilding/circos.png)
+
 **Confirm data integrity**  
 > The data has been sat around in the way of actual in-progress science for the best part of a year and has possibly been moved or "tidied away".
 
@@ -78,9 +81,9 @@ samples having failed, were not subjected to all the processing of their QC appr
 to apply ourselves manually, presumably painstakingly.
 
 'Painstakingly' could probably be described as an understatement now. For the past few weeks I've spent
-most of my time overseeing the construction of bridges.
+most of my time overseeing the construction of bridges. More on what that involves after a more detailed
+introduction to what we are trying to achieve:
 
-# Bridgebuilding
 ## Background
 ### Reminder: Project Goal
 As briefly explained in my last post, the goal of our experiment is to characterise, in terms of quality
@@ -126,7 +129,7 @@ never told about their unfortunate siblings. The key is that time and resources 
 perceivably crappy data through post-sequencing finishing pipelines.
 
 However for the purpose of our analysis pipeline, we want to perform a leave-one-out analysis for **all**
-lanelets (good and bad) and measure the effect caused by their absence. This in itself poses two main issues:
+lanelets (good and bad) and measure the effect caused by their absence. This in itself poses some issues:
 
 * **Failed lanelets aren't polished**  
 We must push all lanelets that have failed through the same process as their passing counterparts such that they can be treated equally during the leave-one-out analysis. *i.e.* We can't just use the failed lanelets as they are because we won't be able to discern whether they are bad because they are "bad" or just because they haven't been pre-processed like the others.
@@ -135,18 +138,37 @@ We must push all lanelets that have failed through the same process as their pas
 Good lanelets compose samples, bad lanelets are ignored. For any sample that contained one or more failed
 lanelets, we must regenerate the improved sample file.
 
+* **Polished lanelets are temporary**
+Improved samples are the input to most downstream analysis, nothing ever looks at the raw lanelet data.
+Once the appropriate (good) processed lanelets are magically merged together to create an improved sample,
+those processed lanelets are not kept around. Only raw lanelets are kept on ice and only improved samples
+are kept for analysis. We'll need to regenerate them for all passed lanelets that appear in a sample
+with at least one failed lanelet.
+
 ### The Data
+The study of interest yields 9508 lanelets which compose 2932 samples, actual people. Our pipeline calls
+for the "comparison to a known result". The reason we can make such a comparison is because a subset of
+these 2932 participants had their DNA analysed with a different technology called a "SNP chip" (or array).
+Rather than whole genome sequencing, very specific positions of interest in a genome can be called with
+higher confidence. 903 participants were genotypes with both studies, yielding 2846 lanelets.
 
-| Source                          | Lanelets | Samples |
-|---------------------------------|----------|---------|
-| All                             | 9508     | 2932    |
-| Overlapping                     | 2846     | 903     |
-| ...of which failed partially    | 339      | 229     |
-| ...of which failed entirely     | 15       | 5       |
-|---------------------------------|----------|---------|
+Of these 903 samples; 229 had at least one lanelet (but not all) fail quality control and 5 had all
+associated lanelets fail. Having read that, this is tabulated for convenience below:
 
 
+| Source                                   | Lanelets | Samples |
+|------------------------------------------|----------|---------|
+| All                                      | 9508     | 2932    |
+| Overlapping                              | 2846     | 903     |
+| ...of which failed partially             | 339      | 229     |
+| ...of which failed entirely              | 15       | 5       |
 
+But we can't just worry about failures. For our purposes, we need the improved samples
+to include the failed lanelets. To rebuild those 229 samples that contain a mix of both passes and fails,
+we must pull all associated lanelets; all 855. Including the 15 from the 5 samples that failed entirely,
+we have a total of **870** lanelets to process and graduate to full-fledged samples.
+
+## Bridgebuilding
 
 Unknown to me, back in 2014 while I was frantically finishing the write-up of my thesis, Josh prepared
 a `Makefile` with the purpose of carrying out one of the more difficult tasks of the project. 
