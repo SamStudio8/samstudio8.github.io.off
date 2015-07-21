@@ -80,9 +80,9 @@ to apply ourselves manually, presumably painstakingly.
 'Painstakingly' could probably be described as an understatement now. For the past few weeks I've spent
 most of my time overseeing the construction of bridges.
 
-## Bridgebuilding
-### Background
-#### Reminder: Project Goal
+# Bridgebuilding
+## Background
+### Reminder: Project Goal
 As briefly explained in my last post, the goal of our experiment is to characterise, in terms of quality
 what a "bad" sample *actually* is. The aim would be to then use this to train a machine learning algorithm
 to identify future "bad" samples and prevent a detrimental effect on downstream anaylsis.
@@ -95,7 +95,7 @@ as good or bad based based on whether the accuracy of a particular run improved 
 However, the explanation is somewhat oversimplified but to get more in depth, we'll first have to introduce
 some jargon.
 
-#### Terminology: Samples, Lanes and Lanelets
+### Terminology: Samples, Lanes and Lanelets
 <blockquote>A <b>sample</b> is a distinct DNA specimen extracted from a particular person. For the purpose of sequencing,
 samples are pipetted in to a flowcell – a glass slide containing a series of very
 thin tubules known as <b>lanes</b>. It is throughout these lanes that the chemical reactions involved in sequencing
@@ -111,14 +111,14 @@ in a sequencer. So, it is in fact *lanelets* that we perform quality control on 
 a machine learning classifier for. Why not just make the distinction to begin with? Well, merely because
 it's often easier to tell someone the word sample when giving an overview of the project!
 
-#### Terminology: Sample Improvement
+### Terminology: Sample Improvement
 A sample is typically multiplexed through and across many lanes, potentially on different flowcells.
 Each aggregation of a particular sample in a single lane is a lanelet and thus these lanelets effectively
 compose the sample. Thus when one talks about "a sample", in terms of post-sequencing data, we're looking
 at a cleverly combined concoction of all the lanelets that pertain to that sample.
 
-### Unsimplifying
-#### The Problem of Quality
+## Unsimplifying
+### The Problem of Quality
 When Sanger's current quality control system deems that a lanelet has "failed" it's kicked to the roadside
 and dumped in a database for posterity, potentially in the hope of being awakened by a naive undergraduate
 student asking questions about quality. Lanelets that have "passed" are polished up and taken care of and
@@ -134,6 +134,16 @@ We must push all lanelets that have failed through the same process as their pas
 * **Failed lanelets are dropped during improvement**  
 Good lanelets compose samples, bad lanelets are ignored. For any sample that contained one or more failed
 lanelets, we must regenerate the improved sample file.
+
+### The Data
+
+| Source                          | Lanelets | Samples |
+|---------------------------------|----------|---------|
+| All                             | 9508     | 2932    |
+| Overlapping                     | 2846     | 903     |
+| ...of which failed partially    | 339      | 229     |
+| ...of which failed entirely     | 15       | 5       |
+|---------------------------------|----------|---------|
 
 
 
