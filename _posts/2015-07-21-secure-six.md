@@ -4,7 +4,7 @@ title: "Securing your Six"
 excerpt: "Sam finally realises his `apache2` stack is not working over IPv6."
 ---
 
-As a financially constrainted student, like many others, I use `apache`'s
+As a financially constrained student, like many others, I use `apache`'s
 [support for Server Name Indication (SNI)](https://wiki.apache.org/httpd/NameBasedSSLVHostsWithSNI)
 to serve multiple SSL domains from one IP. I'm somewhat competent and the setup seems to work for
 all of my domains. Yet, some time ago I tried to access one of my `VirtualHosts` from work over SSL
