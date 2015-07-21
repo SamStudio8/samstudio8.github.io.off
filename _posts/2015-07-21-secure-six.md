@@ -26,7 +26,7 @@ I put it down to some weird quirk of Germany.
 
 A little while later, I found that this particular website was still unaccessible from work.
 Forcing a security exemption, the content downloaded is for the domain the certificate is for[^2].
-Now apparently far beyond any reasonable cache time, I figured something must really be wrong.
+Now far beyond any reasonable cache time, I figured something must really be wrong.
 
 I scoured access and error logs, trying to find something obvious. I focused on the peculiar nature
 of how other SSL protected domains worked fine and yet this one did not. I altered the `LogFormat` to
@@ -65,6 +65,7 @@ NameVirtualHost [<IPv6 Address>]:80
 
 #tl;dr
 * I forgot to configure `apache` to serve content over IPv6 for SSL traffic, things went wrong.
+* I configured `apache` with a `NameVirtualHost` for the server's IPv6 address and things are no longer wrong.
 
 [^1]: Those square brackets aren't to be interpreted as "optional", they are how `apache` expects an IPv6 address to be formatted.
 
