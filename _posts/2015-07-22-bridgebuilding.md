@@ -106,7 +106,34 @@ of a sample (as it will still be sequenced as part of another lane).
 The more abstract of the definitions, a <b>lanelet</b> is the aggregate read of all clusters of a particular sample in a
 single lane.</br><footer>— Sam Nicholls, <a href="https://github.com/SamStudio8/frontier-dissertation"><i>Application of Machine Learning Techniques to Next Generation Sequencing Quality Control</i></a>. Aberystwyth University. 2014.</footer></blockquote>
 
+**Samples** are made from **lanelets**, which are gained as a result of sequencing over **lanes**
+in a sequencer. So, it is in fact *lanelets* that we perform quality control on and thus want to create
+a machine learning classifier for. Why not just make the distinction to begin with? Well, merely because
+it's often easier to tell someone the word sample when giving an overview of the project!
 
+#### Terminology: Sample Improvement
+A sample is typically multiplexed through and across many lanes, potentially on different flowcells.
+Each aggregation of a particular sample in a single lane is a lanelet and thus these lanelets effectively
+compose the sample. Thus when one talks about "a sample", in terms of post-sequencing data, we're looking
+at a cleverly combined concoction of all the lanelets that pertain to that sample.
+
+### Unsimplifying
+#### The Problem of Quality
+When Sanger's current quality control system deems that a lanelet has "failed" it's kicked to the roadside
+and dumped in a database for posterity, potentially in the hope of being awakened by a naive undergraduate
+student asking questions about quality. Lanelets that have "passed" are polished up and taken care of and
+never told about their unfortunate siblings. The key is that time and resources aren't wasted pushing
+perceivably crappy data through post-sequencing finishing pipelines.
+
+However for the purpose of our analysis pipeline, we want to perform a leave-one-out analysis for **all**
+lanelets (good and bad) and measure the effect caused by their absence. This in itself poses two main issues:
+
+* **Failed lanelets aren't polished**  
+We must push all lanelets that have failed through the same process as their passing counterparts such that they can be treated equally during the leave-one-out analysis. *i.e.* We can't just use the failed lanelets as they are because we won't be able to discern whether they are bad because they are "bad" or just because they haven't been pre-processed like the others.
+
+* **Failed lanelets are dropped during improvement**  
+Good lanelets compose samples, bad lanelets are ignored. For any sample that contained one or more failed
+lanelets, we must regenerate the improved sample file.
 
 
 
