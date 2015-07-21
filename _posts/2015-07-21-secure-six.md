@@ -25,6 +25,7 @@ my other SSL protected domains from both work and so too could our bug reporting
 I put it down to some weird quirk of Germany.
 
 A little while later, I found that this particular website was still unaccessible from work.
+Forcing a security exemption, the content downloaded is for the domain the certificate is for[^2].
 Now apparently far beyond any reasonable cache time, I figured something must really be wrong.
 
 I scoured access and error logs, trying to find something obvious. I focused on the peculiar nature
@@ -66,3 +67,5 @@ NameVirtualHost [<IPv6 Address>]:80
 * I forgot to configure `apache` to serve content over IPv6 for SSL traffic, things went wrong.
 
 [^1]: Those square brackets aren't to be interpreted as "optional", they are how `apache` expects an IPv6 address to be formatted.
+
+[^2]: The typical behaviour of `apache` not knowing which `VirtualHost` is supposed to be responding to a request is loading the first one.
