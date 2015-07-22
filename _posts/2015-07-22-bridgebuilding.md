@@ -156,7 +156,7 @@ The study of interest yields 9508 lanelets which compose 2932 samples, actual pe
 for the "comparison to a known result". The reason we can make such a comparison is because a subset of
 these 2932 participants had their DNA analysed with a different technology called a "SNP chip" (or array).
 Rather than whole genome sequencing, very specific positions of interest in a genome can be called with
-higher confidence. 903 participants were genotypes with both studies, yielding 2846 lanelets.
+higher confidence. 903 participants were genotyped with both studies, yielding 2846 lanelets.
 
 Of these 903 samples; 229 had at least one lanelet (but not all) fail quality control and 5 had all
 associated lanelets fail. Having read that, this is tabulated for convenience below:
