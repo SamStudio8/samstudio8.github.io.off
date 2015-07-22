@@ -87,3 +87,15 @@ We had 870
 * Jobs failing stochastically
 * 33 jobs failing as they had already been remapped
 * 387 jobs failing as they were sat on top of an invalid reference
+
+###
+* missing RG
+* "the 33"
+* "177" files... empty bridge BAM
+* 10% remainder... but...
+* "2014" files, sai indexes built in 2014...
+* "the 6"
+
+
+* the final checks: quickcheck, 177, 2014, -e, -d UNKN, gzip -tf
+* the final final checks: random subsample... all but bb-bam same size...
