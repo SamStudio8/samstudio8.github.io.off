@@ -44,7 +44,7 @@ The benefits are obvious, fewer false positives and more mapped sequence for the
 Understandably, our study decided to remap all good lanelets from `GRCh37` to `hs37d5` and re-run the
 sample improvement process.
 
-### Rinse and Repeat
+### Recipe
 To fairly execute our quality control pipeline, when creating new improved samples for our fail-carrying
 samples, we must follow all pre-processing steps from the prime study proper. Thus, we too must remap all of
 our lanelets to `hs37d5`.
@@ -55,6 +55,15 @@ Luckily, Josh's team had in fact already solved this problem and created
 ...it's components and workflow is modelled in the diagram below:
 ..![]({{ site.url }}/public/posts/bridgebuilding-p2/bridge_builder_v1.png)
 
+* **baker**  
+  ...generates the rules for bridging alignments given the origin and destination references...
+* **binnie**  
+  ...divides reads in to appropriate bins
+* **brunel**  
+  ...takes the "blueprints" and generates the final output...
+
+
+### Rinse and Repeat
 Back in mid-2014 while I was frantically finishing the write-up of my thesis, unknown to me
 Josh prepared a `Makefile` with the purpose of orchestrating this process.
 
