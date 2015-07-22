@@ -144,7 +144,7 @@ We must push all lanelets that have failed through the same process as their pas
 Good lanelets compose samples, bad lanelets are ignored. For any sample that contained one or more failed
 lanelets, we must regenerate the improved sample file.
 
-* **Polished lanelets are temporary**
+* **Polished lanelets are temporary**  
 Improved samples are the input to most downstream analysis, nothing ever looks at the raw lanelet data.
 Once the appropriate (good) processed lanelets are magically merged together to create an improved sample,
 those processed lanelets are not kept around. Only raw lanelets are kept on ice and only improved samples
