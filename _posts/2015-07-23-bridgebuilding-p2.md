@@ -90,6 +90,7 @@ We had 870
 
 ###
 * missing RG (my fault)
+* samtools sort clobbering bug
 * "the 33"
 * "177" files... empty bridge BAM
 * 10% remainder... but...
