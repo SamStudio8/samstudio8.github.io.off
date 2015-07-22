@@ -49,14 +49,22 @@ To fairly execute our quality control pipeline, when creating new improved sampl
 samples, we must follow all pre-processing steps from the prime study proper. Thus, we too must remap all of
 our lanelets to `hs37d5`.
 
+Luckily, Josh's team had in fact already solved this problem and created
+[`bridgebuilder`](https://github.com/wtsi-hgi/bridgebuilder)
+
+...it's components and workflow is modelled in the diagram below:
+..![]({{ site.url }}/public/posts/bridgebuilding-p2/bridge_builder_v1.png)
+
 Back in mid-2014 while I was frantically finishing the write-up of my thesis, unknown to me
 Josh prepared a `Makefile` with the purpose of orchestrating this process.
 
-...using [`bridgebuilder`](https://github.com/wtsi-hgi/bridgebuilder)
-..![]({{ site.url }}/public/posts/bridgebuilding-p2/bridge_builder_v1.png)
+* did not attempt to specially detect errors
+* often did not propagate errors with pipes
+* did not print stderr
+* log file could not determine which stdout came from which job
+* stalled frequently
+* assumed file creation as success
 
-carrying out one of the more difficult tasks
-of the project. 
 I'd hoped this had been mostly sorted before my return, but 
 
 Unknown to me, back 
