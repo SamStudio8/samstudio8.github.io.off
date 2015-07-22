@@ -45,12 +45,21 @@ Understandably, our study decided to remap all good lanelets from `GRCh37` to `h
 sample improvement process.
 
 ### Rinse and Repeat
-For our "bad" lanelets to
+To fairly execute our quality control pipeline, when creating new improved samples for our fail-carrying
+samples, we must follow all pre-processing steps from the prime study proper. Thus, we too must remap all of
+our lanelets to `hs37d5`.
 
+Back in mid-2014 while I was frantically finishing the write-up of my thesis, unknown to me
+Josh prepared a `Makefile` with the purpose of orchestrating this process.
+
+...using [`bridgebuilder`](https://github.com/wtsi-hgi/bridgebuilder)
+..![]({{ site.url }}/public/posts/bridgebuilding-p2/bridge_builder_v1.png)
+
+carrying out one of the more difficult tasks
+of the project. 
 I'd hoped this had been mostly sorted before my return, but 
 
-Unknown to me, back in 2014 while I was frantically finishing the write-up of my thesis, Josh prepared
-a `Makefile` with the purpose of carrying out one of the more difficult tasks of the project. 
+Unknown to me, back 
 
 We had 870
 **lanelets** -- parts of whole samples -- 
