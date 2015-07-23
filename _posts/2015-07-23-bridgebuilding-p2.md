@@ -45,23 +45,33 @@ Understandably, our study decided to remap all good lanelets from `GRCh37` to `h
 sample improvement process.
 
 ### Recipe
-To fairly execute our quality control pipeline, when creating new improved samples for our fail-carrying
-samples, we must follow all pre-processing steps from the prime study proper. Thus, we too must remap all of
-our lanelets to `hs37d5`.
+Of course, to execute our quality control pipeline fairly, we too must remap all of our lanelets to `hs37d5`.
+Luckily, Josh and his team had already conuured some software to solve this problem in the form of
+[`bridgebuilder`](https://github.com/wtsi-hgi/bridgebuilder) whose components and workflow are
+modelled in the diagram below:
 
-Luckily, Josh's team had in fact already solved this problem and created
-[`bridgebuilder`](https://github.com/wtsi-hgi/bridgebuilder)
-
-...it's components and workflow is modelled in the diagram below:
 ..![]({{ site.url }}/public/posts/bridgebuilding-p2/bridge_builder_v1.png)
 
-* **baker**  
-  ...generates the rules for bridging alignments given the origin and destination references...
-* **binnie**  
-  ...divides reads in to appropriate bins
-* **brunel**  
-  ...takes the "blueprints" and generates the final output...
+`bridgebuilder` has three main components summarised thus:
 
+* **baker**  
+  Responsible for the generation of the "reference bridge", mapping the old reference to
+  the new reference. In our case, the actual `GRCh37` reference itself is bridged to `hs37d5`.
+  The result is metaphorically a collection of bridges representing parts of `GRCh37` and their
+  new destination somewhere in `hs37d5`.
+* **binnie**  
+  Takes the original lanelet as aligned to the old reference and using the `baker`'s reference
+  bridge works out whether reads can stay where they are, or whether they fall in genomic regions
+  covered by a bridge. For each of the 870 lanelets, the result is the population of four bins:
+    * **Unbridged reads**  
+      Reads whose location in `hs37d5` is the same as in `GRCh37` and do not require re-mapping.
+      Unbridged reads are sub-binned by whether or not their ordering might have been changed.
+    * **Bridged reads**  
+      Reads that do fall on a bridge and are mapped across from `GRCh37` to `hs37d5`.
+    * **Unmapped reads that are now mapped**  
+      Reads that did not have an alignment to `GRCh37` but now align to `hs37d5`.
+* **brunel**  
+  Takes the `binnie` bins as "blueprints" and merges all reads to generate the new lanelet.
 
 ### Rinse and Repeat
 Back in mid-2014 while I was frantically finishing the write-up of my thesis, unknown to me
