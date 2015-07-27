@@ -76,8 +76,8 @@ modelled in the diagram below:
 ### Rinse and Repeat
 Whilst designed to function together and co-existing in the same package, `bridgebuilder`
 is not currently a *push button and acquire bridges* process. Luckily for me, back in 2014
-while I was frantically finishing the write-up of my undergraduate thesis, Josh had prepared
-a `Makefile` with the purpose of orchestrating our construction project.
+while I was frantically finishing the write-up of my undergraduate thesis, Josh had **quickly**
+prepared a **prototype** `Makefile` with the purpose of orchestrating our construction project.
 
 This was neat, as it accepted a file of filenames (a "fofn") and automatically took care of
 each step and all of the many intermediate files inbetween. More importantly it provided a
@@ -89,13 +89,38 @@ submission of `Make` to the farm. As you may have guessed by my tone, this was n
 
 ### Ruins
 Shortly before calling it a day back in 2014, Josh gave the orchestrating Makefile a few
-shots.
-...a mish-mash of segmentation faults, samtools errors....
+shots. The results were hit and miss, a majority of the required files failed to generate
+and the "*superlog*" containing over a million lines aggregated `stdout` from each of the submitted jobs
+was a monolithic mish-mash of unnavigable segmentation faults, samtools errors, debugging
+and scheduling information. Repeated application of the `Makefile` superjob yielded a handful
+more desired files and the errors appeared to tail off, yet we were still missing several hundred
+of the final lanelets. Diagnosing where the errors were arising was particular problematic due to
+two assumptions in the albeit rushed design of our `Makefile`:
 
-* did not attempt to specially detect errors
+* **Error Handling**  
+  The `Makefile` did not expect to have to handle the potential for error between one step
+  and the next. Many but by no means all of the errors pumped to the superlog pertained to
+  the absence of intermediate files, rather than a problem with execution of the commands themselves.
+* **Error Tracing**  
+  There was no convenient mechanism to trace back entries from the superlog to the actual
+  cluster job (and thus particular lanelet) to try and reproduce and investigate errors.
+  The superlog was just a means of establishing a heartbeat on the superjob and to roughly
+  guage progress.
+
+This is where the project left off and to where we must now return.
+
+### Revisiting Ruins
+
+...A major difference between then-and-now is the introduction of the `samtools quickcheck`
+subcommand, written by Josh after the expected behaviour of `samtools index` was changed.
+We could run all our current SAM/BAM alignment files through `quickcheck` to rule out basic
+errors...
+
+
+
+
+
 * often did not propagate errors with pipes
-* did not print stderr
-* log file could not determine which stdout came from which job
 * stalled frequently
 * assumed file creation as success
 
