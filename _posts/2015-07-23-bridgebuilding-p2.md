@@ -50,7 +50,7 @@ Luckily, Josh and his team had already conuured some software to solve this prob
 [`bridgebuilder`](https://github.com/wtsi-hgi/bridgebuilder) whose components and workflow are
 modelled in the diagram below:
 
-..![]({{ site.url }}/public/posts/bridgebuilding-p2/bridge_builder_v1.png)
+![]({{ site.url }}/public/posts/bridgebuilding-p2/bridge_builder_v1.png)
 
 `bridgebuilder` has three main components summarised thus:
 
@@ -74,8 +74,23 @@ modelled in the diagram below:
   Takes the `binnie` bins as "blueprints" and merges all reads to generate the new lanelet.
 
 ### Rinse and Repeat
-Back in mid-2014 while I was frantically finishing the write-up of my thesis, unknown to me
-Josh prepared a `Makefile` with the purpose of orchestrating this process.
+Whilst designed to function together and co-existing in the same package, `bridgebuilder`
+is not currently a *push button and acquire bridges* process. Luckily for me, back in 2014
+while I was frantically finishing the write-up of my undergraduate thesis, Josh had prepared
+a `Makefile` with the purpose of orchestrating our construction project.
+
+This was neat, as it accepted a file of filenames (a "fofn") and automatically took care of
+each step and all of the many intermediate files inbetween. More importantly it provided a
+wrapper for handling submission of jobs to the compute cluster (the "farm"). The latter was
+especially great news for me, having spent [most of my first year battling]({% post_url 2015-04-27-what-am-i-doing %}) our [job management system]({% post_url 2015-02-17-sun-grid-engine %}) back in Aberystwyth.
+
+In theory remapping all 870 lanelets should have been accomplished through one simple
+submission of `Make` to the farm. As you may have guessed by my tone, this was not the case.
+
+### Ruins
+Shortly before calling it a day back in 2014, Josh gave the orchestrating Makefile a few
+shots.
+...a mish-mash of segmentation faults, samtools errors....
 
 * did not attempt to specially detect errors
 * often did not propagate errors with pipes
@@ -84,9 +99,6 @@ Josh prepared a `Makefile` with the purpose of orchestrating this process.
 * stalled frequently
 * assumed file creation as success
 
-I'd hoped this had been mostly sorted before my return, but 
-
-Unknown to me, back 
 
 We had 870
 **lanelets** -- parts of whole samples -- 
