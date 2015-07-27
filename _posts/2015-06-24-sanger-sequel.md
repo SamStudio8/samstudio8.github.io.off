@@ -52,7 +52,7 @@ encompass ensuring the `Goldilocks` region for each sample was correctly extract
 were made up of two studies and we may have decided not to pursue one of them due to differences in sequencing[^2].
 I also recall having some major trouble with needing to re-align the failed samples to a different reference: these
 samples having failed, were not subjected to all the processing of their QC approved counterparts, which we'll need
-to apply ourselves manually, presumably painstakingly.
+to apply ourselves manually, [presumably painstakingly]({% post_url 2015-07-23-bridgebuilding-p2 %}).
 
 **Prepare data for the pipeline**  
 The nail in the coffin for the first stab at this project was the data preparation: `samtools merge` was just
