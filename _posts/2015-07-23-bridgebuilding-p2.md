@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Tolls of Bridge Building: Part II, Construction"
+title: "The Tolls of Bridge Building: Part II, Construction [WIP]"
 ---
 
 [Last time]({{ page.previous.url}}) on Samposium, I gave a more detailed look at the project I'm working
@@ -235,10 +235,21 @@ faster to regenerate them all, rather than trying to diagnose which might have f
 I altered the `Makefile` to use the name of the input file after the path when creating the `PREFIX` to use for temporary files in future, side-stepping the clobbering (and using `-T` as intended).
 
 
-### *The 33*
+### `brunel` and The 33
+Following the regeneration of any sorted file (and all files that use those sorted files thereafter), it was
+time to tackle the mysterious stack of segementation faults occuring at the final hurdle of the process, `brunel`.
+
+
+By now I could see it was the same 33 files that tripped up 
+
 * 33 jobs failing as they had already been remapped
 
-### *The 177*
+### The 177
+With my paranoia getting out of hand (perhaps justified), I collected the file sizes for each intermediate
+file and calculated summary statistics.
+...in common? They were all generated in September 2014, on the same day...
+...no records existed in LSF, was millions of job submissions ago...
+
 * 387 jobs failing as they were sat on top of an invalid reference
 
 ### *The Class of 2014*
