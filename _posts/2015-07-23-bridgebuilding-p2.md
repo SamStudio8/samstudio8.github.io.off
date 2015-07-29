@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Tolls of Bridge Building: Part II, Construction [WIP]"
+title: "The Tolls of Bridge Building: Part II, Construction"
 ---
 
 [Last time]({{ page.previous.url}}) on Samposium, I gave a more detailed look at the project I'm working
@@ -73,7 +73,6 @@ modelled in the diagram below:
 * **brunel**  
   Takes the `binnie` bins as "blueprints" and merges all reads to generate the new lanelet.
 
-### Rinse and Repeat
 Whilst designed to function together and co-existing in the same package, `bridgebuilder`
 is not currently a *push button and acquire bridges* process. Luckily for me, back in 2014
 while I was frantically finishing the write-up of my undergraduate thesis, Josh had **quickly**
@@ -109,27 +108,98 @@ two assumptions in the albeit rushed design of our `Makefile`:
 
 This is where the project left off and to where we must now return.
 
-### Revisiting Ruins
+### Revisiting Wreckage
+As expected, given nothing had been messed around with in the project's year long hiatus,
+rebooting the bridgebuilding pipeline via the `Makefile` provided similar results as before:
+some extra files and a heap of errors of unknown job origin. However, given there was non-trivial
+set of files that the pipeline marked as complete, there were less files to process overall and 
+so many less jobs were submitted as a result, thus inspecting the superlog was somewhat easier.
 
-...A major difference between then-and-now is the introduction of the `samtools quickcheck`
-subcommand, written by Josh after the expected behaviour of `samtools index` was changed.
-We could run all our current SAM/BAM alignment files through `quickcheck` to rule out basic
-errors...
+I figured a reasonable starting point would be to see whether errors could be narrowed down by looking
+for cluster jobs that exited with a failed status code. Unfortunately the superlog doesn't contain the
+LSF summary output for any of the spawned jobs and so I had to try and recover this myself.
+I pulled out job numbers with `grep` and `cut` and fed them to an LSF command that returns status
+information for completed jobs. I noticed a pattern and with a little grep-fu I was able to pull-out
+jobs that failed specifically due to resource constraints,
+a [familiar problem]({% post_url 2015-04-27-what-am-i-doing %}). Though in this case, the resource
+constraints were imposed on each job by rules in the `Makefile`, the cure was to merely be less frugal.
 
+Generously doubling or tripling the requested RAM for each job step and launching the bridgebuilder
+pipeline created an explosion of work on the cluster and within hours we had apparently falled in to
+a scenario where we had a majority of the files desired.
 
+But wielding a strong distrust for anything that a computer does, I was not satisfied with the progress.
 
+### Reaping with `quickcheck`
+Pretty much all of the intermediary files, as well as the final output files are "BAMs".
+BAM (Binary sAM) files are compressed binary representations of SAM files that contain data pertaining to
+DNA sequences and alignments thereof. `samtools` is a suite of bioinformatics tools primarily designed to
+work with such files. After anticipated of [`samtools index` proved unreliable](https://github.com/samtools/samtools/issues/362) for catching more subtle errors, Josh wrote a new
+subcommand for `samtools` called: [**`quickcheck`**](https://github.com/samtools/samtools/pull/406).
 
+`samtools quickcheck` is capable of quickly checking (shocker) whether a BAM, SAM or CRAM file appears "intact";
+*i.e.* the header is valid, the file contains at least one target sequence and for BAMs that the compressed
+end-of-file (EOF) block is present, which is elsewise a pretty good sign your BAM is truncated. I fed each
+of the now thousands of BAM files to `quickcheck` and hundreds of filenames began to flow up the terminal,
+revealing a new problem with the bridgebuilder pipeline's `Makefile`:
+
+* **File Creation is Success**  
+  The existence of a file, be it an intermediate or final output file is viewed as a success,
+  regardless of the exit status of the job that created that file.
+
+The `Makefile` was set-up to remove files that are left broken or unfinished if a job
+fails, but this does not happen if the job is forcibly terminated by LSF for exceeding its
+time or memory allocation, which was unfortunately the case for hundreds of jobs.
+This rule also does not cover cases where a failure occurs but the command does not return a
+failing exit code, a problem that still plagues older parts of `samtools`. Thus, `quickchecking`
+the results is the only assuring step that can be performed.
+
+Worse still, once a file existed, the next step was executed under the assumption the input
+intermediate file must be valid as it had not been cleaned away. Yet this step would likely
+fail itself due to the invalid input, it too leaving behind an invalid output file to go on
+to the next step, and so on.
+
+As an inexpensive operation, it was simple to run `quickcheck` on every BAM file in a reasonable
+amount of time. Any file that failed a `quickcheck` was removed from the directory, forcing it
+to be regenerated anew on the next iteration of the <strike>carousel</strike> pipeline. 
+
+### Rinse and Repeat
+After going full-nuclear on files that upset `quickcheck`, the next iteration of the pipeline
+took much longer, but thankfully the superlog was quieter with respect to errors. It seemed that
+having increased limits on the requests for time and memory, most of the jobs were happy to go
+about their business successfully.
+
+But why repeat what should be a deterministic process?
+
+* **Jobs and nodes fail stochastically**  
+  We're running a significant number of simultaneous jobs, all reading and writing large files to the same directory. It's just a statistical question of *when* rather than if at least one bit goes awry, and indeed it clearly does. Repeating the process and removing any files that fail `quickcheck` allows us to ensure we're only running the jobs where something has gone wrong.
+* **The `Makefile` stalls**  
+  Submitting a `Makefile` to a node with the intention for it to then submit jobs of its own to other nodes and keep a line of communication with each of them open, is potentially not ideal. Occasionally server blips would cause these comm lines to fail and the `Makefile` would stall waiting to hear back from its children. In this scenario the superjob would have to be killed which can leave quite a mess behind.
+
+Following a few rounds of repeated application of the pipeline and rinsing with `quickcheck`,
+we once again appeared in the reasonable position of having the finish line in sight. We were
+just around 200 lanelets off our 870 total. A handful of errors implied that some jobs wanted
+even more resources and due to the less monolithic nature of the superlog, a repetitive error
+with the final `brunel` step throwing a segmentation fault came to my attention.
+
+But not being easily satisfied, I set out to find something wrong with our latest fresh batch of bridges.
+
+### Overwriting with `sort`
+After killing a set of intermediary jobs that appeared to have stalled -- all sorting operations
+using `samtools sort` -- I inspected the damage; unsurprisingly there were several invalid output
+file, but upon inspection of the assigned temporary directory, only a handful of files named `.tmp.NNNN.bam`.
+That's odd... There should have been a whole host of temporary files...
+
+I checked the `Makefile`, we were using `samtools sort`'s `-T`
 
 * often did not propagate errors with pipes
 * stalled frequently
-* assumed file creation as success
 
 
 We had 870
 **lanelets** -- parts of whole samples -- 
 
 
-* Jobs not having enough time or memory
 * Jobs failing to propagate an exit code
 * Jobs failing stochastically
 * 33 jobs failing as they had already been remapped
