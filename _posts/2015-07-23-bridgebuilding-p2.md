@@ -184,36 +184,80 @@ with the final `brunel` step throwing a segmentation fault came to my attention.
 
 But not being easily satisfied, I set out to find something wrong with our latest fresh batch of bridges.
 
-### Overwriting with `sort`
+### Clobbering with `sort`
 After killing a set of intermediary jobs that appeared to have stalled -- all sorting operations
 using `samtools sort` -- I inspected the damage; unsurprisingly there were several invalid output
-file, but upon inspection of the assigned temporary directory, only a handful of files named `.tmp.NNNN.bam`.
-That's odd... There should have been a whole host of temporary files...
+file, but upon inspection of the assigned temporary directory, only a handful of files named `.tmp.NNNN.bam` (where `NNNN` is some sequential index). That's odd... There should have been a whole host of temporary files...
 
-I checked the `Makefile`, we were using `samtools sort`'s `-T`
+I checked the `Makefile`, we were using `samtools sort`'s `-T` argument to provide a path to the
+temporary directory. Except `-T` is not supposed to be a directory path:
 
-* often did not propagate errors with pipes
-* stalled frequently
+```
+  -T PREFIX  Write temporary files to PREFIX.nnnn.bam
+```
+
+So, providing a directory path to `-T` sets the `PREFIX` to `\path\to\tmp\.NNNN.bam`.
+
+Oh shit. Each job shared the same `-T` and must therefore have shared a `PREFIX`, this is **very bad**.
+Immediately I knocked up a quick test case on my laptop to see whether a hunch would prove correct, it did:
+I found a "bug" in `samtools sort`: [`samtools sort` clobbers temporary files if "misusing" `-T`](https://github.com/samtools/samtools/issues/432).
+
+Although this was caused by our mistaken use of `-T` as a path to a temporary directory not a "prefix",
+the resulting behaviour is dangerous, unexpected and as explained in my bug report below, woefully beautiful:
+
+> #### Reproduce
+> Execute two sorts providing a duplicate prefix or duplicate directory path to `-T`:
+
+> #### Result
+>    output1.sam contains input2.sam's header along with read groups appearing in input2.sam and potentially some from input1.sam.
+> output2.sam is not created as the job aborts.
+
+> #### Behaviour
+
+>    * Job A begins executing, creating temporary files in tmp/ with the name `.0000.tmp` to `.NNNN.tmp`.
+>    * Job B begins, chasing Job A, clobbering temporary files in tmp/ from `.0000.tmp` to `.MMMM.tmp`.
+>    * Job A completes sorting temporary files and merges `.0000.tmp` to `.NNNN.tmp`. Thus incorrectly including read groups from Job B in place of the desired read groups from Job A, where N <= M.
+>    * Job A completes merging and deletes temporary files.
+>    * Job B crashes attempting to read `.0000.tmp` as it no longer exists.
+
+By default, `samtools sort` starts writing temporary files to disk if it exceeds 768MB of RAM in a sorting thread.
+Initially, none of the sorting jobs performed by the `Makefile` were alloted more than 512MB of RAM total and thus
+any job on track to exceed 768MB RAM should have been killed by LSF and a temporary file would never have touched disk.
+When I showed up and liberally applied RAM to the affected area, sorting operations with a need for temporary files
+became possible and the clobbering occurred, detected only by luck.
+
+What's elegantly disconcerting about this bug is that the resulting file is valid and thus **cannot be
+identified by `quickcheck`**, my only weapon against bad BAMs. A solution would be to extract the header
+and every readgroup that occurs in the file and look for at least one contradiction. However, due to the
+size of these BAMs (upwards of 5GB, containing tens of millions of alignment records) it turned out to be
+faster to regenerate them all, rather than trying to diagnose which might have fallen prey to the bug.
+
+I altered the `Makefile` to use the name of the input file after the path when creating the `PREFIX` to use for temporary files in future, side-stepping the clobbering (and using `-T` as intended).
 
 
-We had 870
-**lanelets** -- parts of whole samples -- 
-
-
-* Jobs failing to propagate an exit code
-* Jobs failing stochastically
+### *The 33*
 * 33 jobs failing as they had already been remapped
+
+### *The 177*
 * 387 jobs failing as they were sat on top of an invalid reference
 
-###
-* missing RG (my fault)
-* samtools sort clobbering bug
-* "the 33"
-* "177" files... empty bridge BAM
+### *The Class of 2014*
 * 10% remainder... but...
 * "2014" files, sai indexes built in 2014...
-* "the 6"
 
+### *The Missing Six*
 
+### Final Checks
 * the final checks: quickcheck, 177, 2014, -e, -d UNKN, gzip -tf, samtools -c
+
+
+### Final-Final Checks
 * the final final checks: random subsample... all but bb-bam same size...
+
+
+
+
+tl;dr
+* Bug in samtools
+* Faster to regen that diagnose
+* Bug in brunel
