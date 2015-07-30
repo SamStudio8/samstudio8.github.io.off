@@ -230,7 +230,8 @@ What's elegantly disconcerting about this bug is that the resulting file is vali
 identified by `quickcheck`**, my only weapon against bad BAMs. A solution would be to extract the header
 and every readgroup that occurs in the file and look for at least one contradiction. However, due to the
 size of these BAMs (upwards of 5GB, containing tens of millions of alignment records) it turned out to be
-faster to regenerate them all, rather than trying to diagnose which might have fallen prey to the bug.
+faster to regenerate them all, rather than trying to diagnose which specifically might have fallen prey
+to the bug for targeted regneration.
 
 I altered the `Makefile` to use the name of the input file after the path when creating the `PREFIX` to use for temporary files in future, side-stepping the clobbering (and using `-T` as intended).
 
@@ -238,6 +239,27 @@ I altered the `Makefile` to use the name of the input file after the path when c
 ### `brunel` and The 33
 Following the regeneration of any sorted file (and all files that use those sorted files thereafter), it was
 time to tackle the mysterious stack of segementation faults occuring at the final hurdle of the process, `brunel`.
+Our now rather uncluttered superlog made finding use cases simple, especially given the thirty eight line backtrace and memory map spewed out after `brunel` encounters an `abort`:
+
+```
+*** glibc detected *** /software/hgi/pkglocal/bridgebuilder-0.3.6/bin/brunel: munmap_chunk(): invalid pointer: 0x00000000022ec900 ***
+[...]
+/tmp/1436571537.7566550: line 8: 21818 Aborted                 /software/hgi/pkglocal/bridgebuilder-0.3.6/bin/brunel 8328_1#15.GRCh37-hs37d5_bb_bam_header.txt 8328_1#15_GRCh37-hs37d5_unchanged.bam:GRCh37-hs37d5.trans.txt 8328_1#15_GRCh37-hs37d5_remap.queryname_sort.map_hs37d5.fixmate.coordinate_sort.bam 8328_1#15_GRCh37-hs37d5_bridged.queryname_sort.fixmate.coordinate_sort.bam 8328_1#15.GRCh37-hs37d5_bb.bam
+```
+
+```
+Program received signal SIGABRT, Aborted.
+0x00007ffff761e0d5 in __GI_raise (sig=<optimised out>) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+64      ../nptl/sysdeps/unix/sysv/linux/raise.c: No such file or directory.
+(gdb) bt
+#0  0x00007ffff761e0d5 in __GI_raise (sig=<optimised out>) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
+#1  0x00007ffff762183b in __GI_abort () at abort.c:91
+#2  0x00007ffff765b32e in __libc_message (do_abort=2, fmt=0x7ffff77655d8 "*** glibc detected *** %s: %s: 0x%s ***\n") at ../sysdeps/unix/sysv/linux/libc_fatal.c:201
+#3  0x00007ffff7665b26 in malloc_printerr (action=3, str=0x7ffff77656c8 "munmap_chunk(): invalid pointer", ptr=<optimised out>) at malloc.c:5051
+#4  0x00000000004023a8 in build_translation_file (trans_name=<optimised out>, file_header=0x61c640, replace_header=0x621480) at main.c:123
+#5  0x0000000000402935 in init (opts=opts@entry=0x616010) at main.c:211
+#6  0x0000000000401f7b in main (argc=<optimised out>, argv=<optimised out>) at main.c:341
+```
 
 
 By now I could see it was the same 33 files that tripped up 
