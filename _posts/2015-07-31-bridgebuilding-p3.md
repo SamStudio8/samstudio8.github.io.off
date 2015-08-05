@@ -97,20 +97,114 @@ Before blindly resubmitting everything, I figured I'd save some time and face by
 `samtools index` to the rest of my checking procedures, to be sure that this first indexing
 step would at least work on `vr-pipe`.
 
-The indexing still failed. The lanelet bridged BAMs were still unsorted.
+The indexing still failed. The final lanelet bridged BAMs were still unsorted.
 
-What? I double checked that I hadn't accidentally checked the last set of unsorted files.
-Sadly I am somewhat competent and I'd attempted to index the right files, they really were unsorted.
+Despite feeding our now correctly co-ordinate sorted inputs to `brunel`, we still get an
+incorrectly sorted output -- clearly a faux pas with `brunel`'s handling of the inputs.
+Taking just one of the 837 failed lanelets (all but the already mapped 33 lanelets failed
+to index) under my wing, I ran `brunel` manually to try and diagnose the problem.
 
+The error is a little different from the last run, whereas before `samtools index` complained
+about co-ordinates appearing out of order, this time, chromosomes appear non-continuously.
+Unfortunately, several `samtools` errors still do not give specific information and this is one
+of them. I knew that *somewhere* a read, on *some* chromosome appears somewhere it shouldn't, but
+with each of these bridged BAMs containing tens of millions of records, finding it manually could be
+almost impossible.
 
+I manually inspected the first 20 or so records in the bridged BAM, all the reads were on TID 1,
+as expected. The co-ordinates were indeed sorted, starting with the first read at position 10,000.
+
+10,000? Seems a little high? On a hunch I grepped the bridged BAM to try and find a record on
+TID 1 starting at position 0:
+
+```
+grep -Pn -m1 "^[A-z0-9:#]*\t[0-9]*\t1\t1\t" <(samtools view 7500_7#8.GRCh37-hs37d5_bb.bam)
+```
+
+I got a hit. Read `HS29_07500:7:1206:5383:182635#8` appears on TID 1, position 1. It's line
+number in the bridged BAM? 64,070,629. There's our non-continuous chromosome.
+
+I took the read name and checked the three sorted inputs to `brunel`. It appears in the "unchanged"
+BAM. You may recall these "unchanged" reads are those that `binnie` deemed as not requiring re-mapping
+to the new reference and can effectively "stay put". The interesting part of the hit? In the unchanged BAM,
+it doesn't appear on chromosome 1 at all but on "HSCHRUN_RANDOM_CTG19", presumably some form of
+decoy sequence.
+
+This appears to be a serious bug in `brunel`. This "HSCHRUN_RANDOM_CTG19" sequence (and presumably others)
+seem to be leaving `brunel` as aligned to chromosome 1 in the new reference. Adding some weight to the theory,
+the unchanged BAM is the only input that goes through translation too.
+
+Let's revisit [`build_translation_file`](https://github.com/wtsi-hgi/bridgebuilder/blob/673f8aa57abe7acbd688accbeda163c9f6b4eb6a/brunel/src/main.c#L86), you recall that the i-th SQ line of the input BAM -- the "unchanged" BAM --
+is mapped to the j-th entry of the user-provided translation table text file. The translation itself
+is recorded with `trans[i] = j` where both `i` and `j` rely on two loops meeting particular exit conditions.
+
+But note the while loop:
+
+```C
+int counter = file_entries;
+[...]
+while (!feof(trans_file) && !ferror(trans_file) && counter > 0) {
+    getline(&linepointer, &read, trans_file);
+    [...]
+    trans[i] = j;
+    counter--;
+}
+[...] 
+```
+
+This while loop, that houses the `i` and `j` loops, as well as the assignment of `trans[i] = j`,
+may not run for as many SQ lines (`file_entries`) found in the unchanged BAM, as stored in counter,
+if the length of the `trans_file` is shorter than the number of `file_entries`. Which in our case, it is
+-- as there are only entries in the translation text file for chromosomes that actually need translating (Chr1 -> 1).
+
+Thus not every element in `trans` is set with a value by the while loop. Though we've 
+[already seen]({{ post.previous.url }}) where there is no translation to be made, this doesn't work either.
+
+This is particularly troubling, as the
+[check for whether a translation should be performed](https://github.com/wtsi-hgi/bridgebuilder/blob/673f8aa57abe7acbd688accbeda163c9f6b4eb6a/brunel/src/main.c#L279)
+relies on the default value of `trans` being `NULL`.
+As no default value is set and 0 is the most likely value to turn up in the memory
+allocated by `malloc`, the default value for `trans[i]` for all `i`, is 0. Or in `brunel` terms, **if I
+can't find a better translation, translate SQ line `i`, to the 0th line (first chromosome) in the user
+translation file**.
+
+Holy crap. [That's a nasty bug](https://github.com/wtsi-hgi/bridgebuilder/issues/8).
+
+As described in the bug report, I toyed with quick fixes based on initialising `trans` with default values:
+
+> * **Initialise `trans[i] = i`**  
+> This will likely incorrectly label reads as aligning to the i-th SQ line in the new file. If the number of SQ lines in the input is greater than that of the output, this will also likely cause samtools index to error or segfault as it attempts to index a TID that is outside the range of SQ.
+> * **Initialise `trans[i] = NULL`**  
+> Prevents translation of TID but actually has the same effect as above
+> * **Initialise `trans[i] = -1`**  
+> The only quick-fix grade solution that works, causes any read on a TID that has no translation to be regarded as "unmapped". It's TID will be set to "*" and the read is placed at the end of the result file. The output file is however, valid and indexable.
+
+In the end the question of where these reads should actually end up is a little confusing. Josh seems to think
+that the new bridged BAM should contain all the old reads on their old decoy sequences if a better place in the
+new reference could not be found for them. In my opinion, these reads effectively "don't map" to hs37d5 as they
+still lie on old decoy sequences not found in the new reference, which is convinient as my `trans[i] = -1`
+initialisation marks all such reads as unmapped whilst also remaining the most simple fix to the problem.
+
+Either way, the argument as to what should be done with these reads is particularly moot for me and the
+QC study, because we're only going to be calling SNPs and focussing on our
+[**Goldilocks Region**]({% post_url 2015-07-22-bridgebuilding %}) on Chromosome 3, which is neither a decoy
+region or Chromosome 1.
+
+Having deployed my [own fix](https://github.com/SamStudio8/bridgebuilder/tree/fix6), I re-ran our pipeline
+for what I hoped to be the final time, re-ran the various checks that I've picked up along the way (including
+`samtools index`) and was finally left with **870 lanelets** ready for unimprovement.
 
 ### Vanishing Read Groups
+Or so I thought.
 
 * * *
 #tl;dr
 * Make sure your pipeline has the correct permissions to do what it needs with your directory, idiot.
 * There's a special place in hell reserved for those who know `git` and don't use it[^3].
 * [Brunel naively assumes inputs are sorted](https://github.com/wtsi-hgi/bridgebuilder/issues/7)
+* [[critical] Brunel unintentionally translates untranlated entries](https://github.com/wtsi-hgi/bridgebuilder/issues/8)
+* Bioinformatics is *never* **ever** simple.
+* There are bugs **everywhere**, you probably just haven't found them yet.
 
 
 [^1]: Unfortunately somebody towing a caravan decided to have their car burst in to flame on the southbound M11, this and several other incidents turned a boring five hour journey in to a nine hour tiresome ordeal.
