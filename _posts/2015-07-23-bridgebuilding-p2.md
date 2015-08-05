@@ -387,17 +387,18 @@ All now seemed well.
 Not content with finally reaching this point, I tried to rigorously prove the data was ready
 for the sample improvement step via `vr-pipe`:
 
-* `**quickcheck**`  
+* **`quickcheck`**  
 Ensure the EOF block was present and intact.
-* `**bsub -e**`
+* **`bsub -e`**  
 Checked that none of the submissions had actually reported an error to LSF during execution.
-* `**bsub -d UNKN**`
+* **`bsub -d UNKN`**  
 Ensured that submissions did not spend any time during execution in an "UNKNOWN" state,
 an indicator of the job stalling and likely producing bad output.
-* `**samtools view -c**`
+* **`samtools view -c`**  
 Used the counting argument of `samtools view` to confirm the number of reads in the final bridged BAM
-matched the number of reads in the input lanelet.
-* `**gzip -tf**`
+matched the number of reads in the input lanelet. Using `samtools view` to count records in the entire
+file will also catch issues with truncation or corruption (albeit in a time consuming fashion).
+* **`gzip -tf`**  
 Ensure the compression of each block in the BAM was correct.
 
 Now equipped with 870 lanelets that passed these checks, it was time to move on to BAM improvement.
