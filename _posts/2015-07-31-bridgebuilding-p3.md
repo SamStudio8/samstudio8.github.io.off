@@ -197,12 +197,39 @@ for what I hoped to be the final time, re-ran the various checks that I've picke
 ### Vanishing Read Groups
 Or so I thought.
 
+Having convinced Micheal that I wouldn't demand he assume the role of `mercury` for me at short notice again,
+he informed me that whilst all my lanelets had successfully passed the *first step* of the *first pipeline*
+in the entire `vr-pipe` workflow -- indexing. All but (you guessed it), 33 lanelets, failed the following
+step. `GATK` was upset that some reads were missing an `RG` tag.
+
+Sigh. Sigh. Sigh. Table flip.
+
+`GATK` at least gave me a read name to look up with grep and indeed, these reads *were* missing their RG tag.
+I traced the reads backward through each intermediate file to see where these tags were lost. I found that
+these reads had been binned by `binnie` as requiring re-mapping to the new reference with `bwa`. The resulting
+file from `bwa` was missing an `@RG` line and thus each read had no `RG` tag.
+
+Crumbs. I hit the web to see whether this was anticipated behaviour. The [short answer](http://gatkforums.broadinstitute.org/discussion/1903/question-about-rg-tags) was yes, but the longer
+answer was "you should have used `-r` to provide `bwa` with an `RG` line to use". Though I throw my hands up
+in the air a little here to say "I didn't write the `Makefile` and I've never used `bwa`".
+
+Luckily, Martin has recently [drafted a pull request](https://github.com/samtools/samtools/pull/371) to
+`samtools` for a new subcommand: `addreplacerg`. It's purpose? Adding and replacing RG lines and tags in
+BAM files. More usefully, at least to us, it's default operation "mode" is to tag "orphan" records (reads
+that have no RG line -- exactly the problem I am facing) with the first RG line found in the header.
+
+Perfect. I'll just feed each final bridged BAM I have to `samtools addreplacerg` and maybe, just maybe,
+we'll be able to pull the trigger on `vr-pipe` for the final time.
+
+I hope.
+
 * * *
 #tl;dr
 * Make sure your pipeline has the correct permissions to do what it needs with your directory, idiot.
 * There's a special place in hell reserved for those who know `git` and don't use it[^3].
 * [Brunel naively assumes inputs are sorted](https://github.com/wtsi-hgi/bridgebuilder/issues/7)
 * [[critical] Brunel unintentionally translates untranlated entries](https://github.com/wtsi-hgi/bridgebuilder/issues/8)
+* You should use the `-r` argument of `bwa sampe` to ensure your resulting BAM has an RG line
 * Bioinformatics is *never* **ever** simple.
 * There are bugs **everywhere**, you probably just haven't found them yet.
 
