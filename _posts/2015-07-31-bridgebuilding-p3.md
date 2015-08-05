@@ -61,7 +61,7 @@ referring to the `Makefile`. My heart sank:
 # sort by coordinate position
 %.coordinate_sort.bam: LSF_MEM=10000
 %.coordinate_sort.bam: LSF_CPU=4
-%.coordinate_sort.bam: %.bam fixcoordsort$
+%.coordinate_sort.bam: %.bam
   ${SAMTOOLS_BIN} sort -@ ${LSF_CPU} -n -T ${TMP_DIR}$(word 1,$+) -O bam -o $@ $<
 [...]
 ```
