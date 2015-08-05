@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Tolls of Bridge Building: Part II, Construction [WIP]"
+title: "The Tolls of Bridge Building: Part II, Construction"
 ---
 
 [Last time]({{ page.previous.url}}) on Samposium, I gave a more detailed look at the project I'm working
@@ -62,10 +62,9 @@ modelled in the diagram below:
 * **binnie**  
   Takes the original lanelet as aligned to the old reference and using the `baker`'s reference
   bridge works out whether reads can stay where they are, or whether they fall in genomic regions
-  covered by a bridge. For each of the 870 lanelets, the result is the population of four bins:
+  covered by a bridge. For each of the 870 lanelets, the result is the population of three bins:
     * **Unbridged reads**  
       Reads whose location in `hs37d5` is the same as in `GRCh37` and do not require re-mapping.
-      Unbridged reads are sub-binned by whether or not their ordering might have been changed.
     * **Bridged reads**  
       Reads that do fall on a bridge and are mapped across from `GRCh37` to `hs37d5`.
     * **Unmapped reads that are now mapped**  
@@ -203,7 +202,7 @@ Immediately I knocked up a quick test case on my laptop to see whether a hunch w
 I found a "bug" in `samtools sort`: [`samtools sort` clobbers temporary files if "misusing" `-T`](https://github.com/samtools/samtools/issues/432).
 
 Although this was caused by our mistaken use of `-T` as a path to a temporary directory not a "prefix",
-the resulting behaviour is dangerous, unexpected and as explained in my bug report below, woefully beautiful:
+the resulting behaviour is dangerous, rather unexpected and as explained in my bug report below, woefully beautiful:
 
 > #### Reproduce
 > Execute two sorts providing a duplicate prefix or duplicate directory path to `-T`:
@@ -239,7 +238,8 @@ I altered the `Makefile` to use the name of the input file after the path when c
 ### `brunel` and The 33
 Following the regeneration of any sorted file (and all files that use those sorted files thereafter), it was
 time to tackle the mysterious stack of segementation faults occuring at the final hurdle of the process, `brunel`.
-Our now rather uncluttered superlog made finding use cases simple, especially given the thirty eight line backtrace and memory map spewed out after `brunel` encounters an `abort`:
+Our now rather uncluttered superlog made finding cases for reproducing simple, especially given the obvious
+thirty eight line backtrace and memory map spewed out after `brunel` encountered an `abort`:
 
 ```
 *** glibc detected *** /software/hgi/pkglocal/bridgebuilder-0.3.6/bin/brunel: munmap_chunk(): invalid pointer: 0x00000000022ec900 ***
@@ -247,50 +247,165 @@ Our now rather uncluttered superlog made finding use cases simple, especially gi
 /tmp/1436571537.7566550: line 8: 21818 Aborted                 /software/hgi/pkglocal/bridgebuilder-0.3.6/bin/brunel 8328_1#15.GRCh37-hs37d5_bb_bam_header.txt 8328_1#15_GRCh37-hs37d5_unchanged.bam:GRCh37-hs37d5.trans.txt 8328_1#15_GRCh37-hs37d5_remap.queryname_sort.map_hs37d5.fixmate.coordinate_sort.bam 8328_1#15_GRCh37-hs37d5_bridged.queryname_sort.fixmate.coordinate_sort.bam 8328_1#15.GRCh37-hs37d5_bb.bam
 ```
 
+Back with our old friend, `gdb`, I found the error seemed to occur when `brunel` attempted
+to free a pointer to what should have been a line of text from one of the input files:
+
+```C
+char* linepointer = NULL;
+[...]
+while (!feof(trans_file) && !ferror(trans_file) && counter > 0) {
+    getline(&linepointer, &read, trans_file);
+    [...]
+}
+free(linepointer);
 ```
-Program received signal SIGABRT, Aborted.
-0x00007ffff761e0d5 in __GI_raise (sig=<optimised out>) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
-64      ../nptl/sysdeps/unix/sysv/linux/raise.c: No such file or directory.
-(gdb) bt
-#0  0x00007ffff761e0d5 in __GI_raise (sig=<optimised out>) at ../nptl/sysdeps/unix/sysv/linux/raise.c:64
-#1  0x00007ffff762183b in __GI_abort () at abort.c:91
-#2  0x00007ffff765b32e in __libc_message (do_abort=2, fmt=0x7ffff77655d8 "*** glibc detected *** %s: %s: 0x%s ***\n") at ../sysdeps/unix/sysv/linux/libc_fatal.c:201
-#3  0x00007ffff7665b26 in malloc_printerr (action=3, str=0x7ffff77656c8 "munmap_chunk(): invalid pointer", ptr=<optimised out>) at malloc.c:5051
-#4  0x00000000004023a8 in build_translation_file (trans_name=<optimised out>, file_header=0x61c640, replace_header=0x621480) at main.c:123
-#5  0x0000000000402935 in init (opts=opts@entry=0x616010) at main.c:211
-#6  0x0000000000401f7b in main (argc=<optimised out>, argv=<optimised out>) at main.c:341
+Yet if `linepointer` was never assigned to, perhaps because `trans_file` was empty, `brunel` would attempt
+to free `NULL` and everything would catch fire and `abort`, case closed. However whilst this *could* happen,
+my theory was disproved with some good old-fashion print statement debugging -- `trans_file` was indeed
+not empty and `linepointer` was in fact being used.
+
+After much head-scratching, more print-debugging and commenting out various lines, I discovered all ran
+well if I removed the line that updates the i-th element of the translation array, `trans`. How strange?
+I debugged some more and uncovered a bug in `brunel`:
+
+```C
+int *trans = malloc(sizeof(int)*file_entries);
+
+char* linepointer = NULL;
+[...]
+while (!feof(trans_file) && !ferror(trans_file) && counter > 0) {
+    getline(&linepointer, &read, trans_file);
+    [...]
+    
+    // lookup tid of original and replacement
+    int i = 0;
+    for ( ; i < file_entries; i++ ) {
+      char* item = file_header->target_name[i];
+      if (!strcmp(item,linepointer)) { break; }
+    }
+    int j = 0;
+    for ( ; j < replace_entries; j++ ) {
+        char* item = replace_header->target_name[j];
+        if (!strcmp(item,sep)) { break; }
+    }
+    trans[i] = j;
+    counter--;
+}
+free(linepointer);
 ```
 
+Look closely. Assignments to the `trans` array rely on setting both `i` and `j` by breaking
+those two loops when a condition is met. However if the condition is never met, the loop
+counter will be equal to the loop end condition. This is particularly important for `i`, as it
+is used to index `trans`.
 
-By now I could see it was the same 33 files that tripped up 
+At a length of `file_entries`, assigning an element at the maximum bound of loop counter `i`: `file_entries`,
+causes `brunel` to write to memory beyond that which was allocated to the storing of `trans`, likely in to the
+variable that was assigned immediately afterwards... `linepointer`.
 
-* 33 jobs failing as they had already been remapped
+So it seems that `linepointer` is not `NULL`but is infact mangled with the value of `file_entries`.
+I [added a quick patch](https://github.com/wtsi-hgi/bridgebuilder/pull/6) that checked whether `i < file_entries`
+before trying to update the `trans` array and all was well.
+
+Yet, curiosity got the better of me, only a small subset (33/870) files were throwing an `abort` at
+this `brunel` step, why not all of them? What's more, after some grepping over our old pipeline logs,
+the same 33 lanelets each time too. Weird.
+
+Clearly they all shared some property. The lanelet inputs were definitely valid and a brief manual inspection
+of the headers and scroll through the body showed nothing glaringly out of place. Focussing back on
+the function of `brunel` and the nature of this error: the `i` loop not encountering a `break` because
+the exit condition is not met, gives us a good place to start.
+
+These loops in `brunel` are designed to "translate" the sequence identifiers from the old reference, to that
+of the new reference. For example: the label for the first chromosome in GRCh37 is "Chr1" but in hs37d5, it's
+known simply as "1". It's obviously important these match up and ensuring that is in the purpose of the 
+`build_translation_file` function. This mapping is defined by a text file that is also passed to `brunel`
+at invocation. If there is a valid mapping to be made, the loops meet their conditions and when `trans[i] = j`:
+`i` refers to the SQ line in the header to be translated and `j` refers to the new SQ line in the new file
+that will contain all the reads. Lovely.
+
+What about when there are no valid mappings to be made? Under what conditions could this even happen?
+The `i`-loop would never meet it's break condition if a chromosome to be translated (as listed in the
+translation text file) was never seen in the first place. *i.e.* There were no sequence identifiers using
+the GRCh37 syntax. A sprinkling of debugging print statements confirmed no translations ever occurred,
+and `trans[i] = file_entries` was always the result for each iteration through the translation file...
+
+I opened the headers for one of "the 33" lanelets again and confusingly, it was already mapped to hs37d5.
+
+Turns out, these 33 lanelets were from a later phase of the study from which they originated and thus had
+already been mapped to hs37d5 as part of that phase's pipeline. We'd been trying to forcibly remap them
+to the same reference they were already mapped to.
+
+The solution was simple, remove the lanelet identifiers for "the 33" from our pipeline and pull the raw
+lanelets (as they've already been mapped to hs37d5) from the database later. We now had *just* **837 lanelets**
+to care for.
+
 
 ### The 177
-With my paranoia getting out of hand (perhaps justified), I collected the file sizes for each intermediate
-file and calculated summary statistics.
-...in common? They were all generated in September 2014, on the same day...
-...no records existed in LSF, was millions of job submissions ago...
+That should have been the end of things, the 837 lanelets we needed to worry about had made their way
+through the entire pipeline from start to finish and we had **837 bridged BAMs**. But, with my paranoia
+getting out of hand (and given the events so far, perhaps it was now justified), I collected the
+file sizes for each class of intermediate file and calculated summary statistics.
 
-* 387 jobs failing as they were sat on top of an invalid reference
+Unsurprisingly, I found an anomaly. For one class of file, BAM files that were supposed to contain
+all reads that `binnie` determined as requiring re-alignment as they fell on a bridge: a high standard
+deviation and rather postively skewed looking set of quartiles. Looking at the files in question, 387 had
+a size of `177` bytes. Opening just one with `samtools view -h` drew a deep but unexpected sigh:
+
+```
+@SQ     SN:MT   LN:16569
+@SQ     SN:NC_007605    LN:171823
+@SQ     SN:hs37d5       LN:35477943
+@PG     ID:bwa  PN:bwa  VN:0.5.9-r16
+```
+
+Empty other than a modest header. Damn. Damn damn damn. I went for a walk.
+
+The LSF records didn't reach far back enough to let me find out how this might have happened, September 2014
+was millions of jobs ago. The important thing is that this problem didn't seem to be happening to newer jobs
+that had generated this particular class of file more recently.
+
+Why was this still causing trouble now? Remember: **File Creation is Success**!
+
+The solution was to nuke these "has_177" files and let the `Makefile` take careof the rest.
 
 ### *The Class of 2014*
-* 10% remainder... but...
-* "2014" files, sai indexes built in 2014...
+Once that was complete, we had a healthier looking set of 837 lanelets and your average "bridged" BAM
+looked bigger too, which is good news. Ultra paranoid, despite the results now passing `quickcheck`,
+I decided to regenerate a small subset of the 450 non-177 lanelets from scratch and compare the size
+and `md5` of the resulting files to the originals.
 
-### *The Missing Six*
+They were different.
+
+The culprit this time? Indexes built by `bwa` that were generated in 2014 were much smaller than
+their 2015 counterparts. In a bid to not keep repeating the past, I nuked any intermediate file
+that was not from that week and let the `Makefile` regenerate the gaps and final outputs.
+
+All now seemed well.
 
 ### Final Checks
-* the final checks: quickcheck, 177, 2014, -e, -d UNKN, gzip -tf, samtools -c
+Not content with finally reaching this point, I tried to rigorously prove the data was ready
+for the sample improvement step via `vr-pipe`:
 
+* `**quickcheck**`  
+Ensure the EOF block was present and intact.
+* `**bsub -e**`
+Checked that none of the submissions had actually reported an error to LSF during execution.
+* `**bsub -d UNKN**`
+Ensured that submissions did not spend any time during execution in an "UNKNOWN" state,
+an indicator of the job stalling and likely producing bad output.
+* `**samtools view -c**`
+Used the counting argument of `samtools view` to confirm the number of reads in the final bridged BAM
+matched the number of reads in the input lanelet.
+* `**gzip -tf**`
+Ensure the compression of each block in the BAM was correct.
 
-### Final-Final Checks
-* the final final checks: random subsample... all but bb-bam same size...
+Now equipped with 870 lanelets that passed these checks, it was time to move on to BAM improvement.
 
-
-
-
-tl;dr
-* Bug in samtools
-* Faster to regen that diagnose
-* Bug in brunel
+* * *
+#tl;dr
+* Finally completed the `bridgebuilding` process that made this project impossible last year.
+* When files are *huge*, it is probably faster to simply regenerate data that is suspected broken, than to diagnose and triage what may or may not be invalid.
+* LSF is almost as bad as Sun Grid Engine.
+* [`samtools sort` clobbers temporary files if "misusing" `-T`](https://github.com/samtools/samtools/issues/432).
+* [Brunel translation writes beyond `trans` and mangles `linepointer`](https://github.com/wtsi-hgi/bridgebuilder/issues/5)
