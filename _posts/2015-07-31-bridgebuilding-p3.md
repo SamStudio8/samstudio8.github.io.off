@@ -3,7 +3,7 @@ layout: post
 title: "The Tolls of Bridge Building: Part III, Sample (Un)Improvement"
 ---
 
-[Previously, on Samposium]({{ page.previous.url}}): I finally had the **870 lanelets** required for the
+[Previously, on Samposium]({% post_url page.previous.url %}): I finally had the **870 lanelets** required for the
 sample improvement process. But in this post, I explain how my deep-seated paranoia in the quality of my
 data just wasn't enough to prevent what happened next.
 
@@ -112,6 +112,9 @@ Sadly I am somewhat competent and I'd attempted to index the right files, they r
 * There's a special place in hell reserved for those who know `git` and don't use it[^3].
 * [Brunel naively assumes inputs are sorted](https://github.com/wtsi-hgi/bridgebuilder/issues/7)
 
+
 [^1]: Unfortunately somebody towing a caravan decided to have their car burst in to flame on the southbound M11, this and several other incidents turned a boring five hour journey in to a nine hour tiresome ordeal.
+
 [^2]: Somewhat like a glorified `sudo` for humgen projects.
+
 [^3]: Honestly, it doesn't matter how trivial the file is, if it's going to be messed around with frequently, or is a pinnacle piece of code for orchestrating a pipeline, put it under version control. Nobody is going to judge you for trivial use of version control.
