@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Tolls of Bridge Building: Part III, Sample (Un)Improvement [WIP]"
+title: "The Tolls of Bridge Building: Part III, Sample (Un)Improvement"
 ---
 
 [Previously, on Samposium]({{ page.previous.url }}): I finally had the **870 lanelets** required for the
