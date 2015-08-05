@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Tolls of Bridge Building: Part III, Sample (Un)Improvement [WIP]"
+title: "The Tolls of Bridge Building: Part III, Sample (Un)Improvement"
 ---
 
 [Previously, on Samposium]({{ page.previous.url}}): I finally had the **870 lanelets** required for the
@@ -69,7 +69,7 @@ referring to the `Makefile`. My heart sank:
 `samtools sort` accepts an `-n` flag, to sort by query name, rather than the default co-ordinate position
 (*i.e.* chromosome and base position on the reference sequence). Yet *somehow* the `Makefile` had been configured
 to use query name sorting for both. I knew I was the last one to edit this part of the file, as I'd altered
-the `-T` argument to prevent the temporary file clobbering discovered in the [last episode]({% post_url page.prev.url %}).
+the `-T` argument to prevent the temporary file clobbering discovered in the [last episode]({% post_url page.previous.url %}).
 
 Had I been lazy and naughty and copied the line from one stanza to the next? I was sure I hadn't.
 But the knowing-grin Josh shot at me when I showed him the file, had me determined to try and prove my innocence.
