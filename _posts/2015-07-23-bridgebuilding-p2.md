@@ -401,7 +401,7 @@ file will also catch issues with truncation or corruption (albeit in a time cons
 * **`gzip -tf`**  
 Ensure the compression of each block in the BAM was correct.
 
-Now equipped with 870 lanelets that passed these checks, it was time to move on to BAM improvement.
+Now equipped with 870 lanelets that passed these checks, [it was time to attempt BAM improvement]({{ page.next.url }}).
 
 * * *
 #tl;dr
