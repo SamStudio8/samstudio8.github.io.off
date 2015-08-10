@@ -245,9 +245,35 @@ slapping an `RG` sticker on any record missing one and throws it on the output p
 tens of millions of records per file even the quickest of operations can aggregate into considerable time.
 Thus placing the `addreplacerg` jobs on Sanger's `short` queue was clearly an oversight of mine.
 
-I resubmitted to the `normal` queue which allowsand applied quality control - to all files.
+I resubmitted to the `normal` queue which permits a longer default run time limit and applied
+quality control to **all** files. We had the green light to re-launch `vr-pipe`.
 
-### Queue Queue *Update: 4 days later*
+### Conquering Quotas *Update: 4 days later*
+Jobs slowly crawled through the indexing and integrity checking stages and eventually began their way
+through the more time-consuming and intensive GATK indel discovery and re-alignment steps, before
+suddenly and uncontrollably failing in their hundreds. I watched a helpless `vr-pipe` attempt to
+resuscitate each job three times before calling a time of death on my project and shutting down the pipeline
+entirely.
+
+Other than debugging output from `vr-pipe` scheduling and submitting the jobs, the error logs were empty.
+`vr-pipe` had no idea what was happening, and neither did I. 
+
+I escalated the situation to Martin, who could dig a little deeper with his `mercury` mask on. The problem
+appeared somewhat more widespread than just my pipeline; in fact all pipelines writing to the same
+storage cluster had come down with a case of sudden unexpected rapid job death. It was serious.
+
+The situation: pipelines are orchestrated by `vr-pipe`, which is responsible for submitting jobs
+to the LSF scheduler for execution. LSF requires a user to be named as the owner of a job and so `vr-pipe`
+uses `mercury`. I am unsure whether this is just practical, or whether it is to ensure jobs get a fair share
+of resources by all having the same owner though I suspect it could just be an inflexibility in `vr-pipe`.
+The net result of jobs being run as `mercury` is that every output file is also owned by `mercury`.
+The relevance of this is that every storage cluster has user quotas, an upper bound on the amount
+of disk space files owned by that user may occupy before being denied write access.
+
+Presumably you can see where this is going. In short, my job pushed `mercury` 28TB over-quota and so
+disk write operations failed. Jobs, unable to write to disk aborted immediately but the nature of the
+error was not propagated to `vr-pipe`.
+
 
 * * *
 #tl;dr
