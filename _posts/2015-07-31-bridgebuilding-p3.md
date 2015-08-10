@@ -274,6 +274,8 @@ Presumably you can see where this is going. In short, my job pushed `mercury` 28
 disk write operations failed. Jobs, unable to write to disk aborted immediately but the nature of the
 error was not propagated to `vr-pipe`.
 
+Martin is kindly taking care of the necessary juggling to rebalance the books. Will keep you posted.
+
 
 * * *
 #tl;dr
