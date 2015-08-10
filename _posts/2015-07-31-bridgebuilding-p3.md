@@ -223,6 +223,32 @@ we'll be able to pull the trigger on `vr-pipe` for the final time.
 
 I hope.
 
+<a name="queuequeue"></a>
+### Queue Queue *Update: 1 day later*
+For those still following at home, my run of `samtools addreplacerg` seemed to go without a hitch, which
+in retrospect should have been suspicious. I manually inspected just a handful of the files to ensure both
+the "orphaned" reads now had an `RG` tag (and more specifically that it was the correct and only `RG`
+line in the file) and that the already tagged reads had not been interfered with. All seemed well.
+
+After hitting the button on `vr-pipe` once more, it took a few hours for the web interface to catch up and
+throw up glaring red progress bars. It seems the first step - the BAM indexing was now failing? I had
+somehow managed to go a step backwards?
+
+The bridged BAMs were truncated... Immediately I begun scouring the source code of `samtools addreplacerg`
+before realising in my excitement I had skipped my usual quality control test suite. I consulted
+`bhist -e`, a command to display recently submitted cluster jobs that had exited with error and was
+bombarded with line after line of `addreplacerg` job metadata. Inquiring specifically, each and every
+job in the array had violated its run time limit.
+
+I anticipated `addreplacerg` would not require much processing, it just iterates over the input BAM,
+slapping an `RG` sticker on any record missing one and throws it on the output pile. Of course, with
+tens of millions of records per file even the quickest of operations can aggregate into considerable time.
+Thus placing the `addreplacerg` jobs on Sanger's `short` queue was clearly an oversight of mine.
+
+I resubmitted to the `normal` queue which allowsand applied quality control - to all files.
+
+### Queue Queue *Update: 4 days later*
+
 * * *
 #tl;dr
 * Make sure your pipeline has the correct permissions to do what it needs with your directory, idiot.
