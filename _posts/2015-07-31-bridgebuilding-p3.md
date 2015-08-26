@@ -121,7 +121,7 @@ TID 1 starting at position 0:
 grep -Pn -m1 "^[A-z0-9:#]*\t[0-9]*\t1\t1\t" <(samtools view 7500_7#8.GRCh37-hs37d5_bb.bam)
 ```
 
-I got a hit. Read `HS29_07500:7:1206:5383:182635#8` appears on TID 1, position 1. It's line
+I got a hit. Read `HS29_07500:7:1206:5383:182635#8` appears on TID 1, position 1. Its line
 number in the bridged BAM? 64,070,629. There's our non-continuous chromosome.
 
 I took the read name and checked the three sorted inputs to `brunel`. It appears in the "unchanged"
@@ -177,7 +177,7 @@ As described in the bug report, I toyed with quick fixes based on initialising `
 > * **Initialise `trans[i] = NULL`**  
 > Prevents translation of TID but actually has the same effect as above
 > * **Initialise `trans[i] = -1`**  
-> The only quick-fix grade solution that works, causes any read on a TID that has no translation to be regarded as "unmapped". It's TID will be set to "*" and the read is placed at the end of the result file. The output file is however, valid and indexable.
+> The only quick-fix grade solution that works, causes any read on a TID that has no translation to be regarded as "unmapped". Its TID will be set to "*" and the read is placed at the end of the result file. The output file is however, valid and indexable.
 
 In the end the question of where these reads should actually end up is a little confusing. Josh seems to think
 that the new bridged BAM should contain all the old reads on their old decoy sequences if a better place in the
@@ -214,8 +214,8 @@ answer was "you should have used `-r` to provide `bwa` with an `RG` line to use"
 in the air a little here to say "I didn't write the `Makefile` and I've never used `bwa`".
 
 Luckily, Martin has recently [drafted a pull request](https://github.com/samtools/samtools/pull/371) to
-`samtools` for a new subcommand: `addreplacerg`. It's purpose? Adding and replacing RG lines and tags in
-BAM files. More usefully, at least to us, it's default operation "mode" is to tag "orphan" records (reads
+`samtools` for a new subcommand: `addreplacerg`. Its purpose? Adding and replacing RG lines and tags in
+BAM files. More usefully, at least to us, <strike>its default</strike>[^4] it offers an operation "mode" to tag "orphan" records (reads
 that have no RG line -- exactly the problem I am facing) with the first RG line found in the header.
 
 Perfect. I'll just feed each final bridged BAM I have to `samtools addreplacerg` and maybe, just maybe,
@@ -293,3 +293,5 @@ Martin is kindly taking care of the necessary juggling to rebalance the books. W
 [^2]: Somewhat like a glorified `sudo` for humgen projects.
 
 [^3]: Honestly, it doesn't matter how trivial the file is, if it's going to be messed around with frequently, or is a pinnacle piece of code for orchestrating a pipeline, put it under version control. Nobody is going to judge you for trivial use of version control.
+
+[^4]: [Turns out](https://github.com/mp15/samtools/pull/4), it's default mode is `overwrite_all`.

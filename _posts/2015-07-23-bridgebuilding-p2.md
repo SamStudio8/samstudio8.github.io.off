@@ -325,7 +325,7 @@ at invocation. If there is a valid mapping to be made, the loops meet their cond
 that will contain all the reads. Lovely.
 
 What about when there are no valid mappings to be made? Under what conditions could this even happen?
-The `i`-loop would never meet it's break condition if a chromosome to be translated (as listed in the
+The `i`-loop would never meet its break condition if a chromosome to be translated (as listed in the
 translation text file) was never seen in the first place. *i.e.* There were no sequence identifiers using
 the GRCh37 syntax. A sprinkling of debugging print statements confirmed no translations ever occurred,
 and `trans[i] = file_entries` was always the result for each iteration through the translation file...
