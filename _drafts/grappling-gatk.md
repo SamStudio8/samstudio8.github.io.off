@@ -11,3 +11,11 @@
 
 ## Claw (TID)
 ## Parameters to GenomeLocParser are incorrect
+
+## MAX_FILE_HANDLES_FOR_READ_ENDS_MAP
+> Exception in thread "main" htsjdk.samtools.SAMException: [...].tmp not found  
+> [...]  
+> Caused by: java.io.FileNotFoundException: [...].tmp (Too many open files)
+
+`MAX_FILE_HANDLES_FOR_READ_ENDS_MAP` must be <= `ulimit -n`
+```
