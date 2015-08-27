@@ -211,6 +211,11 @@ and then each went up against each of the now-six final check tools (yes, they v
 I checked index generation, re-ran a handful of sanity checks (mainly ensuring we hadn't lost any reads), re-generated
 the manifest file before finally asking Irina for what I really hope to be the last time, to reset my `vr-pipe` setup.
 
+I should add, Martin suggested that I use `samtools fixmate`, a subcommand designed for this very purpose.
+The problem is, for `fixmate` to know where the mates are, they must be adjacent to each-other; that is, sorted
+by name and not by co-ordinate. It was thus cheaper both in time and computation to just re-run `brunel` than to
+name-sort, `fixmate` and coord-sort and current bridged BAMs.
+
 <a name="victory"></a>
 ### Victorious `vr-pipe` *Update: Hours later*
 Refreshing the `vr-pipe` interface [intermittently](https://www.youtube.com/watch?v=8UhONY3-1os), I was waiting
