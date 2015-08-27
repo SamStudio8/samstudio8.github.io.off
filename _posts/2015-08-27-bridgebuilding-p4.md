@@ -7,7 +7,7 @@ Following a short hiatus on the sample *un*-improvement job which may or may not
 have been halted by `vr-pipe` inadvertently [knocking over a storage node]({% post_url 2015-07-31-bridgebuilding-p3 %})
 at the Sanger Institute, our **837** *non-33* jobs burst back in to life
 only to fall at the final hurdle of the first pipeline of the `vr-pipe`
-workflow. Despite my lack of tweed hat and pipe, it was time to play
+workflow. Despite my lack of deerstalker and pipe, it was time to play
 bioinformatics Sherlock Holmes.
 
 Without `mercury` access to review reams of logs myself, the `vr-pipe` web interface
