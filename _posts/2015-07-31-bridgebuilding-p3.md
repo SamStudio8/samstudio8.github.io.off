@@ -294,4 +294,4 @@ Martin is kindly taking care of the necessary juggling to rebalance the books. W
 
 [^3]: Honestly, it doesn't matter how trivial the file is, if it's going to be messed around with frequently, or is a pinnacle piece of code for orchestrating a pipeline, put it under version control. Nobody is going to judge you for trivial use of version control.
 
-[^4]: [Turns out](https://github.com/mp15/samtools/pull/4), it's default mode is `overwrite_all`.
+[^4]: [Turns out](https://github.com/mp15/samtools/pull/4), its default mode is `overwrite_all`.
