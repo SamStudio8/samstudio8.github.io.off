@@ -92,6 +92,7 @@ The co-ordinate sorting step does at least immediately precede invocation of `br
 fast. So after correcting the Makefile, nuking the incorrectly sorted BAMs and restarting the pipeline, it
 wasn't a long wait before I was ready to hassle somebody with `mercury` access to push the button.
 
+<a name="translations"></a>
 ### Untranslated Translations
 Before blindly resubmitting everything, I figured I'd save some time and face by adding
 `samtools index` to the rest of my checking procedures, to be sure that this first indexing
