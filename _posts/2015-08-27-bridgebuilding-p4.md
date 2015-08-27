@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Tolls of Bridge Building: Part IV, Mysterious Malformations [WIP]"
+title: "The Tolls of Bridge Building: Part IV, Mysterious Malformations"
 ---
 
 Following a short hiatus on the sample *un*-improvement job which may or may not
@@ -143,32 +143,97 @@ from face.
 
 ### False Friends
 There was a clear pattern to the log file. Each read that I had translated to unmapped triggered
-four warnings. Taking just one of thousands of such quads:
+four errors. Taking just one of thousands of such quads:
+
+> ERROR: [...] Mate Alignment start should be 0 because reference name = *.  
+> ERROR: [...] Mapped mate should have mate reference name  
+> ERROR: [...] Mapped read should have valid reference name  
+> ERROR: [...] Alignment start should be 0 because reference name = *.
+
+Now, a bitfield of flags on each read is just one of the methods employed by the [BAM format](http://samtools.github.io/hts-specs/SAMv1.pdf) to perform validation
+and filtering operations quickly and efficiently. One of these bits: `0x4`, indicates a read is
+unmapped. Herein lies the problem, although I had instructed `brunel` to translate the TID (which
+refers to the i-th `@SQ` line in the header) to `-1` (*i.e.* no sequence), I did not set the unmapped flag.
+This is invalid (`Mapped read should have valid reference name`), as the read will appear as aligned,
+but to an unknown reference sequence.
+
+Sigh. A quick hack combined with my ignorance of the underlying BAM format specification was at fault[^5].
+
+The fix would be frustratingly easy, a one-liner in `brunel` to raise the `UNMAPPED` flag (and to be
+good, a one-liner to unset the `PROPER_PAIR` flag[^3]) for the appropriate reads. Of course, expecting
+an easy fix jinxed the situation and the `MalformedReadFilter` cull persisted, despite my new
+semaphore knowledge.
+
+For each offending read, `ValidateSamFile` produced a triplet of errors:
 
 > ERROR: [...] Mate Alignment start should be 0 because reference name = *.  
 > ERROR: [...] MAPQ should be 0 for unmapped read.  
 > ERROR: [...] Alignment start should be 0 because reference name = *.
 
+The errors at least seem to indicate that I'd set the `UNMAPPED` flag correctly.
+Confusingly, the [format spec](http://samtools.github.io/hts-specs/SAMv1.pdf) has the following point (parentheses and emphasis mine):
 
-Yes, I'd translated the TID to describe a read as unmapped. But I failed to follow the BAM specification...
+> Bit 0x4 (**unmapped**) is the only reliable place to tell whether the read is unmapped. If 0x4 is set, no assumptions can be made about RNAME, POS, CIGAR, MAPQ, and bits 0x2 (**properly aligned**), 0x100 (secondary), and 0x800 (supplemental).  
 
-* Update the mate TID
-* Update the alignment position
-* Update the mate alignment position
-* Update the mapping quality
+It would seem that canonically, the alignment start (`POS`) and mapping quality (`MAPQ`) are untrustworthy
+on reads where the unmapped flag is set. Yet this triplet appears exactly the same number of times
+as the number of reads hard filtered by the `MalformedReadFilter`.
 
-Initially I updated `brunel` to just raise the `UNMAPPED` flag (and unset the `PROPER_PAIR`[^3])
-appropriately, but the `MalformedReadFilter` cull persisted. The specifications best practice
-states that for unmapped reads:
+I don't understand how these reads could be regarded as "grossly malformed" if even the format specification
+acknowledges the possibility of these fields containing misleading information. Invalid yes, but grossly malformed? No.
+I just have to assume there's a reason `GATK` is being especially anal about such reads, perhaps developers simply (and rather fairly)
+don't want to deal with the scenario of not knowing what to do with reads where the values of half the fields can't be trusted[^6].
+I updated `brunel` to set the alignment positions for the read and its mate alignment to position 0 in retaliation.
 
+I'd reduced the `ValidateSamFile` erorr quads to triplets and now, the triplets to duos:
 
+> ERROR: [...] Mate Alignment start should be 0 because reference name = *.  
+> ERROR: [...] Alignment start should be 0 because reference name = *.
 
-I realised that although the values must be `0`, the `htslib` implementation:
+The alignment positions are non-zero? But I just said I'd fixed that? What gives?
+
+I used `samtools view` and grabbed the tail of the BAM, those positions were indeed non-zero.
+I giggled at the off-by-one error, immediately knowing what I'd done wrong.
+
+The BAM spec describes the alignment position field as:
+
+> **POS**: 1-based leftmost mapping POSition of the first matching base.
+
+But under the hood, the `pos` field is
+[defined in `htslib`](https://github.com/samtools/htslib/blob/f79045536b9bb89666bedf7ee665503a0d9bad2a/htslib/sam.h#L138)
+as a 0-based co-ordinate, because that's how computers work. The 0-based indices are then converted by just adding 1
+whenever necessary. Thus to obtain a value of 0, I'd need to set the positions to -1. This off-by-one mismatch
+is a constant source of embarrassing mistakes in bioinformatics, where typically 1-based genomic indices must be reconciled with 0-indexed data structures[^5].
+
+Updating `brunel` once more, I ran the orchestrating `Makefile` to generate what I really hope to be the final
+set of bridged BAMs, ran them through Martin's `addreplacerg` subcommand to fill in those missing `RG` tags
+and then each went up against each of the now-six final check tools (yes, they validated with `ValidateSamFile`).
+I checked index generation, re-ran a handful of sanity checks (mainly ensuring we hadn't lost any reads), re-generated
+the manifest file before finally asking Irina for what I really hope to be the last time, to reset my `vr-pipe` setup.
+
+<a name="victory"></a>
+### Victorious `vr-pipe` *Update: Hours later*
+Refreshing the `vr-pipe` interface [intermittently](https://www.youtube.com/watch?v=8UhONY3-1os), I was waiting
+to see a number of inputs larger than 33 make it to the end of the first pipeline of the workflow: represented
+by a friendly looking green progress bar.
+
+Although the number currently stands at 1, I remembered that all of *the 33* had the same
+leading digit and that for each progress bar, `vr-pipe` will offer up metadata on one sample job. I hopefully
+clicked the green progress bar and inspected the metadata, the input lanelet was not in the set of the 33
+already re-mapped lanelets.
+
+I'd done it. After almost a year, I've led my lanelet Lemmings to the end of the first level.
 
 * * *
 
 #tl;dr
-* `GATK` has a `MalformedReadFilter`
+* `GATK` has an anal, automatated and aggressive `MalformedReadFilter`
+* `Picard ValidateSamFile` is a useful sanity check for SAM and BAM files
+* Your cleverly simple bug fix has probably swapped a critical and obvious problem for a critically unnoticeable one
+* Software is not **obliged** to adhere to any or all of a format specification
+* Off by one errors continue to produce laughably simple mistakes
+* I should probably learn the BAM format spec inside out
+* Perl is still pretty grim
 
 [^0]: Those reads were just resting in my account!
 
@@ -181,3 +246,9 @@ I realised that although the values must be `0`, the `htslib` implementation:
    > Bit 0x4 (**unmapped**) is the only reliable place to tell whether the read is unmapped. If 0x4 is set, no assumptions can be made about RNAME, POS, CIGAR, MAPQ, and bits 0x2 (**properly aligned**), 0x100 (secondary), and 0x800 (supplemental).  
    
    Parentheses and emphasis mine.
+
+[^4]: Which only goes to further my *don't trust anyone, even yourself* mantra.
+
+[^5]: When I originally authored [`Goldilocks`](https://goldilocks.readthedocs.org), I tried to be clever and make things easier for myself, electing to use a 1-based index strategy throughout. This was partially inspired by FORTRAN, which features 1-indexed arrays. In the end, the strategy caused more problems than it solved and I had to carefully had to tuck my tail between my legs and [return to a 0-based index](https://github.com/SamStudio8/goldilocks/commit/6915d8f0347d7e71f947d84f1f381816b0d8a1e7).
+
+[^6]: Though, [looking at the documentation](https://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_gatk_engine_filters_MalformedReadFilter.php), I'm not even sure *what* aspect of the read is triggering the hard filter. The three additional command line options described don't seem to be related to any of the errors raised by `ValidateSamFile` and there is no explicit description of what is considered to be "malformed".
