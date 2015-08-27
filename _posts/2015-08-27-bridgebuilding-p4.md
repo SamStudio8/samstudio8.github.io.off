@@ -3,8 +3,8 @@ layout: post
 title: "The Tolls of Bridge Building: Part IV, Mysterious Malformations [WIP]"
 ---
 
-Following a short hiatus on the sample *un*improvement job which may or may not
-have been halted by `vr-pipe` inadvertently [knocking over a storage node]({{ page.previous.url }})
+Following a short hiatus on the sample *un*-improvement job which may or may not
+have been halted by `vr-pipe` inadvertently [knocking over a storage node]({% post_url 2015-07-31-bridgebuilding-p3 %})
 at the Sanger Institute, our **837** *non-33* jobs burst back in to life
 only to fall at the final hurdle of the first pipeline of the `vr-pipe`
 workflow. Despite my lack of tweed hat and pipe, it was time to play
@@ -99,15 +99,72 @@ I read the manual for the filter once more and realised we'd ignored the gravity
 
 We're not taking about bad quality reads, we're talking about reads that are incorrect in such a way
 that it may cause an analysis to terminate early. My heart sank, I had a hunch. I ran the output from
-lanelet `7293_3#8`'s adventure through `bridgebuilder` through `GATK` `PrintReads`, an arbitrary tool
-that I knew also applied `MalformedReadFilter`.
+lanelet `7293_3#8`'s `bridgebuilder` adventure through `GATK` [`PrintReads`](https://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_gatk_tools_walkers_readutils_PrintReads.php), an arbitrary tool
+that I knew also applied the `MalformedReadFilter`. Those very same `INFO` lines were printed.
 
 My hunch was right, the reads had been malformed all along.
 
-### False Friends
+### Botched Bugfix
+I had a pretty good idea as to what had happened but I ran the inputs to `brunel`
+(the final step of `bridgebuilder`) through `PrintReads` as a sanity check. This proved
+a little more difficult to orchestrate than one might have expected, I had to falsify headers
+and add those pesky missing `@RG` tags that plagued us before.
 
+The inputs were fine, as suspected, `brunel` was the malformer. My hunch? My [quick hack](https://github.com/SamStudio8/bridgebuilder/commit/e5a83b46d64f888c6dc7780779a2786d7849328e)
+to [fix my last `brunel` problem]({% post_url 2015-07-31-bridgebuilding-p3 %}#translations) had come back
+to bite me in the ass and caused an even more subtle `brunel` problem.
+
+Indeed, despite stringently checking the bridged BAMs with
+[five different tools]({% post_url 2015-07-23-bridgebuilding-p2 %}#finalchecks), successfully generating
+an index and even processing the file with `Picard` to mark duplicate reads and `GATK` to detect and re-align
+around indels, these malformed reads *still* flew under the radar -- only to be caught by a few
+lines of Perl that a minor patch to `vr-pipe` happened to put in the way.
+
+Recall that my `brunel` fix initialises the translation array with `-1`:
+
+> **Initialise `trans[i] = -1`**  
+> The only quick-fix grade solution that works, causes any read on a TID that has no translation to be regarded as "unmapped". Its TID will be set to "*" and the read is placed at the end of the result file. The output file is however, valid and indexable.
+
+This avoided an awful bug where `brunel` would assign reads to chromosome 1 if their actual
+chromosome did not have a translation listed in the user-input translation file.
+In practice, the fix worked. Reads appeared "unmapped", their TID was an asterisk and they were listed at
+the end of the file. The output was viewable, indexable and usable with `Picard` and `GATK`,
+but *technically* **not** valid afterall.
+
+To explain why, let's feed everybody's favourite bridged BAM `7293_3#8` to [`Picard ValidateSamFile`](http://broadinstitute.github.io/picard/command-line-overview.html#ValidateSamFile), a
+handy tool that does what it says on the tin. `ValidateSamFile` linearly passes over each record of a
+BAM and prints any associated validation warnings or errors to a log file[^1]. As the tool moved over the target,
+an occassional warning that could safely be ignored was written to my terminal[^2]. The file seemed valid and
+as the progress bar indicated we were nearly out of chromosomes, I braced.
+
+As `ValidateSamFile` attempted to validate the unmapped reads, a firehose of errors (I was expecting
+a lawn sprinker) spewed up the terminal and despite my best efforts I couldn't `Ctrl-C` to point away
+from face.
+
+### False Friends
+There was a clear pattern to the log file. Each read that I had translated to unmapped triggered
+four warnings. Taking just one of thousands of such quads:
+
+> ERROR: [...] Mate Alignment start should be 0 because reference name = *.
+> ERROR: [...] MAPQ should be 0 for unmapped read.
+> ERROR: [...] Alignment start should be 0 because reference name = *.
+
+
+Yes, I'd translated the TID to describe a read as unmapped. But I failed to follow the BAM specification...
+
+* Update the mate TID
+* Update the alignment position
+* Update the mate alignment position
+* Update the mapping quality
+
+Initially I update `brunel` to just update the read's unmapped flag, but the `MalformedReadFilter`
+persisted.
 
 * * *
 
 #tl;dr
 * `GATK` has a `MalformedReadFilter`
+
+[^1]: Had I known of the tool sooner, I would have employed it as part of the extensive `bridgebuilder` quality control suite.
+
+[^2]: Interestingly, despite [causing jobs to terminate]({% post_url 2015-07-31-bridgebuilding-p3 %}#vanish-rg), a read missing an `RG` tag is a warning, not an error.
