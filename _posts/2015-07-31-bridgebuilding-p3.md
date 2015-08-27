@@ -195,6 +195,7 @@ Having deployed my [own fix](https://github.com/SamStudio8/bridgebuilder/tree/fi
 for what I hoped to be the final time, re-ran the various checks that I've picked up along the way (including
 `samtools index`) and was finally left with **870 lanelets** ready for unimprovement.
 
+<a name="vanish-rg"></a>
 ### Vanishing Read Groups
 Or so I thought.
 
