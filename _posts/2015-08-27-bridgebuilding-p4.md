@@ -99,7 +99,7 @@ I read the manual for the filter once more and realised we'd ignored the gravity
 
 We're not taking about bad quality reads, we're talking about reads that are incorrect in such a way
 that it may cause an analysis to terminate early. My heart sank, I had a hunch. I ran the output from
-lanelet `7293_3#8`'s `bridgebuilder` adventure through `GATK` [`PrintReads`](https://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_gatk_tools_walkers_readutils_PrintReads.php), an arbitrary tool
+lanelet `7293_3#8`'s `bridgebuilder` adventure through [`GATK PrintReads`](https://www.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_gatk_tools_walkers_readutils_PrintReads.php), an arbitrary tool
 that I knew also applied the `MalformedReadFilter`. Those very same `INFO` lines were printed.
 
 My hunch was right, the reads had been malformed all along.
@@ -108,7 +108,7 @@ My hunch was right, the reads had been malformed all along.
 I had a pretty good idea as to what had happened but I ran the inputs to `brunel`
 (the final step of `bridgebuilder`) through `PrintReads` as a sanity check. This proved
 a little more difficult to orchestrate than one might have expected, I had to falsify headers
-and add those pesky missing `@RG` tags that plagued us before.
+and add those pesky missing `RG` tags that plagued us before.
 
 The inputs were fine, as suspected, `brunel` was the malformer. My hunch? My [quick hack](https://github.com/SamStudio8/bridgebuilder/commit/e5a83b46d64f888c6dc7780779a2786d7849328e)
 to [fix my last `brunel` problem]({% post_url 2015-07-31-bridgebuilding-p3 %}#translations) had come back
