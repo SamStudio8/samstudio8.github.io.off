@@ -15,7 +15,7 @@ provides a single sample of output from a random job in the state of interest.
 Taking its offering, it seemed I was about to get extremely familiar with lanelet `7293_3#8`.
 The error was at least straightforward...
 
-### Accounting Irregularities
+### Accounting Irregularities[^0]
 
 ```
 ... [step] failed because 48619252 reads were generated in the output bam
@@ -164,6 +164,8 @@ persisted.
 
 #tl;dr
 * `GATK` has a `MalformedReadFilter`
+
+[^0]: Those reads were just resting in my account!
 
 [^1]: Had I known of the tool sooner, I would have employed it as part of the extensive `bridgebuilder` quality control suite.
 
