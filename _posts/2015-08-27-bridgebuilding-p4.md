@@ -145,8 +145,8 @@ from face.
 There was a clear pattern to the log file. Each read that I had translated to unmapped triggered
 four warnings. Taking just one of thousands of such quads:
 
-> ERROR: [...] Mate Alignment start should be 0 because reference name = *.
-> ERROR: [...] MAPQ should be 0 for unmapped read.
+> ERROR: [...] Mate Alignment start should be 0 because reference name = *.  
+> ERROR: [...] MAPQ should be 0 for unmapped read.  
 > ERROR: [...] Alignment start should be 0 because reference name = *.
 
 
@@ -157,8 +157,13 @@ Yes, I'd translated the TID to describe a read as unmapped. But I failed to foll
 * Update the mate alignment position
 * Update the mapping quality
 
-Initially I update `brunel` to just update the read's unmapped flag, but the `MalformedReadFilter`
-persisted.
+Initially I updated `brunel` to just raise the `UNMAPPED` flag (and unset the `PROPER_PAIR`[^3])
+appropriately, but the `MalformedReadFilter` cull persisted. The specifications best practice
+states that for unmapped reads:
+
+
+
+I realised that although the values must be `0`, the `htslib` implementation:
 
 * * *
 
@@ -170,3 +175,9 @@ persisted.
 [^1]: Had I known of the tool sooner, I would have employed it as part of the extensive `bridgebuilder` quality control suite.
 
 [^2]: Interestingly, despite [causing jobs to terminate]({% post_url 2015-07-31-bridgebuilding-p3 %}#vanish-rg), a read missing an `RG` tag is a warning, not an error.
+
+[^3]: Although not strictly necessary as per the specification (see below), I figured it was cleaner.
+    
+   > Bit 0x4 (**unmapped**) is the only reliable place to tell whether the read is unmapped. If 0x4 is set, no assumptions can be made about RNAME, POS, CIGAR, MAPQ, and bits 0x2 (**properly aligned**), 0x100 (secondary), and 0x800 (supplemental).  
+   
+   Parentheses and emphasis mine.
