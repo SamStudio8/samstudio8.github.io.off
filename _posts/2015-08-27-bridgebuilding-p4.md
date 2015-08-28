@@ -157,7 +157,7 @@ refers to the i-th `@SQ` line in the header) to `-1` (*i.e.* no sequence), I did
 This is invalid (`Mapped read should have valid reference name`), as the read will appear as aligned,
 but to an unknown reference sequence.
 
-Sigh. A quick hack combined with my ignorance of the underlying BAM format specification was at fault[^5].
+Sigh. A quick hack combined with my ignorance of the underlying BAM format specification was at fault[^4].
 
 The fix would be frustratingly easy, a one-liner in `brunel` to raise the `UNMAPPED` flag (and to be
 good, a one-liner to unset the `PROPER_PAIR` flag[^3]) for the appropriate reads. Of course, expecting
