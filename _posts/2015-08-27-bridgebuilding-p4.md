@@ -232,7 +232,7 @@ I'd done it. After almost a year, I've led my lanelet Lemmings to the end of the
 * * *
 
 #tl;dr
-* `GATK` has an anal, automatated and aggressive `MalformedReadFilter`
+* `GATK` has an anal, automated and aggressive `MalformedReadFilter`
 * `Picard ValidateSamFile` is a useful sanity check for SAM and BAM files
 * Your cleverly simple bug fix has probably swapped a critical and obvious problem for a critically unnoticeable one
 * Software is not **obliged** to adhere to any or all of a format specification
